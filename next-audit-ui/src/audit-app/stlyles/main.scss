@@ -1,0 +1,15 @@
+.header {
+  height: 50px;
+  position: sticky;
+  top: 0px;
+  z-index: 2;
+}
+
+.footer {
+  height: 50px;
+  z-index: 2;
+}
+
+.main-body {
+  min-height: calc(100% - 100px);
+}

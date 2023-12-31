@@ -1,0 +1,784 @@
+{
+  "message": {
+    "Business Continuity Mgmt": [
+      {
+        "answer": " I don't know",
+        "criteria": "[11.1] Does your organization have a backup program for critical data and systems?\n ",
+        "details": " I don't know."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "a) Does your organization have a Disaster Recovery Plan for all critical systems?",
+        "details": " No, I don't know."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "b) Does the Disaster Recovery plan consider interruption to, and/or failure of, critical systems?",
+        "details": " No, I don't know."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "c) Are disaster recovery plans updated at least annually?\n ",
+        "details": " No, disaster recovery plans are not updated annually."
+      },
+      {
+        "answer": " I don't know.",
+        "criteria": "d) Has the Disaster Recovery process been tested for all critical systems? ",
+        "details": " No, I don't know."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "e) Do business continuity plans include a disaster recovery plan?",
+        "details": " No, business continuity plans and disaster recovery plans are separate. Business continuity plans typically focus on restoring operations in the event of an emergency, while disaster recovery plans focus on restoring data and IT systems."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "f) Are business continuity plans tested regularly to ensure that they are up-to-date and effective?",
+        "details": "No, business continuity plans are not tested regularly."
+      },
+      {
+        "answer": " D. I don't know.",
+        "criteria": "g) Does the Business Continuity/Disaster Recovery Program's annual review include the review of critical functions, the organizational structure, and personnel changes?",
+        "details": " No, it does not. The annual review of the Business Continuity/Disaster Recovery Program does not include the review of critical functions, the organizational structure, and personnel changes."
+      }
+    ],
+    "Incident Mgmt": [
+      {
+        "answer": " I don't know.",
+        "criteria": "[10.1] How does your organization identify, respond to and mitigate suspected or known security incidents?\n ",
+        "details": " We have a security incident response plan that outlines specific procedures for identifying, responding to, and mitigating suspected or known security incidents. We have dedicated teams to investigate these incidents and document the incident response process in accordance with relevant industry standards."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "a)\u00a0During the investigation of a security incident, is evidence properly collected and maintained?\n ",
+        "details": " I'm sorry, I don't know."
+      },
+      {
+        "answer": " I don't know.",
+        "criteria": "b) Are incidents identified, investigated and reported, according to applicable legal requirements?\n ",
+        "details": " I don't know."
+      },
+      {
+        "answer": " I don't know.",
+        "criteria": "c) How are incidents escalated and communicated? ",
+        "details": " I don't know."
+      },
+      {
+        "answer": " I don't know.",
+        "criteria": "d) Is an information security incident response plan defined?",
+        "details": " No, an information security incident response plan is not defined."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "e) Are recovery plan and incident response procedures evaluated at least annually?",
+        "details": " No, recovery plans and incident response procedures are not evaluated at least annually."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "f) Is a data backup strategy developed for the storage of critical information on a regular basis?",
+        "details": " No, a data backup strategy is not discussed in this context."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "g) Are effective risk mitigation controls established where necessary?",
+        "details": " Yes, we have implemented multi-factor authentication (MFA) for accessing sensitive systems and remote connections. It adds an extra layer of security."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "h) Are anti-virus definition files regularly updated?",
+        "details": " I don't know."
+      },
+      {
+        "answer": " I don't know.",
+        "criteria": "[10.2] Is there a history of incidents (theft, crime, environmental, weather) occurring at your organization's facility(ies)?",
+        "details": " No, there is no history of incidents at our organization's facilities."
+      }
+    ],
+    "Logical Access": [
+      {
+        "answer": " A. Yes",
+        "criteria": "[8.1] Does your organization have a formal access authorization policy and procedures for authorizing, granting and removing access based on 'least privilege' (employees are granted the least amount of access possible in order to perform their assigned duties) and 'need to know' (access permissions are granted based upon the legitimate business need of the user to access the information)?\n",
+        "details": " Yes, we have a formal access authorization policy and procedures in place for authorizing, granting, and removing access based on 'least privilege' and 'need to know'."
+      },
+      {
+        "answer": " A. Yes",
+        "criteria": "a) Is there a policy to use multi-factor authentication to limit access to sensitive data and systems?\n",
+        "details": " Yes, we've implemented multi-factor authentication (MFA) for accessing sensitive systems and remote connections. It adds an extra layer of security."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "b)\u00a0Does your organization have a secured audit trail system that logs privileged user access to sensitive data, systems and/or system events, including access to and alterations made to the audit trail system?\n",
+        "details": " I don't know."
+      },
+      {
+        "answer": " I don't know.",
+        "criteria": "c)\u00a0Is access to source code restricted, as well as formally and independently reviewed on a frequent basis?",
+        "details": " I don't know."
+      },
+      {
+        "answer": " I don't know.",
+        "criteria": "d) Are controls in place to prevent users from installing or downloading restricted software onto desktops, laptops, mobile devices and other technology systems?\n ",
+        "details": " I don't know."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "e) The identity of individuals who request access to their personal information is authenticated before they are given access to that information.",
+        "details": " No, I don't know."
+      },
+      {
+        "answer": " I don't know",
+        "criteria": "[8.2] Are unique user IDs used for granting access?",
+        "details": " No, the auditee mentioned that user accounts are created based on an employee's role, and permissions and group memberships are assigned accordingly."
+      },
+      {
+        "answer": " A. Yes",
+        "criteria": "[8.3] Do you have a process to review user accounts and related access? ",
+        "details": " Yes, we have quarterly access reviews to ensure permissions align with job roles."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "c) Is there a documented list of data owners for each system who must approve roles and user access?",
+        "details": " No, there is no list of data owners for each system who must approve roles and user access."
+      },
+      {
+        "answer": " A. Yes",
+        "criteria": "[8.4] Is there a policy for the use and handling of passwords?",
+        "details": " Yes, passwords are required to meet certain complexity criteria, and we enforce a password change every 90 days."
+      },
+      {
+        "answer": " A. Yes",
+        "criteria": "a) Do passwords expire every 90 days or less?",
+        "details": " Yes, passwords are required to meet certain complexity criteria, and we enforce a password change every 90 days."
+      },
+      {
+        "answer": " A. Yes",
+        "criteria": "b) Are passwords required to be complex?",
+        "details": " Yes, we've implemented multi-factor authentication (MFA) for accessing sensitive systems and remote connections. It adds an extra layer of security. Passwords are required to meet certain complexity criteria, and we enforce a password change every 90 days."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "c) Are temporary passwords required to be changed upon login?",
+        "details": " No, we don't require temporary passwords to be changed upon login."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "d) Are passwords stored and transmitted in a secure manner (hashing)?",
+        "details": " I don't know."
+      },
+      {
+        "answer": " A. Yes",
+        "criteria": "e) Is multi-factor authentication required for remote connections?",
+        "details": " Yes, we've implemented multi-factor authentication (MFA) for accessing sensitive systems and remote connections. It adds an extra layer of security."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "[8.5] Do information owners promptly report all changes in user duties or employment status to the Resource Administrator responsible for the User IDs associated with the involved personnel?",
+        "details": " Yes, when there are changes, the employee's manager submits a request, and the Resource Administrator adjusts the permissions accordingly."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "a) Are inactive IDs terminated after up to 120 days of inactivity?",
+        "details": " I'm not sure. I don't know if inactive IDs are terminated after up to 120 days of inactivity."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "b) Are controls implemented to detect and alert resource administrators of repeated unauthorized attempts to access sensitive information?",
+        "details": " No, we do not have any controls implemented to detect and alert resource administrators of repeated unauthorized attempts to access sensitive information."
+      },
+      {
+        "answer": " A. Yes",
+        "criteria": "c) Do all external connections to Company networks or information resources require strong two-factor authentication?",
+        "details": " No, only sensitive systems and remote connections require two-factor authentication."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "d) Does the organization monitor for unauthorized wireless connections to the information system, including scanning for unauthorized wireless access points, in accordance with organization-defined frequency?",
+        "details": " No, the organization does not monitor for unauthorized wireless connections to the information system."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "e) Does the organization issue specially configured mobile devices to individuals traveling to locations that the organization deems to be of significant risk in accordance with organizational policies and procedures, If authorized?",
+        "details": " No, I don't know if the organization issues specially configured mobile devices to individuals traveling to locations that the organization deems to be of significant risk in accordance with organizational policies and procedures, If authorized."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "f) Do you have controls in place ensuring timely notification and removal of systems access which is no longer required for business purposes?",
+        "details": " Yes, we have quarterly access reviews to ensure permissions align with job roles and we maintain records of access requests, approvals, and access reviews."
+      }
+    ],
+    "Network Security": [
+      {
+        "answer": " I don't know.",
+        "criteria": "[7.1] Do you have a network diagram describing access points into your network?",
+        "details": " No, I don't know if we have a network diagram."
+      },
+      {
+        "answer": " D. I don't know.",
+        "criteria": "a) Are systems and networks that host, process and/or transfer sensitive information \u2018protected\u2019 (isolated or separated) from other systems and networks? \n ",
+        "details": " No, I don't know."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "b)\u00a0Are internal and external networks separated by firewalls with access policies and rules?\n ",
+        "details": " I don't know."
+      },
+      {
+        "answer": " I don't know",
+        "criteria": "c)\u00a0Is there a standard approach for protecting network devices to prevent unauthorized access/network related attacks and data-theft? ",
+        "details": " No, I don't know."
+      },
+      {
+        "answer": " D. I don't know.",
+        "criteria": "[7.2] Is sensitive information transferred to external recipients? If yes, are controls in place to protect sensitive information when transferred (e.g. with encryption)?",
+        "details": " No, this walkthrough did not cover any processes related to transferring sensitive information to external recipients."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "a) Are encryption tools managed and maintained for sensitive information? Is there a an encryption policy? Are there encryption key management procedures in place?",
+        "details": " No, I don't know the answer to that question."
+      },
+      {
+        "answer": " I don't know.",
+        "criteria": "b) Is encryption or another method used to protect structured and unstructured data at rest?",
+        "details": " I don't know."
+      },
+      {
+        "answer": " I don't know.",
+        "criteria": "[7.3] Are vulnerability assessments, scans and/or penetration tests performed on a scheduled basis per the organization's policy?",
+        "details": " No, vulnerability assessments, scans and/or penetration tests are not performed on a scheduled basis per the organization's policy."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "a) Are vulnerability scans performed for internal networks?",
+        "details": " No, vulnerability scans are not performed for internal networks."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "b) Are vulnerability scans performed for external networks?",
+        "details": " No, we don't perform vulnerability scans for external networks."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "c) Are penetration tests performed annually?",
+        "details": " No, we do not perform penetration tests annually."
+      },
+      {
+        "answer": " I don't know.",
+        "criteria": "d) Is there a program to monitor, test and implement security patches?",
+        "details": " I don't know."
+      },
+      {
+        "answer": " I don't know.",
+        "criteria": "[7.4] Are third-party connections to your network monitored and reviewed to confirm authorized access and appropriate usage only? ",
+        "details": " I don't know."
+      },
+      {
+        "answer": " D. I don't know.",
+        "criteria": "a) Does your organization have anti-malware programs installed on all systems?",
+        "details": " No, not all systems have anti-malware programs installed."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "b) Are automatic anti-virus scanning on servers and workstations scheduled on a regular basis?",
+        "details": " No, that is not part of our user access and password management processes."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "c) Are network security devices, such as firewalls and intrusion detection and prevention systems, installed at critical junctures to protect network perimeters?",
+        "details": " No, that wasn't discussed in the walkthrough."
+      },
+      {
+        "answer": " I don't know",
+        "criteria": "d) Are rules on network security devices regularly reviewed to determine their appropriateness and relevancy?",
+        "details": " No, we don't have any rules on network security devices that are regularly reviewed."
+      },
+      {
+        "answer": " I don't know.",
+        "criteria": "e Do firewalls log and monitor all unauthorized activity?",
+        "details": " I don't know."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "f) Is a firewall installed at all connections from an internal network to other internal and external networks?",
+        "details": " I don't know."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "g) Have Intrusion Detection systems been configured to identify possible Denial of Service attacks?",
+        "details": " I don't know."
+      },
+      {
+        "answer": " D. I don't know.",
+        "criteria": "h) Are audit logs retained for at least six months?",
+        "details": " We maintain records of access requests, approvals, and access reviews, as well as password change logs."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "i) Are system and virus signature updates installed on a timely basis?",
+        "details": " I don't know."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "[7.5] Is the use of external personal email accounts (e.g. Hotmail, AOL, Yahoo mail, etc.) while connected to the company network prohibited?",
+        "details": " I don't know."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "a) Are fax machines provided by your organization provided for use in connection with company business?",
+        "details": " No, our organization does not provide fax machines for use in connection with company business."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "[7.6] Have all identified security, contractual and regulatory requirements for customer access been addressed and remediated prior to granting customers access to data, assets and organizational systems?",
+        "details": " I don't know."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "a) Is physical and logical user access to audit logs restricted to authorized personnel?",
+        "details": " No, I don't know."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "[7.7] Do the wireless networking controls require  multi-factor authentication?",
+        "details": " Yes, we've implemented multi-factor authentication (MFA) for accessing sensitive systems and remote connections. It adds an extra layer of security."
+      },
+      {
+        "answer": " D. I don't know.",
+        "criteria": "a) Does your organization develop effective internal control systems to manage technology risks due to growing complexity of the IT environment?",
+        "details": " Yes, we have implemented multi-factor authentication (MFA) for accessing sensitive systems and remote connections. It adds an extra layer of security. We also have quarterly access reviews to ensure permissions align with job roles, and users can reset their passwords through a self-service portal."
+      }
+    ],
+    "Operations Mgmt": [
+      {
+        "answer": " D. I don't know",
+        "criteria": "[9.1] Has antivirus software been deployed and installed on your computers and supporting systems (e.g., desktops, servers and gateways)? ",
+        "details": "\nI don't know."
+      },
+      {
+        "answer": " I don't know.",
+        "criteria": "[9.2] Are systems and networks monitored for security events? If so, please describe this monitoring. ",
+        "details": " I'm sorry, I don't know."
+      },
+      {
+        "answer": " I don't know.",
+        "criteria": "[9.3] Do procedures exist to protect sensitive data on portable media (e.g., tapes, disks, CD-ROMs, USB sticks, memory cards, smart phones, etc.), from unauthorized disclosure, modification, removal, and destruction?",
+        "details": " Yes, we have procedures that require encryption of sensitive data on portable media, as well as restricted access to authorized personnel only. We also have protocols in place for the secure disposal of any portable media containing sensitive data."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "a) Is sensitive data encrypted when stored on laptop, desktop and server hard drives, flash drives, backup tapes, etc.? ",
+        "details": " No, I don't know."
+      },
+      {
+        "answer": " I don't know",
+        "criteria": "[9.4] Are there security procedures for decommissioning, replacing, and destroying IT equipment and IT storage devices which contain and/or process sensitive information? ",
+        "details": " I don't know."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "a) Upon termination of a contract with a client or vendor, is there a process to securely destroy or return all data to the rightful owner?",
+        "details": " I don't know."
+      },
+      {
+        "answer": " I don't know",
+        "criteria": "b) Upon termination of a contract with a client or vendor, is there a policy to retain our data for a period of time?",
+        "details": " Unfortunately, I don't know."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "[9.5] Are development, test and production environments separated to protect production sytems from inadvertent changes and/or disruption? ",
+        "details": " I don't know."
+      },
+      {
+        "answer": " I don't know.",
+        "criteria": "[9.6] Are duties separated, where appropriate, to reduce the opportunity for unauthorized modification, unintentional modification, and/or misuse of your organization's IT and information assets? ",
+        "details": " Yes, duties are separated to reduce the opportunity for unauthorized modification, unintentional modification, and misuse of our organization's IT and information assets. For example, when a new employee joins the company, HR sends us their details and we create user accounts based on their role, assigning appropriate access levels, permissions, and group memberships. Additionally, we have quarterly access reviews to ensure permissions align with job roles."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "[9.7] Do formal change management procedures exist for networks, systems, desktops, software releases, deployments, and software vulnerability (e.g. virus and spyware) patching activities? ",
+        "details": " Yes, we have formal change management procedures in place for networks, systems, desktops, software releases, deployments, and software vulnerability patching activities. These procedures include submitting requests, assigning access levels, reviewing access, and maintaining records."
+      },
+      {
+        "answer": " I don't know",
+        "criteria": "[9.8] Does the email system provide SPAM protection?",
+        "details": " I don't know."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "a) Is a technological infrastructure plan regularly updated?",
+        "details": " No, a technological infrastructure plan is not regularly updated."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "b) Has a standard configuration for workstations been defined that includes desktop controls, including browser configurations?",
+        "details": " No, I don't know."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "[1.3] Are development logs, approvals and project plans maintained and kept up-to-date for application development?",
+        "details": " No, we do not maintain development logs, approvals and project plans for application development."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "a) Is application development outsourced to developers on or offshore?",
+        "details": " No, application development is not outsourced."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "b) Is an application developer restricted from having access to production data and environment?",
+        "details": " No, we do not restrict application developers from having access to production data and environment."
+      }
+    ],
+    "Personnel Security": [
+      {
+        "answer": " D. I don't know",
+        "criteria": "[5.1] Does your organization perform background checks to examine and assess an employee\u2019s work and criminal history? ",
+        "details": " No, we do not perform background checks to examine and assess an employee's work and criminal history."
+      },
+      {
+        "answer": " D. I don't know.",
+        "criteria": "a) Does your organization perform background checks to examine and assess a contractor's or third party's work and criminal history? ",
+        "details": " No, we do not perform background checks for contractors or third parties."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "b) Does background screening include credit checks?",
+        "details": " No, background screening for employee access management does not include credit checks."
+      },
+      {
+        "answer": " I don't know.",
+        "criteria": "[5.2] Are your employees required to sign a non-disclosure agreement? If so, are employees required to sign the non-disclosure agreement annually? ",
+        "details": " No, our employees do not need to sign a non-disclosure agreement. We do not require employees to sign a non-disclosure agreement annually."
+      },
+      {
+        "answer": " D. I don't know.",
+        "criteria": "[5.3] Do you have a formal process to manage the termination and or transfer of employees? ",
+        "details": " No, we do not have a formal process for managing the termination and or transfer of employees."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "a) Is there a termination or change of employment status process that includes review of access privileges to internal systems and data?",
+        "details": " Yes, when an employee's status changes or they are terminated, we review their access privileges to internal systems and data. We also have quarterly access reviews to ensure permissions align with job roles."
+      }
+    ],
+    "Physical Security": [
+      {
+        "answer": " I don't know.",
+        "criteria": "[6.1] Does your organization have effective physical access controls (e.g., door locks) in place that prevent unauthorized access to facilities, as well as a facility security plan? \n\n",
+        "details": " I'm not sure. I don't have the information necessary to answer that question."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "a) Are there contingency plans in place to handle/manage events/circumstances (e.g. what if the person with the key to the server room is sick)? \n",
+        "details": " No, there are no contingency plans in place to handle/manage events/circumstances."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "b) Is there a facility security plan? \n",
+        "details": " No, there is no facility security plan discussed in the context."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "c) Is physical access to areas storing or transmitting sensitive data authorized by an approved individual or set of individuals? \n",
+        "details": " No, this is not part of our user access management and password management processes."
+      },
+      {
+        "answer": " I don't know.",
+        "criteria": "d) Are there policies and procedures to document repairs and modifications to physical components of the facility that are related to security?\n",
+        "details": " No, we only document processes related to user access and password management."
+      },
+      {
+        "answer": " D. I don't know.",
+        "criteria": "e) Are visitors required to sign a visitor control log, and require to be escorted within the building?",
+        "details": " No, visitors are not required to sign a visitor control log, and do not require to be escorted within the building."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "f) Does the main lobby contain a reception or a security desk?",
+        "details": " I don't know."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "g) Does Closed Circuit Television (CCTV) monitor main entry points, the data center, loading docks and parking areas?",
+        "details": " No, CCTV does not monitor main entry points, the data center, loading docks, and parking areas."
+      },
+      {
+        "answer": " D. I don't know.",
+        "criteria": "h) Is physical access to areas storing or transmitting sensitive data formally reviewed or certified on a routine basis?",
+        "details": " No, physical access to areas storing or transmitting sensitive data is not formally reviewed or certified on a routine basis."
+      },
+      {
+        "answer": " D. I don't know.",
+        "criteria": "i) Does your organization keep a log of employees and contractors and/or third parties that have access to our sensitive data?",
+        "details": " Yes, we maintain records of access requests, approvals, and access reviews, as well as password change logs."
+      },
+      {
+        "answer": " I don't know.",
+        "criteria": "[6.2] Is backup electronic media stored on site protected against the effects of fire, smoke, flood, extreme temperatures, etc.? ",
+        "details": " I don't know."
+      },
+      {
+        "answer": " I don't know",
+        "criteria": "a) Is there an asset list of all backup media containing your sensitive data? Is this list securely maintained and reviewed regularly?",
+        "details": " No, there is no asset list of all backup media containing sensitive data. However, we do maintain a secure record of access requests, approvals, and access reviews, as well as password change logs, which are regularly reviewed."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "b) Does your organization require strong (multifactor) authentication options (card keys+PIN, biometric readers, etc.) for access to your physical facilities where our sensitive data may be accessed, stored and/or transmitted?",
+        "details": " Yes, we've implemented multi-factor authentication (MFA) for accessing sensitive systems and remote connections. It adds an extra layer of security."
+      }
+    ],
+    "Risk Mgmt & Compliance": [
+      {
+        "answer": " D. I don't know",
+        "criteria": "[3.1] Is a defined methodology for the risk assessment process established within your organization?",
+        "details": " No, we do not have a defined methodology for the risk assessment process established within our organization."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "[3.2] Does your organization have an Information Security Risk Management program?",
+        "details": " No, we do not have an Information Security Risk Management program."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "a) Has a risk assessment been conducted within the last 12 months to identify risks to our sensitive information?",
+        "details": " No, a risk assessment has not been conducted within the last 12 months."
+      },
+      {
+        "answer": " D. I don't know.",
+        "criteria": "b) Does your organization have a process that addresses: the identification and measurement of potential risks, mitigating controls (measures taken to reduce risk), and the acceptance or transfer (e.g. insurance policies, warranties) of the remaining (residual) risk, after mitigation steps have been applied? ",
+        "details": " Yes, we have a process in place that includes the identification and measurement of potential risks, mitigating controls, and the acceptance or transfer of the remaining (residual) risk."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "c) Do risk assessment results include updates to security policies, procedures, standards and controls to ensure they remain relevant and effective?",
+        "details": " No, risk assessment results are used to inform security policies, procedures, standards, and controls, but do not include updates to them."
+      },
+      {
+        "answer": " I don't know",
+        "criteria": "d) Are there regular privacy risk assessments?",
+        "details": " No, there are no regular privacy risk assessments."
+      },
+      {
+        "answer": " A. Yes, we have quarterly access reviews to ensure permissions align with job roles.",
+        "criteria": "If yes, provide frequency and scope. If no, explain reason.",
+        "details": " Yes, we have quarterly access reviews to ensure permissions align with job roles."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "e) Are controls identified for each risk classified as: preventive, detective, or corrective controls?",
+        "details": " No, these controls are not identified for each risk classified as preventive, detective, or corrective controls."
+      },
+      {
+        "answer": " D. I don't know.",
+        "criteria": "f) Has a risk assessment been performed for all applications resulting in a system classification based on criticality, and data classification?",
+        "details": " No, we have not performed a risk assessment for all applications resulting in a system classification based on criticality, and data classification."
+      },
+      {
+        "answer": " D. I don't know.",
+        "criteria": "[3.2] Does a formal organization and process exist to identify new laws and regulations with information security implications?",
+        "details": " No, there is no formal organization or process in place to identify new laws and regulations with information security implications."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "a) Are information systems regularly checked for compliance with security implementation standards?",
+        "details": " No, I don't know."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "b) Are there procedures to ensure compliance with legislative, regulatory, and contractual requirements on the rights to use of intellectual property and proprietary software products?",
+        "details": " I don't know."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "c) Are legal and regulatory compliance requirements documented within the organization's policies?",
+        "details": " No, legal and regulatory compliance requirements are not documented within the organization's policies."
+      },
+      {
+        "answer": " D. I don't know.",
+        "criteria": "d) Do non-disclosure and confidentiality agreements reflect your organization's needs for the protection of data?",
+        "details": " No, I do not know."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "e) In the past 12 months, have there been any regulatory or legal findings that are publicly available regarding privacy or data security related to your organization?",
+        "details": " No, there have not been any regulatory or legal findings related to privacy or data security in the past 12 months."
+      },
+      {
+        "answer": " I don't know.",
+        "criteria": "g) Is there an Ethics and Compliance Program in place for all employees?",
+        "details": " No, I don't know."
+      }
+    ],
+    "Security Policy": [
+      {
+        "answer": " I don't know.",
+        "criteria": "[2.1] Does your organization have documented information security policies and procedures?\n",
+        "details": " Yes, we maintain records of access requests, approvals, and access reviews, as well as password change logs. I'll make sure you have access to those."
+      },
+      {
+        "answer": " I don't know",
+        "criteria": "a)\u00a0Have formal acceptable use rules been established for assets? Example assets include data assets, computer equipment, communications equipment, etc.\n",
+        "details": " No, I don't know."
+      },
+      {
+        "answer": " D. I don't know.",
+        "criteria": "b) Does your organization have a clean desk policy?",
+        "details": " No, we do not have a clean desk policy."
+      },
+      {
+        "answer": " I don't know.",
+        "criteria": "c) Does your organization have employee responsibilities policies to include the use of email, internet, desktop computing, and consequences for non compliance? ",
+        "details": " No, we don't have employee responsibilities policies for the use of email, internet, and desktop computing."
+      },
+      {
+        "answer": " I don't know.",
+        "criteria": "d) Do your organization's security and privacy policies align with industry standards (e.g. ISO-27001, ISO-22307, CoBIT?)",
+        "details": " We adhere to the security and privacy requirements specified in ISO-27001, ISO-22307, and CoBIT. We also maintain an up-to-date risk register to track any vulnerabilities."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "e) Does your organization's privacy policies comply with all applicable privacy regulations and laws?",
+        "details": " I don't know."
+      },
+      {
+        "answer": " D. I don't know.",
+        "criteria": "[2.2] Does your organization review/update its policies, standards and procedures on an annual basis?",
+        "details": " No, we review and update our policies, standards and procedures on a quarterly basis."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "a) Does your organization have a formal review and approval processes in place for security policy exceptions? ",
+        "details": " No, we do not have any formal review and approval processes in place for security policy exceptions."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "b) Is there a policy review committee in place to review and approve policy changes?",
+        "details": " No, there is no policy review committee in place to review and approve policy changes. We have quarterly access reviews to ensure permissions align with job roles."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "c) Is an impact analysis performed prior to policy changes?",
+        "details": " No, we don't perform an impact analysis prior to policy changes."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "d) Do all policies and procedures have a document owner?",
+        "details": " No, not all policies and procedures have a document owner."
+      },
+      {
+        "answer": " I don't know.",
+        "criteria": "e) Are policies published and readily available to employees and contractors?",
+        "details": " No, I don't know."
+      },
+      {
+        "answer": " D. I don't know.",
+        "criteria": "[2.2] Does your organization have a formal information classification procedure? Please describe it. In particular, how would our sensitive data be categorized and what are the security requirements for those categories? For example, critical, essential, or normal.\n",
+        "details": " Yes, we have a formal information classification procedure. Our sensitive data is categorized as critical, essential, or normal. Critical data has the highest security requirements and is only accessible to authorized personnel with appropriate permission levels. Essential data requires additional protections, such as multi-factor authentication and encryption. Normal data is accessible to all users with appropriate permission levels. We also have quarterly access reviews to ensure that only authorized personnel have access to sensitive data."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "a) Are polices and procedures established for labeling, handling and storing of data, and objects that contain data?",
+        "details": " No, I don't know."
+      },
+      {
+        "answer": " I don't know.",
+        "criteria": "b)\u00a0Does your organization have a data retention and destruction policy?",
+        "details": " No, we do not have a data retention and destruction policy."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "c) Is our sensitive information (e.g., PII, PHI, cardholder data) categorized so that it is encrypted at rest and in transit?\n ",
+        "details": " No, I don't know."
+      },
+      {
+        "answer": " I don't know.",
+        "criteria": "[2.3] Do your organization's policies and procedures clearly define firewall configurations?",
+        "details": " No, our policies and procedures do not clearly define firewall configurations."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "a) Is the a Vulnerability and Patch management policy?",
+        "details": " No, I don't know if there is a Vulnerability and Patch management policy."
+      },
+      {
+        "answer": " I don't know",
+        "criteria": "b) Is there an information sharing policy to include transmission protocols, encryption, and access management?",
+        "details": " No, there is no information sharing policy."
+      },
+      {
+        "answer": " I don't know.",
+        "criteria": "[2.4] Does your organization develop and formally document media protection and destruction procedures?",
+        "details": " No, we do not have media protection and destruction procedures in place."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "a) Do policies, standards, and procedures address and enforce security related to usage of mobile devices (e.g., USB drives, PDAs, Smart Phones, tablets, etc.), including Bring Your Own Device (BYOD)? ",
+        "details": " No, we do not address security related to usage of mobile devices in our policies, standards, and procedures."
+      },
+      {
+        "answer": " D. I don't know.",
+        "criteria": "[2.5] Does your organization develop and formally document physical and environmental protection policies that address purpose, scope, roles and responsibilities, management commitment, coordination among organizational entities, and compliance with applicable policies, regulatory requirements, and laws?",
+        "details": " No, we do not have any physical and environmental protection policies."
+      },
+      {
+        "answer": " I don't know.",
+        "criteria": "a) Does your organization review/update the physical and environmental protection policies and procedures on an annual basis?",
+        "details": " No, we do not review/update the physical and environmental protection policies and procedures on an annual basis."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "[2.6] Are policies, processes and procedures defining business continuity and disaster recovery in place to minimize the impact of a realized risk event?",
+        "details": " No, policies, processes and procedures defining business continuity and disaster recovery are not in place to minimize the impact of a realized risk event."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "a) Are Business Impact Assessments performed and documented for all critical functions and systems?",
+        "details": " No, I don't know."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "b) Are BCP/DR tests performed annually for all functions storing, transferring, or using our data?",
+        "details": " No, BCP/DR tests are not performed annually for all functions storing, transferring, or using our data."
+      },
+      {
+        "answer": " I don't know.",
+        "criteria": "[2.7] Are policies, processes and procedures effectively communicated to stakeholders on a regular basis?",
+        "details": " No, I don't know."
+      }
+    ],
+    "Training & Awareness": [
+      {
+        "answer": " I don't know",
+        "criteria": "[4.1] Is there a formal security awareness program in place?",
+        "details": " No, there is not a formal security awareness program in place."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "a) Are employees and/or contractors provided with formal information security training on an annual basis? ",
+        "details": " No, I don't know."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "a) Have all policies and changes to policies been communicated?",
+        "details": " No, not all policies and changes to policies have been communicated."
+      },
+      {
+        "answer": " I don't know.",
+        "criteria": "b) Are periodic security reminders provided to employees and contractors?",
+        "details": " No, we don't provide periodic security reminders."
+      },
+      {
+        "answer": " I don't know.",
+        "criteria": "a) Is periodic training about malware in email and internet usage conducted?",
+        "details": " No, periodic training about malware in email and internet usage is not conducted."
+      },
+      {
+        "answer": " D. I don't know",
+        "criteria": "b) Are employees/contractors made aware of their responsibilities for maintaining awareness and compliance with published security policies, procedures, standards and applicable regulatory requirements?",
+        "details": " Yes, employees/contractors receive training on security policies, procedures, standards, and applicable regulatory requirements. They are then required to sign a document acknowledging their understanding and agreement to comply."
+      }
+    ]
+  }
+}

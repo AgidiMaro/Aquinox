@@ -1,0 +1,54 @@
+.dashboard {
+  padding: 20px;
+}
+
+.dashboard-header h2 {
+  margin: 0;
+  color: #333;
+}
+
+.dashboard-header p {
+  color: #666;
+}
+
+.audit-status {
+  display: flex;
+  justify-content: space-between;
+}
+
+.audit-table {
+  border-color: black !important;
+}
+
+.status-card {
+  width: 30%;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.status-number {
+  display: block;
+  font-size: 2em;
+  color: #333;
+}
+
+/* Add styles for not-started, in-progress, and completed status card variants */
+
+.audit-list .list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.audit-item{
+  cursor: pointer;
+}
+
+td, th {
+  text-align: center;
+  padding: 15px 6px;
+}
+
+.audit-table {
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}

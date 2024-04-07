@@ -5,6 +5,7 @@ interface FileInputProps {
   name: string;
   value: string;
   onChange: any;
+  multiple?: boolean;
 }
 
 const FileInput = (props: FileInputProps) => {
@@ -12,7 +13,7 @@ const FileInput = (props: FileInputProps) => {
     <div className="mb-4">
       <label className="block mb-2 text-sm font-medium">{props.label}</label>
       <input className="block w-full text-sm rounded-lg cursor-pointer" name={props.name}  id="file" type="file"
-        accept="application/pdf" onChange={props.onChange} />
+        multiple={props.multiple} accept="application/pdf" onChange={props.onChange} />
     </div>
   )
 }

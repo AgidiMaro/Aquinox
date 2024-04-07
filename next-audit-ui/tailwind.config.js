@@ -14,7 +14,7 @@ module.exports = {
       colors: {
         pureWhite: '#FFFFFF',
         darkBlue: '#1C73DA',
-        lightWhite: '#F3F3F3'
+        lightWhite: '#F5F7FB'
       }
     },
   },

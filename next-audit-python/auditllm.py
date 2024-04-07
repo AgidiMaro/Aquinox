@@ -105,6 +105,9 @@ class AuditLLM:
         })
         
     return result
+  
+  def generate_findings(self, text: str, answer_list):
+    return {"overview" : "", "summary": ""}
 
 
 

@@ -8,11 +8,15 @@ import Base from './audit-app/components/base/base';
 import { BrowserRouter } from "react-router-dom";
 import reportWebVitals from './reportWebVitals';
 
+import { Provider } from 'react-redux'
+import { store } from './audit-app/state/store'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
-    <Base />
+    <Provider store={store}>
+      <Base/>
+    </Provider>
   </BrowserRouter>
 );
 

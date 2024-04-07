@@ -2,7 +2,7 @@ import imp
 from urllib import response
 from flask import Flask
 from flask_restful import Api
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 from flask import request
 
 from dotenv import load_dotenv
@@ -13,8 +13,17 @@ from filereader import FileReader
 import json
 
 
+# brew install pyenv-virtualenv   
+# brew install pyenv-virtualenv 
+# pyenv virtualenv 3.9.4 env9 
+#  export PYENV_ROOT="$HOME/.pyenv" 
+# source ${PYENV_ROOT}/versions/env9/bin/activate
+
+
 app = Flask(__name__)
 CORS(app)
+
+
 api = Api(app)
 load_dotenv()
 
@@ -32,6 +41,9 @@ def upload():
     uploaded_files.append(file)
 
   for file in request.files.getlist("meetingNote"):
+   uploaded_files.append(file)
+    
+  for file in request.files.getlist("otherFiles"):
     uploaded_files.append(file)
   
   merged_text = ""
@@ -40,10 +52,11 @@ def upload():
     merged_text += file_reader.read_pdf_file(file)
 
   #print(merged_text)
-  #answer_list = audit_llm.generate_results(text=merged_text)  
+  #answer_list = audit_llm.generate_results(text=merged_text)   
   #answer_list = audit_llm.generate_audit(text=merged_text, program='ThirdPartySecurityRiskAssessment')
+  #findings = audit_llm.generate_findings()
   
-  #response = {"message": answer_list}
+  #response = {"message": answer_list, "findings", findings}
   #response = {"message": "Hello"}
 
   # Reading precreated output
@@ -54,4 +67,4 @@ def upload():
 
 
 if __name__ == "__main__":
-  app.run(debug=True)
+  app.run(port=8000, debug=True)

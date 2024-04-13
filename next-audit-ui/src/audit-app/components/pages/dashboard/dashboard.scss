@@ -1,55 +1,127 @@
 .dashboard {
   padding: 20px;
-  
-}
 
-.dashboard-header h2 {
-  margin: 0;
-  color: #333;
-}
+  .dashboard-header {
+    h2 {
+      margin: 0;
+      color: #333;
+    }
 
-.dashboard-header p {
-  color: #666;
-}
+    p {
+      color: #666;
+    }
+  }
 
-.audit-status {
-  display: flex;
-  justify-content: space-between;
-}
+  .search-input {
+    border: 1px solid #ccc;
 
-.audit-table {
-  border-color: black !important;
-}
+    max-width: 20rem;
 
-.status-card {
-  width: 30%;
-  padding: 20px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
+    width: 100%;
+    padding: 0.5rem 1rem;
+    border: 1px solid #EAECF0; // Lighter border color by default
+    border-radius: 1rem; // Fully rounded borders for pill-shaped input
+    transition: border-color 0.2s; // Smooth transition for border color
 
-.status-number {
-  display: block;
-  font-size: 2em;
-  color: #333;
-}
+    text-align: center; // Centers the placeholder text
 
-/* Add styles for not-started, in-progress, and completed status card variants */
+    // Position the search icon
+    // background-image: url('./search_icon.svg'); // Path to your search icon
+    // background-repeat: no-repeat;
+    // background-position: 1rem center; // Adjust based on your icon size
+    // background-size: 16px; // Size of your search icon
+    // text-indent: 2rem; // Indent text to make space for the icon
 
-.audit-list .list-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+    &:focus {
+      outline: none;
+      border-color: #5b21b6; // Change to purple when focused
+    }
 
-.audit-item{
-  cursor: pointer;
-}
 
-td, th {
-  text-align: center;
-  padding: 15px 6px;
-}
 
-.audit-table {
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+
+
+  .audit-status {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+
+    .status-card {
+      width: 30%;
+      padding: 20px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    // Colors based on status
+    .not-started .status-number {
+      color: #e74c3c;
+    }
+
+    .in-progress .status-number {
+      color: #f39c12;
+    }
+
+    .completed .status-number {
+      color: #27ae60;
+    }
+
+    .status-number {
+      display: block;
+      font-size: 2em;
+      color: #333;
+    }
+  }
+
+  .audit-list {
+    margin-top: 20px;
+
+    .list-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      h3 {
+        font-size: 24px;
+      }
+    }
+
+    .audit-table {
+      width: 100%;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      border-collapse: collapse;
+
+      th,
+      td {
+        padding: 15px;
+        border-bottom: 1px solid #ddd;
+      }
+
+      th {
+        background-color: #f8f8f8;
+      }
+
+      .audit-item {
+        cursor: pointer;
+        transition: background-color 0.3s;
+
+        &.not-started {
+          background-color: #fef6f6;
+        }
+
+        &.in-progress {
+          background-color: #fffaf3;
+        }
+
+        &.completed {
+          background-color: #f2f7f2;
+        }
+
+        &:hover {
+          background-color: #f0f0f0;
+        }
+      }
+    }
+  }
 }

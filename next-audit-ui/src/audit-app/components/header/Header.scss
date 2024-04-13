@@ -27,18 +27,30 @@
         flex-grow: 2; // Allow the search box to grow as needed
         max-width: 30rem; // Set a maximum width for the search box
         position: relative;
+        
 
         input {
             width: 100%;
-            padding: 0.75rem 1rem;
+            padding: 0.5rem 1rem;
             border: 2px solid #e2e8f0; // Lighter border color by default
             border-radius: 2rem; // Fully rounded borders for pill-shaped input
             transition: border-color 0.2s; // Smooth transition for border color
+            background-color: #EDEDED;
+            text-align: center; // Centers the placeholder text
 
+            // Position the search icon
+            background-image: url('./search_icon.svg'); // Path to your search icon
+            background-repeat: no-repeat;
+            background-position:1rem center; // Adjust based on your icon size
+            background-size: 16px; // Size of your search icon
+            text-indent: 2rem; // Indent text to make space for the icon
+        
             &:focus {
                 outline: none;
                 border-color: #5b21b6; // Change to purple when focused
             }
+
+                        
         }
     }
 

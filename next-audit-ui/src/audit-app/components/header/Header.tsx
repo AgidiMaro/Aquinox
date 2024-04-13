@@ -3,6 +3,7 @@ import './Header.scss';
 import logo from './logo.svg';
 import menu_arrow from './arrow.svg';
 import avatar from './avatar.svg'
+import search_icon from './search_icon.svg'
 
 
 
@@ -18,13 +19,16 @@ const Header = () => {
         <img src={logo}alt="Logo"/>
         <h1>NextGen</h1>
       </div>
+
       <div className="search-box">
         <input
           type="text"
           id="search"
           placeholder="Search here"
+
         />
       </div>
+
       <div className="user-profile">
         <span className="avatar">
           <img src={avatar}/>

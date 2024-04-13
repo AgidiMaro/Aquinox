@@ -23,6 +23,7 @@ const Router = () => {
         <Route path='chart' element={<ChartReport/>}/>
       </Route>
       <Route path='dashboard' element={<Dashboard/>}/>
+      
       <Route path='test' element={<CreateReport2/>}/>
       <Route path='*' element={<Navigate to='report'/>}/>
     </Routes>

@@ -1,0 +1,72 @@
+.header {
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    padding: 3rem 2rem; // Add padding to match the vertical spacing in the image
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .logo {
+        color: #5b21b6; // A purple color similar to the one in the image
+        font-size: 1.5rem; // Adjust size as needed
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+
+        // Assume there's a graphic or SVG logo before the text "Logo"
+        svg {
+            margin-right: 0.5rem; // Add space between SVG icon and logo text
+            height: 1.5rem; // Match height to font size of logo text for alignment
+            width: 1.5rem; // Match width to height for a square aspect ratio
+            fill: currentColor; // Use the color of the parent element
+        }
+    }
+
+    .search-box {
+        flex-grow: 2; // Allow the search box to grow as needed
+        max-width: 30rem; // Set a maximum width for the search box
+        position: relative;
+
+        input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid #e2e8f0; // Lighter border color by default
+            border-radius: 2rem; // Fully rounded borders for pill-shaped input
+            transition: border-color 0.2s; // Smooth transition for border color
+
+            &:focus {
+                outline: none;
+                border-color: #5b21b6; // Change to purple when focused
+            }
+        }
+    }
+
+    .user-profile {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem; // Adjust space between elements as needed
+
+        .avatar {
+                        border-radius: 9999px; // Fully rounded
+             // Placeholder color for the avatar
+        }
+
+        .username {
+            color: #5b21b6; // Same purple color for username
+            font-size: 1rem;
+            font-weight: medium;
+        }
+
+        .menu-button {
+            display: none; // Hide menu button on larger screens
+
+            @media (max-width: 1023px) {
+                display: flex;
+                padding: 0.5rem;
+                border-radius: 0.375rem; // Slightly rounded
+                // Include styles for your menu button icon here
+            }
+        }
+    }
+}

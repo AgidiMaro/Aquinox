@@ -55,10 +55,10 @@ const Dashboard = () => {
   return (
     <div className="dashboard">
       <div className="dashboard-header">
-        <h2 className="text-3xl">Welcome back, Scott</h2>
+        <h2 className="text-3xl font-semibold">Welcome back, Scott</h2>
         <p>Elevate your audits with seamless management powered by AI and NLP</p>
-
       </div>
+
       <div className="audit-status">
         {/* Status cards here */}
         <div className="status-card bg-pureWhite not-started">
@@ -77,7 +77,7 @@ const Dashboard = () => {
       </div>
       <div className="audit-list mt-10">
         <div className="list-header">
-          <h3 className="text-2xl">All audits</h3>
+          <h3 className="text-2xl font-semibold">All audits</h3>
           {/* Additional list controls here */}
           <input
           type="text"
@@ -88,7 +88,7 @@ const Dashboard = () => {
         />
         </div>
         
-        <table className="audit-table table-auto mt-5 min-w-full audit-table bg-pureWhite">
+        <table className="audit-table mt-5 min-w-full bg-pureWhite rounded-lg ">
           <thead>
             <tr>
               <th>Audit</th>
@@ -98,6 +98,7 @@ const Dashboard = () => {
               <th>Due Date</th>
             </tr>
           </thead>
+
           <tbody>
             {filteredAudits.map(audit => (
               <tr

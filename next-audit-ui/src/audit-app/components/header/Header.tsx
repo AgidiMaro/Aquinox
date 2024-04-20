@@ -5,22 +5,16 @@ import menu_arrow from './arrow.svg';
 import avatar from './avatar.svg'
 import search_icon from './search_icon.svg'
 
-
-
-// Replace with your actual logo and menu icon components if available
-// const LogoSVG = () => <svg /* svg props and content here */ />;
-// const MenuIcon = () => <svg /* svg props and content here */ />;
-
 const Header = () => {
   return (
     <header className="header">
       <div className="logo">
-        {/* Insert your SVG logo here */}
+        
         <img src={logo}alt="Logo"/>
         <h1>NextGen</h1>
       </div>
 
-      <div className="search-box">
+      <div className="search-box text-base">
         <input
           type="text"
           id="search"

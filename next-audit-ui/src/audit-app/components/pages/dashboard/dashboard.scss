@@ -50,8 +50,9 @@
     .status-card {
       width: 30%;
       padding: 20px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       text-align: center;
+      border-radius: 1rem;
+      border: 1pt solid #D0D5DD;
     }
 
     // Colors based on status
@@ -81,47 +82,49 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-
-      h3 {
-        font-size: 24px;
-      }
     }
+  }
 
     .audit-table {
       width: 100%;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       border-collapse: collapse;
-
-      th,
+      border-radius: 1rem;
+      overflow: hidden;
+      
+    
       td {
         padding: 15px;
         border-bottom: 1px solid #ddd;
+        text-align: center;
+        color: #666;
       }
 
       th {
-        background-color: #f8f8f8;
+        padding: 15px;
+        background-color: #EAECF0;
       }
 
       .audit-item {
         cursor: pointer;
         transition: background-color 0.3s;
 
-        &.not-started {
-          background-color: #fef6f6;
-        }
+        // &.not-started {
+        //   background-color: #fef6f6;
+        // }
 
-        &.in-progress {
-          background-color: #fffaf3;
-        }
+        // &.in-progress {
+        //   background-color: #fffaf3;
+        // }
 
-        &.completed {
-          background-color: #f2f7f2;
-        }
+        // &.completed {
+        //   background-color: #f2f7f2;
+        // }
 
         &:hover {
-          background-color: #f0f0f0;
+          background-color: #F0F0F0;
         }
       }
     }
+
   }
-}
+  

@@ -1,8 +1,8 @@
 .header {
-    background-color: white;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    background-color: #F5F7FB;
+    border-bottom: 2pt solid #D0D5DD;
     overflow: hidden;
-    padding: 3rem 2rem; // Add padding to match the vertical spacing in the image
+    padding: 2.5rem 2rem; // Add padding to match the vertical spacing in the image
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -31,13 +31,12 @@
 
         input {
             width: 100%;
-            padding: 0.5rem 1rem;
-            border: 2px solid #e2e8f0; // Lighter border color by default
+            padding: 0.3rem 1rem;
+            border: 1px solid #e2e8f0; // Lighter border color by default
             border-radius: 2rem; // Fully rounded borders for pill-shaped input
             transition: border-color 0.2s; // Smooth transition for border color
-            background-color: #EDEDED;
+            background-color: #F5F7FB;
             text-align: center; // Centers the placeholder text
-
             // Position the search icon
             background-image: url('./search_icon.svg'); // Path to your search icon
             background-repeat: no-repeat;

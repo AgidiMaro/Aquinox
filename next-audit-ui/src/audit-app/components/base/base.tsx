@@ -18,7 +18,7 @@ const Base = () => {
           <Router/>
         </div>
       </div>
-      <Footer/>
+      {/* <Footer/> */}
     </div>
   );
 }

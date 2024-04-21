@@ -2,10 +2,11 @@ from filereader import FileReader
 
 from langchain.text_splitter import CharacterTextSplitter
 from langchain.embeddings.openai import OpenAIEmbeddings
-from langchain.vectorstores import FAISS
+from langchain_community.vectorstores import FAISS
 from langchain.chains.question_answering import load_qa_chain
-from langchain.llms import OpenAI
-from langchain.callbacks import get_openai_callback
+from langchain_community.llms import OpenAI
+from langchain_community.chat_models import ChatOpenAI
+from langchain_community.callbacks import get_openai_callback
 
 question_set = [
   "Is there a policy for the use and handling of passwords?",
@@ -19,12 +20,17 @@ question_set = [
 flag_question = "\n A. Yes \n B. No \n C. Maybe \n D. I don't know"
 flag_question2 = "\n A. True \n B. False \n C. Partially True \n D. Not Applicable"
 
+updated_flag_question_prefix = "Classify the reponse to the question below as 'Yes', 'No' or 'Unknown'\n"
+
+
+
+
 class AuditLLM:
 
   def __init__(self, file_reader: FileReader) -> None:
     self.file_reader = file_reader
     self.embeddings = OpenAIEmbeddings()
-    self.chain = load_qa_chain(OpenAI(), chain_type="stuff")
+    self.chain = load_qa_chain(OpenAI(temperature=0.0), chain_type="stuff")
     self.text_splitter = CharacterTextSplitter(
       separator="\n",
       chunk_size=1000,
@@ -43,7 +49,7 @@ class AuditLLM:
     
     for user_question in question_set:
       docs = knowledge_base.similarity_search(user_question)
-      print(user_question + flag_question)
+      print(user_question)
 
       with get_openai_callback() as cb:
         details = self.chain.run(input_documents=docs, question=user_question)
@@ -52,7 +58,8 @@ class AuditLLM:
 
       with get_openai_callback() as cb:
         answer = self.chain.run(input_documents=docs, question= ( user_question + flag_question) )
-
+      
+        
       print(answer)
 
       result.append({
@@ -87,16 +94,31 @@ class AuditLLM:
 
       for domain_question in domain_questions:
         docs = knowledge_base.similarity_search(domain_question)
+        
+        # self.chain = load_qa_chain(ChatOpenAI(temperature=0.0), chain_type="stuff")
 
         with get_openai_callback() as cb:
           details = self.chain.run(input_documents=docs, question=domain_question)
 
         print(details)
+        
+        next_question = updated_flag_question_prefix
+        next_question += "question: + {0} \n".format(domain_question)
+        
+        next_question2 = updated_flag_question_prefix
+        next_question2 += "answer: + {0} \n".format(details)
 
         with get_openai_callback() as cb:
-          answer = self.chain.run(input_documents=docs, question= ( domain_question + flag_question) )
+          answer = self.chain.run(input_documents=docs, question= ( next_question2) )
 
         print(answer)
+      
+        if 'Yes' in answer:
+          answer = 'Pass'
+        elif 'No' in answer:
+          answer = 'Fail'
+        else:
+          answer = 'UnKnown'
 
         domain_list.append({
           "criteria": domain_question,
@@ -108,6 +130,7 @@ class AuditLLM:
   
   def generate_findings(self, text: str, answer_list):
     return {"overview" : "", "summary": ""}
+
 
 
 

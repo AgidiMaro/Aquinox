@@ -43,26 +43,27 @@ def upload():
   for file in request.files.getlist("meetingNote"):
    uploaded_files.append(file)
     
-  for file in request.files.getlist("otherFiles"):
-    uploaded_files.append(file)
+  # for file in request.files.getlist("otherFiles"):
+  #   uploaded_files.append(file)
   
   merged_text = ""
 
   for file in uploaded_files:
     merged_text += file_reader.read_pdf_file(file)
 
-  #print(merged_text)
-  #answer_list = audit_llm.generate_results(text=merged_text)   
-  #answer_list = audit_llm.generate_audit(text=merged_text, program='ThirdPartySecurityRiskAssessment')
-  #findings = audit_llm.generate_findings()
+  print(merged_text)
+  # answer_list = audit_llm.generate_results(text=merged_text)   
+  # answer_list = audit_llm.generate_audit(text=merged_text, program='ThirdPartySecurityRiskAssessment')
+  answer_list = audit_llm.generate_audit(text=merged_text, program='LogicalAccess')
+  findings = audit_llm.generate_findings(text=merged_text, answer_list=answer_list)
   
-  #response = {"message": answer_list, "findings", findings}
-  #response = {"message": "Hello"}
+  response = {"message": answer_list, "findings": findings}
+  # response = {"message": "Hello"}
 
   # Reading precreated output
-  f = open('thirdrisksample.json')
+  # f = open('thirdrisksample.json')
  
-  response = json.load(f)
+  # response = json.load(f)
   return response
 
 

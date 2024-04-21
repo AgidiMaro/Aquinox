@@ -47,10 +47,20 @@ const CreateReport = () => {
 
       // TO DO - Map to accurate and not random values
       const length = questions.length;
-      const yes = Math.floor(Math.random() * length);
-      const rem = length - yes;
-      const no = Math.floor(Math.random() * rem);
-      const maybe = rem - no;
+      let yes = 0;
+      let no = 0;
+      let maybe = 0;
+
+      for (const question of questions) {
+        if (question.answer == 'Pass'){
+          ++yes;
+        }
+        else if (question.answer == 'Fail') {
+          ++no;
+        } else {
+          ++maybe;
+        }
+      }
 
       yesFraction += yes / questions.length;
       noFraction += no / questions.length;
@@ -63,7 +73,6 @@ const CreateReport = () => {
         noCount: no,
         unknown: maybe
       }
-
       domains.push(domain);
     } 
 

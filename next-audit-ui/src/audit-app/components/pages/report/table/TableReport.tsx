@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Domain } from "../../../../models/AuditReport";
 import { AppDispatch, RootState } from "../../../../state/store";
-import { expandSection } from "../../../../state/reportSlice";
+import { expandSection, updateAuditReport } from "../../../../state/reportSlice";
 
 
 const TableReport = () => {
@@ -17,6 +17,7 @@ const TableReport = () => {
   if (!report || !Object.keys(report).length) {
     console.log('Update report');
     report = JSON.parse(localStorage.getItem('report') as string);
+    dispatch(updateAuditReport(report));
     console.log(report);
   }
 

@@ -14,7 +14,8 @@ module.exports = {
       colors: {
         pureWhite: '#FFFFFF',
         darkBlue: '#1C73DA',
-        lightWhite: '#F5F7FB'
+        lightWhite: '#F5F7FB',
+        logoPurple: '#7F56D9'
       }
     },
   },

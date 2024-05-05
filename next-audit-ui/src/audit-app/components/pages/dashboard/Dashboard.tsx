@@ -49,11 +49,11 @@ const Dashboard = () => {
 // Use this for navigation when route is completed
   const navigateToAudit = (auditId: number) => {
     // navigate(`/audit/${auditId}`);
-    navigate("/test");
+    navigate("/report");
   };
 
   return (
-    <div className="dashboard">
+    <div className="dashboard mx-10">
       <div className="dashboard-header">
         <h2 className="text-3xl font-semibold">Welcome back, Scott</h2>
         <p>Elevate your audits with seamless management powered by AI and NLP</p>

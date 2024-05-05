@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "../../../models/Links";
 import { NavLink } from "react-router-dom";
+import './subheader.scss';
 
 export interface SubheaderProps {
   paths: Link [];
@@ -10,7 +11,7 @@ export interface SubheaderProps {
 const Subheader = (props : SubheaderProps) => {
 
   return (
-    <div className="mx-10 px-5 mb-5 flex items-center">
+    <div className="flex items-center sub-header">
       <NavLink to="/">Home</NavLink>
       {props.paths.map(path => (
             <>
@@ -20,7 +21,8 @@ const Subheader = (props : SubheaderProps) => {
         ))}
       <span className="ml-auto">
         {props.buttons.map(button => (
-              <button className="bg-darkBlue text-white float-right p-2 mx-5">{button.linkTitle}</button>
+              <button onClick={button.action}
+              className="bg-logoPurple text-white rounded float-right p-2 mx-5">{button.linkTitle}</button>
           ))}
       </span>
     </div>

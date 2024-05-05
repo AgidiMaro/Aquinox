@@ -14,7 +14,7 @@ const Base = () => {
          {  <SideBar/> }
         </div>
         */}
-        <div className="m-3 h-auto col-span-4">
+        <div className="my-3 h-auto col-span-4">
           <Router/>
         </div>
       </div>

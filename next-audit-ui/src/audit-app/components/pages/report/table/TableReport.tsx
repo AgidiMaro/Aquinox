@@ -172,10 +172,13 @@ const TableReport = () => {
         enabled:true,
         
         callbacks: {
-          label: (tooltipItem:TooltipItem<'bar'>) => {
+          label: (tooltipItem: TooltipItem<"bar">) => {
+            const datasetLabel =
+              tooltipItem.chart.data.datasets[tooltipItem.datasetIndex]
+                .label;
             const value = tooltipItem.raw as number; // Cast raw to number
-            return `${value.toFixed(0)}%`; // Handling raw as a number directly
-          }
+            return `${datasetLabel} : ${value.toFixed(0)}%`; // Handling raw as a number directly
+          },
         },
       },
     },

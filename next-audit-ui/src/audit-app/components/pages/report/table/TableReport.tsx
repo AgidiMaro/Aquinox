@@ -8,6 +8,8 @@ import title_icon from './TitleIcon.svg'
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend,ChartOptions,
   ChartData, TooltipItem } from 'chart.js';
+import { Link } from "../../../../models/Links";
+import SubHeader from "../../../common/subheader/SubHeader";
 
 
 // Register the necessary Chart.js components
@@ -33,6 +35,29 @@ const TableReport = () => {
     const csvDoc = csvMaker();
     download(csvDoc);
   }
+
+  const headerPaths: Link [] = [
+    {
+      linkRef: '/dashboard',
+      linkTitle: 'Audits'
+    },
+    {
+      linkRef: '/report',
+      linkTitle: 'Audit 1' 
+    },
+    {
+      linkRef: '',
+      linkTitle: 'Report' 
+    }
+  ];
+
+  const headerButtons: Link [] = [
+    {
+      linkRef: '',
+      linkTitle: 'Download',
+      action: exportAsCSV
+    }
+  ];
 
   const download = (data: any)  => { 
   
@@ -100,170 +125,167 @@ const TableReport = () => {
   const collapsedIconClass = 'arrow down';
  
   return (
-    <div className="mx-auto p-6 ">
-      <div className="flex justify-between items-center mb-8">
-        {/* replace the breadcrumbs with actual data */}
-        <div className="text-gray-600">Home {'>'} Audits {'>'} Audit task 1 {'>'} Report</div>
-        <button onClick={exportAsCSV} className="bg-logoPurple text-white py-2 px-4 rounded">
-          Download
-        </button>
-      </div>
-      
-      {/* Report Title and Icon*/}
-      <div className="flex items-center mb-8">
-        <img src={title_icon}alt="Logo"/>
-        <h1 className="text-2xl font-semibold">Logical Access Audit</h1>
-      </div>
 
-      <div>
+    <>
+      <SubHeader buttons={headerButtons} paths={headerPaths}></SubHeader>
+   
+      <div className="mx-7 p-6 ">        
+        {/* Report Title and Icon*/}
+        <div className="flex items-center mb-8">
+          <img src={title_icon}alt="Logo"/>
+          <h1 className="text-2xl font-semibold">Logical Access Audit</h1>
+        </div>
 
-        {/* <div>
-          {report.overview}
-        </div> */}
+        <div>
 
-        {report.domains.map((domain) => {
-        const total = domain.yesCount + domain.noCount + domain.unknown;
-        
-        const rawDatasets = [
-          { label: 'Effective', data: [domain.yesCount], backgroundColor: '#219653', borderRadius: { topLeft: 50, bottomLeft: 50 }, borderSkipped: false },
-          { label: 'Ineffective', data: [domain.noCount], backgroundColor: '#EB5757', borderSkipped: false },
-          { label: 'N/A', data: [domain.unknown], backgroundColor: '#F2C94C', borderRadius: { topRight: 50, bottomRight: 50 }, borderSkipped: false },
-        ];
+          {/* <div>
+            {report.overview}
+          </div> */}
 
-        const datasets = rawDatasets.map(dataset => ({
-          ...dataset,
-          data: [(dataset.data[0] / total) * 100],
-        }));
+          {report.domains.map((domain) => {
+          const total = domain.yesCount + domain.noCount + domain.unknown;
+          
+          const rawDatasets = [
+            { label: 'Effective', data: [domain.yesCount], backgroundColor: '#219653', borderRadius: { topLeft: 50, bottomLeft: 50 }, borderSkipped: false },
+            { label: 'Ineffective', data: [domain.noCount], backgroundColor: '#EB5757', borderSkipped: false },
+            { label: 'N/A', data: [domain.unknown], backgroundColor: '#F2C94C', borderRadius: { topRight: 50, bottomRight: 50 }, borderSkipped: false },
+          ];
 
-        console.log({datasets})
-        const data = {
-          labels: [''],
-          datasets,
-        };
+          const datasets = rawDatasets.map(dataset => ({
+            ...dataset,
+            data: [(dataset.data[0] / total) * 100],
+          }));
 
-        const options = {
-        indexAxis: 'y' as const,
-        maintainAspectRatio: false,
-        responsive: true,
-        scales: {
-          x: {
-            stacked: true,
-            display: false,
-            max:100,
-            grid:{
-              display:false,
-              drawTicks:false,
-              drawOnChartArea:false,
-            }
-          },
-      y: {
-        stacked: true,
-        max:100,
-        grid:{
-          display:false,
-          drawTicks:false,
-          drawOnChartArea:false,
-        }
+          console.log({datasets})
+          const data = {
+            labels: [''],
+            datasets,
+          };
+
+          const options = {
+          indexAxis: 'y' as const,
+          maintainAspectRatio: false,
+          responsive: true,
+          scales: {
+            x: {
+              stacked: true,
+              display: false,
+              max:100,
+              grid:{
+                display:false,
+                drawTicks:false,
+                drawOnChartArea:false,
+              }
+            },
+        y: {
+          stacked: true,
+          max:100,
+          grid:{
+            display:false,
+            drawTicks:false,
+            drawOnChartArea:false,
+          }
+        },
       },
-    },
-    plugins: {
-      
-      tooltip: {
-        enabled:true,
+      plugins: {
         
-        callbacks: {
-          label: (tooltipItem: TooltipItem<"bar">) => {
-            const datasetLabel =
-              tooltipItem.chart.data.datasets[tooltipItem.datasetIndex]
-                .label;
-            const value = tooltipItem.raw as number; // Cast raw to number
-            return `${datasetLabel} : ${value.toFixed(0)}%`; // Handling raw as a number directly
+        tooltip: {
+          enabled:true,
+          
+          callbacks: {
+            label: (tooltipItem: TooltipItem<"bar">) => {
+              const datasetLabel =
+                tooltipItem.chart.data.datasets[tooltipItem.datasetIndex]
+                  .label;
+              const value = tooltipItem.raw as number; // Cast raw to number
+              return `${datasetLabel} : ${value.toFixed(0)}%`; // Handling raw as a number directly
+            },
           },
         },
       },
-    },
-        };
+          };
 
 
-            return (
-              <>
-                <div onClick={() => dispatch(expandSection(domain))} className="border-2 rounded-lg pl-8 pr-24">
-                  
-                  <div className="flex justify-between items-center py-2 ">
-                    <div className="font-medium text-gray-700">
-                    {domain.name}
+              return (
+                <>
+                  <div onClick={() => dispatch(expandSection(domain))} className="border-2 rounded-lg pl-8 pr-24">
+                    
+                    <div className="flex justify-between items-center py-2 ">
+                      <div className="font-medium text-gray-700">
+                      {domain.name}
+                      </div>
+                      
+                      {/* Bar chart and the icon for expansion */}
+                    <div className="h-10 w-1/6 flex justify-between items-center p-1">
+                      
+                      <Bar data={data} options={options} className="rounded-full " />
+                      
+                      <div className="ml-12">
+
+                      <i className={domain.isExpanded ? expandedIconClass : collapsedIconClass}></i>
+      
                     </div>
-                    
-                    {/* Bar chart and the icon for expansion */}
-                  <div className="h-10 w-1/6 flex justify-between items-center p-1">
-                    
-                    <Bar data={data} options={options} className="rounded-full " />
-                    
-                    <div className="ml-12">
 
-                    <i className={domain.isExpanded ? expandedIconClass : collapsedIconClass}></i>
-    
-                  </div>
+                    </div>
 
-                  </div>
+                    </div>    
 
-                  </div>    
-
-                  {/* Section showing the expanded results */}
-                  {
-                  domain.isExpanded &&
-                  
-                    <table className="table-auto border-collapse w-full my-4 rounded-lg overflow-hidden">
-                  <thead className="border-b-2 bg-gray-200">
-                    <tr>
-                      <th className="font-medium text-sm p-2 text-gray-700">Test procedure</th>
-                      <th className="font-medium text-sm p-2 text-gray-700">Result</th>
-                      <th className="font-medium text-sm p-2 text-gray-700">Details</th>
-                    </tr>
-                  </thead>
-
-                  <tbody>
+                    {/* Section showing the expanded results */}
                     {
-                      domain.questions.map((question, index) => {
-                        return (
-                          <tr key={domain.name + index} className="my-10 font-normal text-sm text-gray-700">
-                            <td className="p-2 border-b border-gray-300  text-left">{question.criteria}</td>
-                            <td className="p-2 border-b border-gray-300  text-center">{question.answer}</td>
-                            <td className="p-2 border-b border-gray-300 text-left">{question.details}</td>
-                          </tr>
-                        )
-                      })
-                    }
-                  </tbody>
-                </table>
-                 
+                    domain.isExpanded &&
+                    
+                      <table className="table-auto border-collapse w-full my-4 rounded-lg overflow-hidden">
+                    <thead className="border-b-2 bg-gray-200">
+                      <tr>
+                        <th className="font-medium text-sm p-2 text-gray-700">Test procedure</th>
+                        <th className="font-medium text-sm p-2 text-gray-700">Result</th>
+                        <th className="font-medium text-sm p-2 text-gray-700">Details</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      {
+                        domain.questions.map((question, index) => {
+                          return (
+                            <tr key={domain.name + index} className="my-10 font-normal text-sm text-gray-700">
+                              <td className="p-2 border-b border-gray-300  text-left">{question.criteria}</td>
+                              <td className="p-2 border-b border-gray-300  text-center">{question.answer}</td>
+                              <td className="p-2 border-b border-gray-300 text-left">{question.details}</td>
+                            </tr>
+                          )
+                        })
+                      }
+                    </tbody>
+                  </table>
                   
-                
-                }
+                    
                   
-                </div>
+                  }
+                    
+                  </div>
 
-                
-              </>
-            );
-          })}
+                  
+                </>
+              );
+            })}
 
-          {/* Summary at the bottom */}
-          {/* <div onClick={() => dispatch(expandSection())} className="my-5 bg-pureWhite shadow-md rounded p-8 m-auto">
-            Summary
-            <span className="float-right">
-              <span className="mx-3">Yes: {(report.yesFrac).toFixed(2)}%</span>
-              <span className="mx-3">No: {(report.noFrac).toFixed(2)}%</span>
-              <span className="mx-3">N/A: {(report.unknownFrac).toFixed(2)}%</span>
-              <i className={report.showOverview ? expandedIconClass : collapsedIconClass}></i>
-            </span>
-          </div>
-          <div>
-          {report.showOverview && report.summary}
-        </div> */}
+            {/* Summary at the bottom */}
+            {/* <div onClick={() => dispatch(expandSection())} className="my-5 bg-pureWhite shadow-md rounded p-8 m-auto">
+              Summary
+              <span className="float-right">
+                <span className="mx-3">Yes: {(report.yesFrac).toFixed(2)}%</span>
+                <span className="mx-3">No: {(report.noFrac).toFixed(2)}%</span>
+                <span className="mx-3">N/A: {(report.unknownFrac).toFixed(2)}%</span>
+                <i className={report.showOverview ? expandedIconClass : collapsedIconClass}></i>
+              </span>
+            </div>
+            <div>
+            {report.showOverview && report.summary}
+          </div> */}
 
+        </div>
       </div>
-    </div>
+    </>
   )
 }
 

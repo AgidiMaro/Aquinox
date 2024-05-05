@@ -18,14 +18,13 @@ const Router = () => {
   return (
     <Routes>
       <Route path='report' element={<Report/>}>
-        <Route path='' element={<CreateReport />}/>
+        <Route path='' element={<CreateReport2/>}/>
         <Route path='result' element={<TableReport/>}/>
         <Route path='chart' element={<ChartReport/>}/>
       </Route>
       <Route path='dashboard' element={<Dashboard/>}/>
       
-      <Route path='test' element={<CreateReport2/>}/>
-      <Route path='*' element={<Navigate to='report'/>}/>
+      <Route path='*' element={<Navigate to='dashboard'/>}/>
     </Routes>
   );
   

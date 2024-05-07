@@ -98,11 +98,18 @@
         text-align: center;
         color: #666;
       }
+            #description-cell {
+              text-align: left;
+              padding: auto;
+            }
+          
 
       th {
         padding: 15px;
         background-color: #EAECF0;
       }
+
+            
 
       .audit-item {
         cursor: pointer;

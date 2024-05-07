@@ -120,17 +120,17 @@ const CreateReport2 = () => {
   const inputs = [
     {
       titleText: 'Policies',
-      descriptionText: 'Upload Policies for Audit Task',
+      descriptionText: 'Upload associated policies and procedures maintained by the organisation',
       nameOnForm: 'policyDoc'
     },
     {
-      titleText: 'WalkThrough Note',
-      descriptionText: 'Upload Policies for Audit Task',
+      titleText: 'Walkthrough Note',
+      descriptionText: 'Upload walkthrough notes from meeting with control operator(s)',
       nameOnForm: 'meetingNote'
     },
     {
       titleText: 'Supporting Evidence',
-      descriptionText: 'Upload Policies for Audit Task',
+      descriptionText: 'Upload any other supporting evidence for the review',
       nameOnForm: 'otherFiles'
     }
   ]
@@ -142,48 +142,59 @@ const CreateReport2 = () => {
         <Form
           onSubmit={onSubmit}
           render={({ handleSubmit }) => (
-            <form onSubmit={handleSubmit} id="audit-form" 
-              className="rounded p-5 ml-10">
-              <div className="flex items-center mb-8">
-                <img src={title_icon}alt="Logo"/>
-                <h2 className="text-2xl font-semibold">Audit Task 1</h2>
+            <form
+              onSubmit={handleSubmit}
+              id="audit-form"
+              className="rounded p-5 ml-10"
+            >
+              <div className="flex items-center mb-8 ">
+                <img src={title_icon} alt="Logo" />
+                <h2 className="text-2xl font-semibold">Logical access audit</h2>
               </div>
-              {
-                inputs.map(input => (
-                  <FileSection titleText={input.titleText} descriptionText={input.descriptionText}
-                    nameOnForm={input.nameOnForm}>
-                
-                  </FileSection>
-                ))
-              }
+              {inputs.map((input) => (
+                <FileSection
+                  titleText={input.titleText}
+                  descriptionText={input.descriptionText}
+                  nameOnForm={input.nameOnForm}
+                ></FileSection>
+              ))}
             </form>
           )}
         />
       </div>
       <div className="rounded p-5 w-2/6 inline-grid report-sidebar">
-        <div className="text-xl mb-3">Description</div>
+        <div className="text-lg mb-3  text-lightBlack">Description</div>
         <div className="text-sm">
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+          The logical access audit evaluates and verifies the implementation and
+          effectiveness of an organization's electronic data systems controls.
+          This type of audit ensures that only authorized individuals have
+          access to systems and data, thereby safeguarding sensitive information
+          from unauthorized access, use, or manipulation. The audit process
+          typically involves reviewing user access rights, authentication
+          mechanisms, and system activity logs to identify any discrepancies or
+          potential security vulnerabilities. The goal is to maintain integrity
+          and confidentiality of data by ensuring that access controls are
+          appropriate and effectively managed
         </div>
         <table className="text-sm mt-5">
           <tbody>
             <tr>
-              <td>Status</td>
+              <td className="text-lightBlack">Status</td>
               <td>Active</td>
             </tr>
             <tr>
-              <td>Assignee</td>
+              <td className="text-lightBlack">Assignee</td>
               <td>Emmanuel Maro</td>
             </tr>
             <tr>
-              <td>Due Date</td>
-              <td>2nd March 2027</td>
+              <td className="text-lightBlack">Due Date</td>
+              <td>2nd June 2024</td>
             </tr>
           </tbody>
         </table>
       </div>
     </>
-  )
+  );
 }
 
 export default CreateReport2

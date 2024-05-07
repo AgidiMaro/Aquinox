@@ -18,24 +18,69 @@ const Dashboard = () => {
   const audits: Audit[] = [
     {
       id: 1,
-      description: 'Initial Audit Assessment',
-      assignee: 'Olivia Rhye',
-      status: 'Not Started',
-      dueDate: '2024-03-02'
+      description: "Logical Access Audit",
+      assignee: "Emmanuel Maro",
+      status: "Completed",
+      dueDate: "2024-03-02",
     },
     {
       id: 2,
-      description: 'Quarterly Financial Review',
-      assignee: 'James Bond',
-      status: 'In Progress',
-      dueDate: '2024-07-05'
+      description:
+        "OWASP Application Security Verification Standard (ASVS) Review",
+      assignee: "James Bond",
+      status: "Completed",
+      dueDate: "2024-07-05",
     },
     {
       id: 3,
-      description: 'Annual Compliance Audit',
-      assignee: 'Ava Green',
-      status: 'Completed',
-      dueDate: '2023-12-15'
+      description: "Annual Compliance Audit",
+      assignee: "Ava Green",
+      status: "In Progress",
+      dueDate: "2023-12-15",
+    },
+    {
+      id: 4,
+      description: "The General Data Protection Regulation (GDPR) Audit",
+      assignee: "Olivia Rhye",
+      status: "Not Started",
+      dueDate: "2024-03-02",
+    },
+    {
+      id: 5,
+      description: "NIST Cybersecurity Framework (CSF) Review",
+      assignee: "James Bond",
+      status: "In Progress",
+      dueDate: "2024-07-05",
+    },
+    {
+      id: 6,
+      description: "CryptoCurrency Security Standard Audit",
+      assignee: "Ava Green",
+      status: "Not Started",
+      dueDate: "2023-12-15",
+    },
+    {
+      id: 7,
+      description:
+        "Payment Card Industry Data Security Standard (PCI DSS) Audit",
+      assignee: "Ava Green",
+      status: "Completed",
+      dueDate: "2023-12-15",
+    },
+    {
+      id: 8,
+      description: "Third Party Audit",
+      assignee: "Ava Green",
+      status: "Not Started",
+      dueDate: "2023-12-15",
+    },
+    {
+      id: 9,
+      description:
+        "UK Cyber Essentials: Requirements for IT infrastructure Review",
+      assignee: "Ava Green",
+      status: "Not Started",
+      dueDate: "2023-12-15",
     },
     // ...other audits
   ];
@@ -56,38 +101,39 @@ const Dashboard = () => {
     <div className="dashboard mx-10">
       <div className="dashboard-header">
         <h2 className="text-3xl font-semibold">Welcome back, Scott</h2>
-        <p>Elevate your audits with seamless management powered by AI and NLP</p>
+        <p>
+          Elevate your audits with seamless management powered by AI and NLP
+        </p>
       </div>
 
       <div className="audit-status">
         {/* Status cards here */}
         <div className="status-card bg-pureWhite not-started">
           <h3>Not started</h3>
-          <span className="status-number">2,420</span>
+          <span className="status-number">4</span>
         </div>
         <div className="status-card bg-pureWhite in-progress">
           <h3>In progress</h3>
-          <span className="status-number">2,420</span>
+          <span className="status-number">2</span>
         </div>
         <div className="status-card bg-pureWhite completed">
           <h3>Completed</h3>
-          <span className="status-number">2,420</span>
+          <span className="status-number">3</span>
         </div>
-
       </div>
       <div className="audit-list mt-10">
         <div className="list-header">
           <h3 className="text-2xl font-semibold">All audits</h3>
           {/* Additional list controls here */}
           <input
-          type="text"
-          className="search-input"
-          placeholder="Search audits..."
-          value={searchTerm}
-          onChange={e => setSearchTerm(e.target.value)}
-        />
+            type="text"
+            className="search-input"
+            placeholder="Search audits..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
         </div>
-        
+
         <table className="audit-table mt-5 min-w-full bg-pureWhite rounded-lg ">
           <thead>
             <tr>
@@ -100,23 +146,21 @@ const Dashboard = () => {
           </thead>
 
           <tbody>
-            {filteredAudits.map(audit => (
+            {filteredAudits.map((audit) => (
               <tr
                 onClick={() => navigateToAudit(audit.id)}
-                className={`audit-item ${audit.status.replace(/\s+/g, '-').toLowerCase()}`}
+                className={`audit-item ${audit.status
+                  .replace(/\s+/g, "-")
+                  .toLowerCase()}`}
                 key={audit.id}
               >
-            
                 <td>{audit.id}</td>
-                <td>{audit.description}</td>
+                <td id="description-cell">{audit.description}</td>
                 <td>{audit.assignee}</td>
                 <td>{audit.status}</td>
                 <td>{audit.dueDate}</td>
               </tr>
             ))}
-            
-
-
           </tbody>
         </table>
       </div>

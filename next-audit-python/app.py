@@ -32,6 +32,11 @@ file_reader = FileReader()
 audit_llm = AuditLLM(file_reader=file_reader)
 
 
+@app.route('/ping', methods=['GET'])
+def ping():
+  return {"message": "ping"}
+
+
 @app.route('/upload', methods=['POST'])
 def upload():
   
@@ -51,7 +56,7 @@ def upload():
   for file in uploaded_files:
     merged_text += file_reader.read_pdf_file(file)
 
-  print(merged_text)
+  # print(merged_text)
   # answer_list = audit_llm.generate_results(text=merged_text)   
   # answer_list = audit_llm.generate_audit(text=merged_text, program='ThirdPartySecurityRiskAssessment')
   answer_list = audit_llm.generate_audit(text=merged_text, program='LogicalAccess')

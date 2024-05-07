@@ -100,7 +100,7 @@ class AuditLLM:
         with get_openai_callback() as cb:
           details = self.chain.run(input_documents=docs, question=domain_question)
 
-        print(details)
+        # print(details)
         
         next_question = updated_flag_question_prefix
         next_question += "question: + {0} \n".format(domain_question)
@@ -111,7 +111,7 @@ class AuditLLM:
         with get_openai_callback() as cb:
           answer = self.chain.run(input_documents=docs, question= ( next_question2) )
 
-        print(answer)
+        # print(answer)
       
         if 'Yes' in answer:
           answer = 'Pass'

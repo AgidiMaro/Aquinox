@@ -39,12 +39,13 @@ const reportSlice = createSlice({
   },
 });
 
-
+const deployedDomain = 'https://avid-audit-deploy-d9c98622bb55.herokuapp.com/';
+// const localDomain = 'http://localhost';
 export const getReportAsync = createAsyncThunk(
   "getReportAsync",
   async (formData: FormData): Promise<any> => {
     const result = await new Promise((resolve, reject) => {
-      fetch("http://localhost:8000/upload", {
+      fetch(`${deployedDomain}upload`, {
           method: 'post',
           body: formData
       })
@@ -58,6 +59,8 @@ export const getReportAsync = createAsyncThunk(
               .catch(err => {
                   reject(err);
               })
+          }else {
+            reject(response);
           }
       })
       .catch(err => {

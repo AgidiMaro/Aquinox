@@ -7,6 +7,7 @@ export interface FileSectionProps {
   titleText: string;
   descriptionText: string;
   nameOnForm: string;
+  required: boolean;
 }
 
 const FileSection = (props: FileSectionProps) => {
@@ -64,9 +65,10 @@ const FileSection = (props: FileSectionProps) => {
             </span>
           )}
           {!!files.length &&
-            files.map((file) => <FileIcon name={(file as any).name} />)}
+            files.map((file) => <FileIcon key={(file as any).name} name={(file as any).name} />)}
           <input
             id={props.nameOnForm}
+            required={props.required}
             className="block w-full text-sm rounded-lg cursor-pointer none"
             name={props.nameOnForm}
             type="file"

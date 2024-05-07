@@ -21,10 +21,17 @@ const CreateReport2 = () => {
     const form: any = document.getElementById("audit-form");
     const formData = new FormData(form);
 
+    
+    if (!form.checkValidity()) {
+      window.confirm('Ensure the Policies and Walkthrough notes are uploaded');
+      return;
+    }
+    
     // dispatch(getReportAsync(formData))
     dispatch(getReportAsync(formData))
     .unwrap()
     .then(message => navigateToResult(message))
+    .catch(err => window.confirm('Error. Ensure All required fields are populated'))
   };
 
   const navigateToResult = (res: any) => {
@@ -119,19 +126,22 @@ const CreateReport2 = () => {
 
   const inputs = [
     {
-      titleText: 'Policies',
+      titleText: 'Policies*',
       descriptionText: 'Upload associated policies and procedures maintained by the organisation',
-      nameOnForm: 'policyDoc'
+      nameOnForm: 'policyDoc',
+      required: true
     },
     {
-      titleText: 'Walkthrough Note',
+      titleText: 'Walkthrough Note*',
       descriptionText: 'Upload walkthrough notes from meeting with control operator(s)',
-      nameOnForm: 'meetingNote'
+      nameOnForm: 'meetingNote',
+      required: true
     },
     {
       titleText: 'Supporting Evidence',
       descriptionText: 'Upload any other supporting evidence for the review',
-      nameOnForm: 'otherFiles'
+      nameOnForm: 'otherFiles',
+      required: false
     }
   ]
 
@@ -153,9 +163,11 @@ const CreateReport2 = () => {
               </div>
               {inputs.map((input) => (
                 <FileSection
+                  key={input.nameOnForm}
                   titleText={input.titleText}
                   descriptionText={input.descriptionText}
                   nameOnForm={input.nameOnForm}
+                  required={input.required}
                 ></FileSection>
               ))}
             </form>

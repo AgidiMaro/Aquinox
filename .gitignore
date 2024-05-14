@@ -30,3 +30,6 @@
 
 # ide
 .vscode
+
+# React
+**/.firebase

@@ -20,6 +20,9 @@ import json
 # source ${PYENV_ROOT}/versions/env9/bin/activate
 
 
+#  git subtree push --prefix next-audit-python origin heroku
+# git push heroku heroku:main
+
 app = Flask(__name__)
 CORS(app)
 

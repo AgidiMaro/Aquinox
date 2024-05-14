@@ -13,7 +13,7 @@ export interface FileSectionProps {
 const FileSection = (props: FileSectionProps) => {
 
   const [files, setFiles] = useState([] as any []);
-  const [isExpanded, setExpanded] = useState(false);
+  const [isExpanded, setExpanded] = useState(true);
 
   const expandedIconClass = 'arrow up';
   const collapsedIconClass = 'arrow down';

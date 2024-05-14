@@ -11,7 +11,7 @@ const Header = () => {
       <div className="logo">
         
         <img src={logo}alt="Logo"/>
-        <h1>NextGen</h1>
+        <h1>Avid Audit</h1>
       </div>
 
       <div className="search-box text-base">

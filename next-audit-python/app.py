@@ -1,4 +1,5 @@
 import imp
+import time
 from urllib import response
 from flask import Flask
 from flask_restful import Api
@@ -44,12 +45,24 @@ def ping():
 def upload():
   
   uploaded_files = []
+  
+  if request.form.get('useSample') is not None:
+    f = open('sample-respnoses/LogicalAccess.json')
+    response = json.load(f)
+    time.sleep(2)
+    return response
 
-  for file in request.files.getlist("policyDoc"):
-    uploaded_files.append(file)
+  if request.files.getlist("policyDoc") is not None:
+    for file in request.files.getlist("policyDoc"):
+      uploaded_files.append(file)
 
-  for file in request.files.getlist("meetingNote"):
-   uploaded_files.append(file)
+  if request.files.getlist("meetingNote") is not None:
+    for file in request.files.getlist("meetingNote"):
+      uploaded_files.append(file)
+      
+  # if request.files.getlist("otherFiles") is not None:
+  # for file in request.files.getlist("otherFiles"):
+  # uploaded_files.append(file)
     
   # for file in request.files.getlist("otherFiles"):
   #   uploaded_files.append(file)

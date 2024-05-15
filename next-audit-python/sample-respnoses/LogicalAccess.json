@@ -1,0 +1,129 @@
+{
+  "findings": {
+      "overview": "",
+      "summary": ""
+  },
+  "message": {
+      "Access Removal": [
+          {
+              "answer": "Pass",
+              "criteria": "[8.5] Do information owners promptly report all changes in user duties or employment status to the Resource Administrator responsible for the User IDs associated with the involved personnel?",
+              "details": " Yes, information owners are required to promptly report all changes in user duties or employment status to ensure access rights are updated accordingly. This is to ensure that users only have the minimum necessary access to perform their roles and responsibilities."
+          },
+          {
+              "answer": "Fail",
+              "criteria": "a) Are inactive IDs terminated after up to 120 days of inactivity?",
+              "details": " No, inactive IDs are terminated after a period of 365 days of inactivity, as stated in the context provided."
+          },
+          {
+              "answer": "Pass",
+              "criteria": "b) Are controls implemented to detect and alert resource administrators of repeated unauthorized attempts to access sensitive information?",
+              "details": " Yes, there are systems in place for immediate alerts on repeated unauthorized attempts to access sensitive information."
+          },
+          {
+              "answer": "Pass",
+              "criteria": "c) Do all external connections to Company networks or information resources require strong two-factor authentication?",
+              "details": " Yes, according to the context provided, all external connections to Anglo Corporation's networks require strong two-factor authentication. This is mentioned in section 3.15 of the company's policies and procedures."
+          },
+          {
+              "answer": "Pass",
+              "criteria": "d) Does the organization monitor for unauthorized wireless connections to the information system, including scanning for unauthorized wireless access points, in accordance with organization-defined frequency?",
+              "details": " Yes, regular scans are performed to detect and address unauthorized access points, in accordance with organization-defined frequency."
+          },
+          {
+              "answer": "Pass",
+              "criteria": "e) Does the organization issue specially configured mobile devices to individuals traveling to locations that the organization deems to be of significant risk in accordance with organizational policies and procedures, If authorized?",
+              "details": " Yes, the organization does issue specially configured mobile devices for high-risk travel situations, in accordance with organizational policies and procedures."
+          },
+          {
+              "answer": "Pass",
+              "criteria": "f) Do you have controls in place ensuring timely notification and removal of systems access which is no longer required for business purposes?",
+              "details": " Yes, according to organizational policies and procedures, controls are in place to ensure timely notification and removal of systems access which is no longer required for business purposes. This is stated in section 3.18 of the policies and procedures document."
+          }
+      ],
+      "Authentication": [
+          {
+              "answer": "Pass",
+              "criteria": "[8.1] Does your organization have a formal access authorization policy and procedures for authorizing, granting and removing access based on 'least privilege' (employees are granted the least amount of access possible in order to perform their assigned duties) and 'need to know' (access permissions are granted based upon the legitimate business need of the user to access the information)?",
+              "details": " Yes, our organization has a formal access authorization policy and procedures that adhere to the principles of 'least privilege' and 'need to know'. Access is granted based on the specific duties and responsibilities of users, ensuring they have the minimum necessary access to perform their roles. Controls are also in place to ensure timely removal of access that is no longer required for business purposes."
+          },
+          {
+              "answer": "Fail",
+              "criteria": "a) Is there a policy currently available that uses multi-factor authentication to limit access to sensitive data and systems?",
+              "details": " No, there is not currently a policy in place for multi-factor authentication."
+          },
+          {
+              "answer": "Pass",
+              "criteria": "b)\u00a0Does your organization have a secured audit trail system that logs privileged user access to sensitive data, systems and/or system events, including access to and alterations made to the audit trail system?",
+              "details": " Yes, our organization has a secure, tamper-proof audit trail system in place that logs all privileged user access to sensitive data, systems, and system events. This includes access to and alterations made to the audit trail system itself."
+          },
+          {
+              "answer": "Pass",
+              "criteria": "c)\u00a0Is access to source code restricted, as well as formally and independently reviewed on a frequent basis?",
+              "details": " Yes, access to source code is highly restricted and subject to regular, independent reviews to ensure that only authorized personnel can access and modify the source code."
+          },
+          {
+              "answer": "Pass",
+              "criteria": "d) Are controls in place to prevent users from installing or downloading restricted software onto desktops, laptops, mobile devices and other technology systems?",
+              "details": " Yes, strict controls and policies are in place to prevent unauthorized software installation or downloading on all devices. Administrative rights are closely managed to enforce these controls."
+          },
+          {
+              "answer": "Pass",
+              "criteria": "e) The identity of individuals who request access to their personal information is authenticated before they are given access to that information.",
+              "details": " Yes, this is stated in context 3.6 and 3.7, where it is mentioned that the identity of individuals requesting access to their personal information is verified before access is granted, ensuring data privacy and security."
+          },
+          {
+              "answer": "Pass",
+              "criteria": "[8.2] Are unique user IDs used for granting access?",
+              "details": " Yes, unique user IDs are used for granting access to ensure traceability and accountability. This is stated in section 3.7 of the context provided."
+          }
+      ],
+      "Password": [
+          {
+              "answer": "Pass",
+              "criteria": "[8.3] Do you have a process to review user accounts and related access?",
+              "details": " Yes, Anglo conducts periodic reviews of user accounts and access rights to ensure they remain appropriate and secure. This process is documented and helps to maintain the principle of least privilege and need to know."
+          },
+          {
+              "answer": "Pass",
+              "criteria": "c) Is there a documented list of data owners for each system who must approve roles and user access?",
+              "details": " Yes, each system has a designated owner who approves access based on necessity and role."
+          },
+          {
+              "answer": "Pass",
+              "criteria": "[8.4] Is there a policy for the use and handling of passwords?",
+              "details": " Yes, Anglo Corporation has a comprehensive policy that covers the creation, management, and security of passwords."
+          },
+          {
+              "answer": "Pass",
+              "criteria": "a) Do passwords expire every 90 days or less?",
+              "details": " Yes, passwords are required to expire within 90 days or less to encourage regular updates and maintain security."
+          },
+          {
+              "answer": "Pass",
+              "criteria": "b) Are passwords required to be complex?",
+              "details": " Yes, passwords are required to be complex, incorporating various character types."
+          },
+          {
+              "answer": "Pass",
+              "criteria": "c) Are temporary passwords required to be changed upon login?",
+              "details": " Yes, any temporary password must be changed at first use."
+          },
+          {
+              "answer": "Pass",
+              "criteria": "d) Are passwords stored and transmitted in a secure manner (hashing)?",
+              "details": " Yes, passwords are hashed and encrypted to ensure their security during storage and transmission."
+          },
+          {
+              "answer": "Fail",
+              "criteria": "e) Is multi-factor authentication currently required for remote connections?",
+              "details": " No, it is not currently required but it is being worked on and will be implemented next year."
+          },
+          {
+              "answer": "UnKnown",
+              "criteria": "f) Are there guidelines for handling user cookies?",
+              "details": " I do not know."
+          }
+      ]
+  }
+}

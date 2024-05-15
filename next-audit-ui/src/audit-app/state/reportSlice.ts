@@ -40,7 +40,7 @@ const reportSlice = createSlice({
 });
 
 const deployedDomain = 'https://avid-audit-deploy-d9c98622bb55.herokuapp.com/';
-// const localDomain = 'http://localhost';
+// const deployedDomain = 'http://localhost:8000/';
 export const getReportAsync = createAsyncThunk(
   "getReportAsync",
   async (formData: FormData): Promise<any> => {

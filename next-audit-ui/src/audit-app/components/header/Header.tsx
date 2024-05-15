@@ -4,6 +4,7 @@ import logo from './logo.svg';
 import menu_arrow from './arrow.svg';
 import avatar from './avatar.svg'
 import search_icon from './search_icon.svg'
+import { NavLink } from 'react-router-dom';
 
 const Header = () => {
   return (
@@ -11,7 +12,7 @@ const Header = () => {
       <div className="logo">
         
         <img src={logo}alt="Logo"/>
-        <h1>Avid Audit</h1>
+        <NavLink to="/dashboard">Avid Audit</NavLink>
       </div>
 
       <div className="search-box text-base">

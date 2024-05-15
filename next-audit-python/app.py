@@ -22,7 +22,7 @@ import json
 
 
 #  git subtree push --prefix next-audit-python origin heroku
-# git push heroku heroku:main
+# git push heroku origin/heroku:main
 
 app = Flask(__name__)
 CORS(app)

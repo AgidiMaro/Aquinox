@@ -3,6 +3,7 @@ import Header from "../header/Header";
 import Footer from "../footer/Footer";
 import Router from "../router/Router";
 import SideBar from "../sidebar/SideBar";
+import PageSpinner from "../common/pageSpinner/PageSpinner";
 
 const Base = () => {
   return (
@@ -19,6 +20,7 @@ const Base = () => {
         </div>
       </div>
       {/* <Footer/> */}
+      <PageSpinner></PageSpinner>
     </div>
   );
 }

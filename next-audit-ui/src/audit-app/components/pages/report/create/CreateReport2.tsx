@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { useState } from "react";
 import { getReportAsync, updateAuditReport } from "../../../../state/reportSlice";
 import { Form } from "react-final-form";
 import { AppDispatch } from "../../../../state/store";
@@ -10,11 +10,14 @@ import FileSection from "../../../common/filesection/FileSection";
 import { useNavigate } from "react-router-dom";
 import { AuditReport, Domain, Query } from "../../../../models/AuditReport";
 import title_icon from '../table/TitleIcon.svg'
+import { updateShowSpinner } from "../../../../state/pageSlice";
+import './CreateReport.scss'
 
 const CreateReport2 = () => {
 
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
+  const [filesRequired, setFilesRequired] = useState(true);
 
   const onSubmit = () => {
     
@@ -28,10 +31,17 @@ const CreateReport2 = () => {
     }
     
     // dispatch(getReportAsync(formData))
+    dispatch(updateShowSpinner(true));
     dispatch(getReportAsync(formData))
     .unwrap()
-    .then(message => navigateToResult(message))
-    .catch(err => window.confirm('Error. Ensure All required fields are populated'))
+    .then(message => { 
+      dispatch(updateShowSpinner(false));
+      navigateToResult(message)
+    })
+    .catch(err => { 
+      dispatch(updateShowSpinner(false));
+      window.confirm('Error. Ensure All required fields are populated')
+    })
   };
 
   const navigateToResult = (res: any) => {
@@ -129,13 +139,13 @@ const CreateReport2 = () => {
       titleText: 'Policies*',
       descriptionText: 'Upload associated policies and procedures maintained by the organisation',
       nameOnForm: 'policyDoc',
-      required: true
+      required: filesRequired
     },
     {
       titleText: 'Walkthrough Note*',
       descriptionText: 'Upload walkthrough notes from meeting with control operator(s)',
       nameOnForm: 'meetingNote',
-      required: true
+      required: filesRequired
     },
     {
       titleText: 'Supporting Evidence',
@@ -160,6 +170,11 @@ const CreateReport2 = () => {
               <div className="flex items-center mb-8 ">
                 <img src={title_icon} alt="Logo" />
                 <h2 className="text-2xl font-semibold">Logical access audit</h2>
+                <div className="ml-auto mt-5 flex items-center">
+                  <input name="useSample" onChange={() => setFilesRequired(!filesRequired)} 
+                  className="sample-checkbox" type="checkbox" value="true" />
+                  <span className="ml-3">Use sample Data</span>
+                </div>
               </div>
               {inputs.map((input) => (
                 <FileSection

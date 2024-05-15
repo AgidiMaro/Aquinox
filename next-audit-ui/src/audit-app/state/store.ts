@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import reportReducer from "./reportSlice";
+import pageReducer from "./pageSlice";
 
 export const store = configureStore({
   reducer: {
-    report: reportReducer
+    report: reportReducer,
+    page: pageReducer
   }
 });
 

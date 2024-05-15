@@ -23,6 +23,7 @@ import json
 
 #  git subtree push --prefix next-audit-python origin heroku
 # git push heroku origin/heroku:main
+# heroku restart
 
 app = Flask(__name__)
 CORS(app)
@@ -52,20 +53,17 @@ def upload():
     time.sleep(2)
     return response
 
-  if request.files.getlist("policyDoc") is not None:
-    for file in request.files.getlist("policyDoc"):
+  if request.files.getlist("PolicyDoc") is not None:
+    for file in request.files.getlist("PolicyDoc"):
       uploaded_files.append(file)
 
-  if request.files.getlist("meetingNote") is not None:
-    for file in request.files.getlist("meetingNote"):
+  if request.files.getlist("MeetingNote") is not None:
+    for file in request.files.getlist("MeetingNote"):
       uploaded_files.append(file)
       
-  # if request.files.getlist("otherFiles") is not None:
-  # for file in request.files.getlist("otherFiles"):
+  # if request.files.getlist("OtherFiles") is not None:
+  # for file in request.files.getlist("OtherFiles"):
   # uploaded_files.append(file)
-    
-  # for file in request.files.getlist("otherFiles"):
-  #   uploaded_files.append(file)
   
   merged_text = ""
 

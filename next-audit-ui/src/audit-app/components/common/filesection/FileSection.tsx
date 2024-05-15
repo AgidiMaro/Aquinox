@@ -7,7 +7,9 @@ export interface FileSectionProps {
   titleText: string;
   descriptionText: string;
   nameOnForm: string;
-  required: boolean;
+  required?: boolean;
+  disabled?: boolean;
+  useSample?: boolean;
 }
 
 const FileSection = (props: FileSectionProps) => {
@@ -31,6 +33,29 @@ const FileSection = (props: FileSectionProps) => {
     setExpanded(true);
   }
 
+
+  // Rendering files
+  let filesDisplay;
+
+  if (props.useSample) {
+    filesDisplay = (
+      <>
+        <FileIcon name={`${props.nameOnForm} Sample 1`} />
+        <FileIcon name={`${props.nameOnForm} Sample 2`} />
+      </>
+    );
+  } else if (!files || !files.length ) {
+    filesDisplay = (
+      <span>
+        {" "}
+        <b>Click to upload</b> or drag and drop
+      </span>
+    );
+  }else {
+    filesDisplay = files.map((file) => <FileIcon key={(file as any).name} name={(file as any).name} />);
+  }
+
+
   return (
     <>
       <div className="flex items-center mb-5">
@@ -48,33 +73,30 @@ const FileSection = (props: FileSectionProps) => {
             {props.descriptionText}
           </div>
         </div>
-        <button
-          type="button"
-          className="ml-auto py-2 px-4 bg-pureWhite text-lightBlack font-semibold file-button text-sm"
-        >
-          <label htmlFor={props.nameOnForm}>Upload</label>
-        </button>
+        {
+          !props.useSample &&
+          <button
+            type="button"
+            className="ml-auto py-2 px-4 bg-pureWhite text-lightBlack font-semibold file-button text-sm"
+          >
+            <label htmlFor={props.nameOnForm}>Upload</label>
+          </button>
+        }
       </div>
 
       <div className={`mb-4 ${displayClass}`}>
         <label className="block flex items-center justify-center mb-2 p-2 text-sm bg-pureWhite font-medium input-label">
-          {!files.length && (
-            <span>
-              {" "}
-              <b>Click to upload</b> or drag and drop
-            </span>
-          )}
-          {!!files.length &&
-            files.map((file) => <FileIcon key={(file as any).name} name={(file as any).name} />)}
+          {filesDisplay}
           <input
-            id={props.nameOnForm}
-            required={props.required}
-            className="block w-full text-sm rounded-lg cursor-pointer none"
-            name={props.nameOnForm}
-            type="file"
-            multiple={true}
-            onChange={onUpload}
-            accept="application/pdf"
+          id={props.nameOnForm}
+          required={props.required}
+          className="block w-full text-sm rounded-lg cursor-pointer none"
+          name={props.nameOnForm}
+          type="file"
+          multiple={true}
+          onChange={onUpload}
+          disabled={props.disabled}
+          accept="application/pdf"
           />
         </label>
       </div>

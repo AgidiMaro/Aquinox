@@ -6,7 +6,7 @@ import { AppDispatch } from "../../../../state/store";
 import { useDispatch } from "react-redux";
 import SubHeader from "../../../common/subheader/SubHeader";
 import { Link } from "../../../../models/Links";
-import FileSection from "../../../common/filesection/FileSection";
+import FileSection, { FileSectionProps } from "../../../common/filesection/FileSection";
 import { useNavigate } from "react-router-dom";
 import { AuditReport, Domain, Query } from "../../../../models/AuditReport";
 import title_icon from '../table/TitleIcon.svg'
@@ -134,24 +134,30 @@ const CreateReport2 = () => {
     }
   ]
 
-  const inputs = [
+  const inputs: FileSectionProps [] = [
     {
       titleText: 'Policies*',
       descriptionText: 'Upload associated policies and procedures maintained by the organisation',
-      nameOnForm: 'policyDoc',
-      required: filesRequired
+      nameOnForm: 'PolicyDoc',
+      required: filesRequired,
+      useSample: !filesRequired,
+      disabled: !filesRequired
     },
     {
       titleText: 'Walkthrough Note*',
       descriptionText: 'Upload walkthrough notes from meeting with control operator(s)',
-      nameOnForm: 'meetingNote',
-      required: filesRequired
+      nameOnForm: 'MeetingNote',
+      required: filesRequired,
+      useSample: !filesRequired,
+      disabled: !filesRequired
     },
     {
       titleText: 'Supporting Evidence',
       descriptionText: 'Upload any other supporting evidence for the review',
-      nameOnForm: 'otherFiles',
-      required: false
+      nameOnForm: 'OtherFiles',
+      required: false,
+      useSample: !filesRequired,
+      disabled: !filesRequired
     }
   ]
 
@@ -170,19 +176,16 @@ const CreateReport2 = () => {
               <div className="flex items-center mb-8 ">
                 <img src={title_icon} alt="Logo" />
                 <h2 className="text-2xl font-semibold">Logical access audit</h2>
-                <div className="ml-auto mt-5 flex items-center">
-                  <input name="useSample" onChange={() => setFilesRequired(!filesRequired)} 
+                <div id="useSampleWrapper" className="ml-auto mt-5 p-2">
+                  <input name="useSample" id="useSample" onChange={() => setFilesRequired(!filesRequired)} 
                   className="sample-checkbox" type="checkbox" value="true" />
-                  <span className="ml-3">Use sample Data</span>
+                  <label htmlFor="useSample" className="ml-3">Use sample Data</label>
                 </div>
               </div>
               {inputs.map((input) => (
                 <FileSection
                   key={input.nameOnForm}
-                  titleText={input.titleText}
-                  descriptionText={input.descriptionText}
-                  nameOnForm={input.nameOnForm}
-                  required={input.required}
+                  {...input}
                 ></FileSection>
               ))}
             </form>

@@ -3,3 +3,15 @@
   zoom: 1.5;
   accent-color: #7F56D9;
 }
+
+#useSampleWrapper {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  border: 1pt solid transparent;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    border: 1pt solid #D0D5DD;
+  }
+}

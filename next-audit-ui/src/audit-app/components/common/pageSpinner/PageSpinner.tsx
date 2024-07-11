@@ -15,7 +15,7 @@ const PageSpinner = () => {
         <div id='page-spinner-wrapper'>
           <div id='page-spinner'>
             <ClipLoader
-                color={'#1C73DA'}
+                color={'#7F56D9'}
                 loading={showSpinner}
                 size={300}
                 aria-label="Loading Spinner"

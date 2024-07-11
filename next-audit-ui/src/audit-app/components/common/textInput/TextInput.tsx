@@ -5,16 +5,18 @@ interface TextInputProps {
   name: string;
   value: string;
   onChange: any;
+  placeholder?: string
+  required?: boolean;
 }
 
 const TextInput = (props: TextInputProps) => {
   return (
-    <div className="mb-4">
+    <div className="my-10">
       <label className="block text-gray-700 text-sm font-bold mb-2">
         {props.label}
       </label>
-      <input className="shadow rounded block w-full p-2" name={props.name} type="text" onChange={props.onChange}
-        value={props.value} placeholder={props.label}/>
+      <input className="shadow h-12 rounded block w-full p-2 border border-grey-100" name={props.name} type="text" onChange={props.onChange}
+        value={props.value} placeholder={props.placeholder || props.label} required={props.required}/>
     </div>
   )
 }

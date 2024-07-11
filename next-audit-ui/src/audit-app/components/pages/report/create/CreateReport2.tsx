@@ -176,11 +176,11 @@ const CreateReport2 = () => {
               <div className="flex items-center mb-8 ">
                 <img src={title_icon} alt="Logo" />
                 <h2 className="text-2xl font-semibold">Logical access audit</h2>
-                <div id="useSampleWrapper" className="ml-auto mt-5 p-2">
+                <label id="useSampleWrapper" className="ml-auto mt-5 p-2">
                   <input name="useSample" id="useSample" onChange={() => setFilesRequired(!filesRequired)} 
                   className="sample-checkbox" type="checkbox" value="true" />
-                  <label htmlFor="useSample" className="ml-3">Use sample Data</label>
-                </div>
+                  <span className="ml-3">Use sample Data</span>
+                </label>
               </div>
               {inputs.map((input) => (
                 <FileSection

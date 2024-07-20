@@ -75,10 +75,15 @@ class AuditLLM:
                 # Extract references for details and draft results
                 details_references = [{"source": doc.metadata['source'], "file_name": doc.metadata['file_name'], "text": doc.page_content} for doc in docs]
                 draft_result_references = [{"source": doc.metadata['source'], "file_name": doc.metadata['file_name'], "text": doc.page_content} for doc in details_docs]
+                # citations = [f"{ref['source']}" for ref in details_references]
 
-                # print(details_references)
-                # print("DRAFT RESULT \n")
-                # print(draft_result_references)
+                print(details_references)
+                # print("CITATION \n")
+                # print(citations)
+                # print("\n")
+                # print("DETALS with CITATIONS \n")
+                # response_with_citations = details + "\n\nCitations:\n" + "\n".join(citations)
+                # print(response_with_citations)
 
                 # Convert draft result to Pass/Fail/Unknown. Convert to pass and fail for presentation. Also protect against the LLM having responses more words.
                 if 'Effective' in draft_result_from_prompt:

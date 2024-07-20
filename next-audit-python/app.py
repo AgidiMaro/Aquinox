@@ -1,5 +1,6 @@
 # Importing Required Modules
 import time
+import os
 from flask import Flask, request
 from flask_restful import Api
 from flask_cors import CORS
@@ -57,7 +58,23 @@ def upload():
 
     # Read and merge the content of uploaded files, associating text with filenames
     for file, filename in zip(uploaded_files, file_names):
-        text = file_reader.read_pdf_file(file)
+        if filename.endswith('.pdf'):
+            text = file_reader.read_pdf_file(file)
+        elif filename.endswith('.txt'):
+            text = file_reader.read_txt_file(file)
+        elif filename.endswith('.docx'):
+            text = file_reader.read_docx_file(file)
+        elif filename.endswith('.xlsx'):
+            text = file_reader.read_xlsx_file(file)
+        # elif filename.endswith('.doc'):
+        #     # Save .doc file temporarily to disk to use win32com for reading
+        #     temp_file_path = os.path.join('temp', filename)
+        #     file.save(temp_file_path)
+        #     text = file_reader.read_doc_file(temp_file_path)
+        #     os.remove(temp_file_path)  # Clean up temporary file
+        else:
+            continue  # Skip unsupported file types
+        
         merged_text += text
         texts_with_filenames.append((text, filename))
 

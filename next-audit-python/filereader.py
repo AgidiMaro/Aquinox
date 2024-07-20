@@ -1,6 +1,10 @@
 # Import necessary modules
 from PyPDF2 import PdfReader
 import csv
+import docx
+import pythoncom
+from win32com import client as win32
+from openpyxl import load_workbook
 
 # Class to handle file reading operations
 class FileReader:
@@ -19,6 +23,37 @@ class FileReader:
         for page in pdf_reader.pages:
             text += page.extract_text()
 
+        return text
+    
+    # Method to read a text file and extract its content
+    def read_txt_file(self, file) -> str:
+        text = file.read().decode('utf-8')  # Read the text file content and decode it
+        return text
+    
+    # Method to read a DOCX file and extract its content
+    def read_docx_file(self, file) -> str:
+        doc = docx.Document(file)
+        text = '\n'.join([paragraph.text for paragraph in doc.paragraphs])
+        return text
+
+    # Method to read a DOC file and extract its content
+    def read_doc_file(self, file_path) -> str:
+        pythoncom.CoInitialize()
+        word = win32.Dispatch("Word.Application")
+        doc = word.Documents.Open(file_path)
+        text = doc.Range().Text
+        doc.Close()
+        word.Quit()
+        return text
+    
+    # Method to read an XLSX file and extract its content
+    def read_xlsx_file(self, file) -> str:
+        workbook = load_workbook(file)
+        text = ""
+        for sheet in workbook.worksheets:
+            for row in sheet.iter_rows(values_only=True):
+                row_text = "\t".join([str(cell) if cell is not None else "" for cell in row])
+                text += row_text + "\n"
         return text
 
     # Method to read a CSV file and return its contents as a dictionary

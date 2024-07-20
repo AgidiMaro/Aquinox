@@ -17,8 +17,15 @@ export interface Domain {
   unknown: number;
 }
 
+export interface Reference {
+  source: string;
+  file_name: string;
+  text: string;
+}
+
 export interface Query {
   answer: string;
   criteria: string;
   details: string;
+  details_references:Reference[];
 }

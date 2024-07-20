@@ -16,6 +16,7 @@ module.exports = {
         logoPurple: "#7F56D9",
         darkBlack: "#101828",
         lightBlack: "#667085",
+        pwcOrange: "#D04A02",
       },
     },
   },

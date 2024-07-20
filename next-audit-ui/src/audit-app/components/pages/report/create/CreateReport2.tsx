@@ -175,37 +175,50 @@ const CreateReport2 = () => {
             >
               <div className="flex items-center mb-8 ">
                 <img src={title_icon} alt="Logo" />
-                <h2 className="text-2xl font-semibold">Change management audit</h2>
+                <h2 className="text-2xl font-semibold">
+                  Change management audit
+                </h2>
                 <label id="useSampleWrapper" className="ml-auto mt-5 p-2">
-                  <input name="useSample" id="useSample" onChange={() => setFilesRequired(!filesRequired)} 
-                  className="sample-checkbox" type="checkbox" value="true" />
+                  <input
+                    name="useSample"
+                    id="useSample"
+                    onChange={() => setFilesRequired(!filesRequired)}
+                    className="sample-checkbox"
+                    type="checkbox"
+                    value="true"
+                  />
                   <span className="ml-3">Use sample Data</span>
                 </label>
               </div>
               {inputs.map((input) => (
-                <FileSection
-                  key={input.nameOnForm}
-                  {...input}
-                ></FileSection>
+                <FileSection key={input.nameOnForm} {...input}></FileSection>
               ))}
             </form>
           )}
         />
       </div>
-      
+
       <div className="rounded p-5 w-2/6 inline-grid report-sidebar">
         <div className="text-lg mb-3  text-lightBlack">Description</div>
         <div className="text-sm">
-          The Change management audit evaluates and verifies the implementation and
-          effectiveness of an organization's electronic data systems controls.
-          This type of audit ensures that only authorized individuals have
-          access to systems and data, thereby safeguarding sensitive information
-          from unauthorized access, use, or manipulation. The audit process
-          typically involves reviewing user access rights, authentication
-          mechanisms, and system activity logs to identify any discrepancies or
-          potential security vulnerabilities. The goal is to maintain integrity
-          and confidentiality of data by ensuring that access controls are
-          appropriate and effectively managed
+          A change management audit assesses the effectiveness of an
+          organization's procedures for managing changes to systems, processes,
+          and products, ensuring they are introduced systematically and with
+          minimal risk. Key aspects to look out for include the thorough
+          documentation and logging of change requests, a formal submission
+          process with detailed justifications and impact analyses, and a robust
+          approval workflow involving appropriate stakeholders. The audit should
+          also evaluate detailed implementation planning, effective
+          communication strategies, and comprehensive training programs.
+          Rigorous testing and validation procedures, coupled with thorough
+          post-implementation reviews, are essential to ensure changes meet all
+          requirements and perform as intended. Proper documentation and
+          record-keeping practices must be maintained for future audits.
+          Continuous improvement mechanisms should be in place to refine change
+          management processes based on feedback. Overall, the audit aims to
+          verify that changes are beneficial, aligned with strategic goals, and
+          compliant with regulations, thus supporting organizational stability
+          and efficiency.
         </div>
         <table className="text-sm mt-5">
           <tbody>

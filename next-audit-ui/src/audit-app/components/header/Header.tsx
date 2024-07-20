@@ -12,7 +12,7 @@ const Header = () => {
       <div className="logo">
         
         <img src={logo}alt="Logo"/>
-        <NavLink to="/dashboard">Avid Audit</NavLink>
+        <NavLink to="/dashboard">Project Equinox</NavLink>
       </div>
 
       <div className="search-box text-base">
@@ -29,7 +29,7 @@ const Header = () => {
           <img src={avatar}/>
         </span>
         <span className="username">
-          Chinedu Isaiah
+          Emmanuel Agidi
         </span>
         <button className="menu-button">
           {/* Insert menu icon here */}

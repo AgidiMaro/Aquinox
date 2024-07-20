@@ -1,5 +1,5 @@
+# Import necessary modules and classes 
 from filereader import FileReader
-
 from langchain.text_splitter import CharacterTextSplitter
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain_community.vectorstores import FAISS
@@ -8,25 +8,12 @@ from langchain_community.llms import OpenAI
 from langchain_community.chat_models import ChatOpenAI
 from langchain_community.callbacks import get_openai_callback
 
-question_set = [
-  "Is there a policy for the use and handling of passwords?",
-  "Do passwords expire every 90 days or less?"
-  "Are passwords required to be complex?",
-  "Are temporary passwords required to be changed upon login?",
-  "Are passwords stored and transmitted in a secure manner (hashing)?",
-  "Is multi-factor authentication required for remote connections?"
-]
-
-flag_question = "\n A. Yes \n B. No \n C. Maybe \n D. I don't know"
-flag_question2 = "\n A. True \n B. False \n C. Partially True \n D. Not Applicable"
-
-updated_flag_question_prefix = "Classify the reponse to the question below as 'Yes', 'No' or 'Unknown'\n"
-
-
-
+# Prompt used for classifying responses. Can modify this for contextualisation
+# updated_flag_question_prefix = "Classify the reponse to the question below as 'Yes', 'No' or 'Unknown'\n"
+prompt_for_draft_result_prefix = "Classify the response to the question as 'Effective', 'Ineffective' or 'Unknown' based on best practice for IT change management.\n"
 
 class AuditLLM:
-
+  #Initializes the model class with necessary component. Sets up the file_reader, embeddings, chain, and text_splitter needed for processing the input text and generating results.
   def __init__(self, file_reader: FileReader) -> None:
     self.file_reader = file_reader
     self.embeddings = OpenAIEmbeddings()
@@ -37,85 +24,58 @@ class AuditLLM:
       chunk_overlap=200,
       length_function=len
     )
-
-  def generate_results(self, text: str):
-    # split text
-    chunks = self.text_splitter.split_text(text)
-
-    # create embeddings
-    knowledge_base = FAISS.from_texts(chunks, self.embeddings)
-
-    result = []
-    
-    for user_question in question_set:
-      docs = knowledge_base.similarity_search(user_question)
-      print(user_question)
-
-      with get_openai_callback() as cb:
-        details = self.chain.run(input_documents=docs, question=user_question)
-
-      print(details)
-
-      with get_openai_callback() as cb:
-        answer = self.chain.run(input_documents=docs, question= ( user_question + flag_question) )
-      
-        
-      print(answer)
-
-      result.append({
-        "question": user_question,
-        "answer": answer,
-        "details": details
-      })
-    #st.write(response)
-    return result
-
   
-  def generate_audit(self, text: str, program: str):
-
+  def read_template_generate_result(self, text: str, program: str):
+    """  
+        Reads a template and generates results based on the provided text and program.  
+        :param text: The input text (uploaded files) to be analyzed.  
+        :param program: The work program (D&I template) name for which the audit is being conducted.  
+        :return: A dictionary containing the audit results.  
+    """ 
+    # Get the file path for the D&I template and read the CSV data 
     program_file_path = self.file_reader.get_file_path(program)
     csv_data = self.file_reader.read_csv_file(program_file_path)
 
-    # split text
+    # split the text (uploaded files eg policies) into chunks
     chunks = self.text_splitter.split_text(text)
 
-    # create embeddings
+    # create embeddings for the text chunks (uploaded files eg policies) broken into chunks of 1000
     knowledge_base = FAISS.from_texts(chunks, self.embeddings)
 
-    result = {}
+    result = {} # Dictionary to store the results  
 
     domain_list = None
     domain_questions = None
 
+    # Iterate through each domain in the CSV data (D&I template). Sample domain is test management
     for domain in csv_data:
       domain_list = []
       result[domain] = domain_list
       domain_questions = csv_data[domain]
 
+      # Iterate through each domain in the CSV data (D&I template)
       for domain_question in domain_questions:
+        # Perform similarity search for the question
         docs = knowledge_base.similarity_search(domain_question)
-        
-        # self.chain = load_qa_chain(ChatOpenAI(temperature=0.0), chain_type="stuff")
-
+        #This is returns the finding/details column of the final output
         with get_openai_callback() as cb:
           details = self.chain.run(input_documents=docs, question=domain_question)
 
-        # print(details)
-        
-        next_question = updated_flag_question_prefix
-        next_question += "question: + {0} \n".format(domain_question)
-        
-        next_question2 = updated_flag_question_prefix
-        next_question2 += "answer: + {0} \n".format(details)
-
+        #For the draft conclusion, we combine the question and answer and recheck the merged documents (chunks)  that have the details
+        details_docs = knowledge_base.similarity_search(details)
+        prompt_for_draft_result = prompt_for_draft_result_prefix 
+        prompt_for_draft_result += "Question: {0}\n".format(domain_question) + "Answer: {0} \n".format(details)
         with get_openai_callback() as cb:
-          answer = self.chain.run(input_documents=docs, question= ( next_question2) )
+          draft_result_from_prompt = self.chain.run(input_documents=details_docs, question= (prompt_for_draft_result) )
 
-        # print(answer)
+        #Use this if you want to check the full document again
+        with get_openai_callback() as cb:
+          draft_result_from_prompt = self.chain.run(input_documents=docs, question= (prompt_for_draft_result) )     
       
-        if 'Yes' in answer:
+      #Convert to pass and fail for presentation. Also protect against the LLM having responses more words. 
+        if 'Effective' in draft_result_from_prompt:
           answer = 'Pass'
-        elif 'No' in answer:
+        elif 'Ineffective' in draft_result_from_prompt:
           answer = 'Fail'
         else:
           answer = 'UnKnown'
@@ -130,8 +90,3 @@ class AuditLLM:
   
   def generate_findings(self, text: str, answer_list):
     return {"overview" : "", "summary": ""}
-
-
-
-
-

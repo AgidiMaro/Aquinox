@@ -18,7 +18,7 @@ const Dashboard = () => {
   const audits: Audit[] = [
     {
       id: 1,
-      description: "Logical Access Audit",
+      description: "Change Management",
       assignee: "Emmanuel Maro",
       status: "Completed",
       dueDate: "2024-03-02",
@@ -100,9 +100,9 @@ const Dashboard = () => {
   return (
     <div className="dashboard mx-10">
       <div className="dashboard-header">
-        <h2 className="text-3xl font-semibold">Welcome back, Scott</h2>
+        <h2 className="text-3xl font-semibold">Welcome back, Nick</h2>
         <p>
-          Elevate your audits with seamless management powered by AI and NLP
+          Elevate your audits with generative AI
         </p>
       </div>
 

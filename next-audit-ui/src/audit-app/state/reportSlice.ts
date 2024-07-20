@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AuditReport, Domain } from "../models/AuditReport";
 
+
 interface ReportState {
   auditReport: AuditReport;
 }
@@ -41,6 +42,7 @@ const reportSlice = createSlice({
 
 // const deployedDomain = 'https://avid-audit-deploy-d9c98622bb55.herokuapp.com/';
 const deployedDomain = 'http://localhost:8000/';
+
 export const getReportAsync = createAsyncThunk(
   "getReportAsync",
   async (formData: FormData): Promise<any> => {

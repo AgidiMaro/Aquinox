@@ -175,7 +175,7 @@ const CreateReport2 = () => {
             >
               <div className="flex items-center mb-8 ">
                 <img src={title_icon} alt="Logo" />
-                <h2 className="text-2xl font-semibold">Logical access audit</h2>
+                <h2 className="text-2xl font-semibold">Change management audit</h2>
                 <label id="useSampleWrapper" className="ml-auto mt-5 p-2">
                   <input name="useSample" id="useSample" onChange={() => setFilesRequired(!filesRequired)} 
                   className="sample-checkbox" type="checkbox" value="true" />
@@ -192,10 +192,11 @@ const CreateReport2 = () => {
           )}
         />
       </div>
+      
       <div className="rounded p-5 w-2/6 inline-grid report-sidebar">
         <div className="text-lg mb-3  text-lightBlack">Description</div>
         <div className="text-sm">
-          The logical access audit evaluates and verifies the implementation and
+          The Change management audit evaluates and verifies the implementation and
           effectiveness of an organization's electronic data systems controls.
           This type of audit ensures that only authorized individuals have
           access to systems and data, thereby safeguarding sensitive information

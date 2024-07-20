@@ -133,7 +133,7 @@ const TableReport = () => {
         {/* Report Title and Icon*/}
         <div className="flex items-center mb-8">
           <img src={title_icon}alt="Logo"/>
-          <h1 className="text-2xl font-semibold">Logical Access Audit</h1>
+          <h1 className="text-2xl font-semibold">Change Management Design and Implementation</h1>
         </div>
 
         <div>

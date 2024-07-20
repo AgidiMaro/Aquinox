@@ -55,9 +55,18 @@ class FileReader:
                 row_text = "\t".join([str(cell) if cell is not None else "" for cell in row])
                 text += row_text + "\n"
         return text
+    
+    # Method to read a CSV file and extract its content as plain text
+    def read_csv_file(self, file) -> str:
+        text = ""
+        file.stream.seek(0)  # Ensure the file pointer is at the beginning
+        csv_reader = csv.reader(file.stream.read().decode('utf-8').splitlines())
+        for row in csv_reader:
+            text += ", ".join(row) + "\n"
+        return text
 
-    # Method to read a CSV file and return its contents as a dictionary
-    def read_csv_file(self, file_path):
+    # Method to read a CSV D&I template file and return its contents as a dictionary
+    def read_csv_template_file(self, file_path):
         file_result = {}  # Dictionary to store the results
         domain = None
         questions_list = []

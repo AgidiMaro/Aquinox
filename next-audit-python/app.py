@@ -66,6 +66,8 @@ def upload():
             text = file_reader.read_docx_file(file)
         elif filename.endswith('.xlsx'):
             text = file_reader.read_xlsx_file(file)
+        elif filename.endswith('.csv'):
+            text = file_reader.read_csv_file(file)
         # elif filename.endswith('.doc'):
         #     # Save .doc file temporarily to disk to use win32com for reading
         #     temp_file_path = os.path.join('temp', filename)

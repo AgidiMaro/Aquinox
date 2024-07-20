@@ -39,7 +39,7 @@ class AuditLLM:
         """
         # Get the file path for the D&I template and read the CSV data
         program_file_path = self.file_reader.get_file_path(program)
-        csv_data = self.file_reader.read_csv_file(program_file_path)
+        template_csv_data = self.file_reader.read_csv_template_file(program_file_path)
         
         documents = []
         # Split the text (uploaded files eg policies) into chunks and create Document instances with metadata
@@ -53,7 +53,7 @@ class AuditLLM:
         result = {}  # Dictionary to store the results
 
         # Iterate through each domain in the CSV data (D&I template)
-        for domain, domain_questions in csv_data.items():
+        for domain, domain_questions in template_csv_data.items():
             domain_list = []
             result[domain] = domain_list
 

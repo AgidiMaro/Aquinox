@@ -18,7 +18,7 @@ const userSlice = createSlice({
   },
 });
 
-// const deployedDomain = 'https://avid-audit-deploy-d9c98622bb55.herokuapp.com/';
+
 const deployedDomain = 'http://localhost:8080/';
 
 export const signInAsync = createAsyncThunk(

@@ -18,43 +18,43 @@ const Dashboard = () => {
   const audits: Audit[] = [
     {
       id: 1,
-      description: "Change Management",
-      assignee: "Emmanuel Maro",
+      description: "PC - Change Management",
+      assignee: "Emmanuel Agidi",
       status: "Completed",
       dueDate: "2024-03-02",
     },
     {
       id: 2,
       description:
-        "OWASP Application Security Verification Standard (ASVS) Review",
+        "APD - Starters",
       assignee: "James Bond",
       status: "Completed",
       dueDate: "2024-07-05",
     },
     {
       id: 3,
-      description: "Annual Compliance Audit",
+      description: "APD - Leavers",
       assignee: "Ava Green",
       status: "In Progress",
       dueDate: "2023-12-15",
     },
     {
       id: 4,
-      description: "The General Data Protection Regulation (GDPR) Audit",
+      description: "APD - Recertification",
       assignee: "Olivia Rhye",
       status: "Not Started",
       dueDate: "2024-03-02",
     },
     {
       id: 5,
-      description: "NIST Cybersecurity Framework (CSF) Review",
+      description: "APD - Authentication",
       assignee: "James Bond",
       status: "In Progress",
       dueDate: "2024-07-05",
     },
     {
       id: 6,
-      description: "CryptoCurrency Security Standard Audit",
+      description: "APD - Privilege Access Management",
       assignee: "Ava Green",
       status: "Not Started",
       dueDate: "2023-12-15",
@@ -62,14 +62,14 @@ const Dashboard = () => {
     {
       id: 7,
       description:
-        "Payment Card Industry Data Security Standard (PCI DSS) Audit",
+        "CO - Batch job management",
       assignee: "Ava Green",
       status: "Completed",
       dueDate: "2023-12-15",
     },
     {
       id: 8,
-      description: "Third Party Audit",
+      description: "CO - Backup and Restoration",
       assignee: "Ava Green",
       status: "Not Started",
       dueDate: "2023-12-15",
@@ -77,7 +77,7 @@ const Dashboard = () => {
     {
       id: 9,
       description:
-        "UK Cyber Essentials: Requirements for IT infrastructure Review",
+        "PD - Program Development",
       assignee: "Ava Green",
       status: "Not Started",
       dueDate: "2023-12-15",
@@ -100,9 +100,9 @@ const Dashboard = () => {
   return (
     <div className="dashboard mx-10">
       <div className="dashboard-header">
-        <h2 className="text-3xl font-semibold">Welcome back, Nick</h2>
+        <h2 className="text-3xl font-semibold">Welcome back, Phill</h2>
         <p>
-          Elevate your audits with generative AI
+          Prepare initial drafts of audit walkthroughs
         </p>
       </div>
 

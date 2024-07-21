@@ -134,32 +134,46 @@ const CreateReport2 = () => {
     }
   ]
 
-  const inputs: FileSectionProps [] = [
+  const inputs: FileSectionProps[] = [
     {
-      titleText: 'Policies*',
-      descriptionText: 'Upload associated policies and procedures maintained by the organisation',
-      nameOnForm: 'PolicyDoc',
+      titleText: "Policies*",
+      descriptionText:
+        "Upload associated policies and procedures maintained by the organisation",
+      nameOnForm: "PolicyDoc",
       required: filesRequired,
       useSample: !filesRequired,
-      disabled: !filesRequired
+      disabled: !filesRequired,
+      accept: ".pdf,.txt,.docx,.xlsx,.csv",
     },
     {
-      titleText: 'Walkthrough Note*',
-      descriptionText: 'Upload walkthrough notes from meeting with control operator(s)',
-      nameOnForm: 'MeetingNote',
+      titleText: "Walkthrough Note*",
+      descriptionText:
+        "Upload walkthrough notes from meeting with control operator(s)",
+      nameOnForm: "MeetingNote",
       required: filesRequired,
       useSample: !filesRequired,
-      disabled: !filesRequired
+      disabled: !filesRequired,
+      accept: ".pdf,.txt,.docx,.xlsx,.csv",
     },
     {
-      titleText: 'Supporting Evidence',
-      descriptionText: 'Upload any other supporting evidence for the review',
-      nameOnForm: 'OtherFiles',
+      titleText: "Supporting Evidence",
+      descriptionText: "Upload any other supporting evidence for the review",
+      nameOnForm: "OtherFiles",
       required: false,
       useSample: !filesRequired,
-      disabled: !filesRequired
-    }
-  ]
+      disabled: !filesRequired,
+      accept: ".pdf,.txt,.docx,.xlsx,.csv",
+    },
+    {
+      titleText: "Additional Context",
+      descriptionText: "Enter additional context here",
+      nameOnForm: "AdditionalContext",
+      required: false,
+      useSample: false,
+      disabled: false,
+      isTextInput: true,
+    },
+  ];
 
   return (
     <>

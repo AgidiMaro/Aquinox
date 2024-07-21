@@ -30,6 +30,8 @@ def upload():
     uploaded_files = []
     file_names = []
 
+    
+
     # Checks if the useSample checkbox field is selected, and if so, loads a sample JSON response.
     if request.form.get('useSample') is not None:
         with open('sample-responses/LogicalAccess.json') as f:
@@ -52,6 +54,12 @@ def upload():
         for file in request.files.getlist("OtherFiles"):
             uploaded_files.append(file)
             file_names.append(file.filename)
+
+    additional_context = request.form.get("AdditionalContext_text", "")
+
+    
+
+    
 
     merged_text = ""
     texts_with_filenames = []
@@ -81,11 +89,12 @@ def upload():
         texts_with_filenames.append((text, filename))
 
     # Call method from AuditLLM to read the audit template and generate responses based on the merged text
-    answer_list = audit_llm.read_template_generate_result(texts_with_filenames=texts_with_filenames, program='Change Management')
+    answer_list = audit_llm.read_template_generate_result(texts_with_filenames=texts_with_filenames, program='Change Management', additional_context=additional_context)
     findings = audit_llm.generate_findings(text=merged_text, answer_list=answer_list)
 
     # Return a JSON response containing the audit answers and findings
     response = {"message": answer_list, "findings": findings}
+    
     return response
 
 # Start the Flask application on port 8000 with debug mode enabled

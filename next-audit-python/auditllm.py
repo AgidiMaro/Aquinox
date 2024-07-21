@@ -8,7 +8,21 @@ from langchain_community.llms import OpenAI
 from langchain_community.callbacks import get_openai_callback
 
 # Prompt used for classifying responses. Can modify this for contextualization
-prompt_for_draft_result_prefix = "Classify the response to the question as 'Effective', 'Ineffective' or 'Unknown' based on best practice for IT change management.\n"
+prompt_for_draft_result_prefix = """You are an AI assisting an auditor with documenting audit walkthroughs. Based on best practices for IT change management, classify the response to the question as 'Effective', 'Ineffective' or 'Unknown' based on best practice for IT change management.
+
+Question :
+"""
+# prompt_for_details_prefix="""You are an AI assiting an auditor with documenting audit walkthroughs, Provide detailed responses using examples to the question. Include as much context and specific information as possible.
+# Question :"""
+
+def prompt_for_details_prefix(additional_context: str) -> str:
+    return f"""
+    You are an AI assisting a PwC IT auditor with documenting audit walkthroughs. 
+    Additional Context: {additional_context} 
+    Provide a detailed response to the following question based on best practices for IT change management. Include as much context and specific information as possible.
+  
+    Question:
+    """
 
 # Class to represent a document with its content and metadata
 class Document:
@@ -24,17 +38,18 @@ class AuditLLM:
         self.embeddings = OpenAIEmbeddings()  # OpenAI embeddings for text processing
         self.chain = load_qa_chain(OpenAI(temperature=0.0), chain_type="stuff")  # Load QA chain with OpenAI LLM
         self.text_splitter = CharacterTextSplitter(
-            separator="\n",
-            chunk_size=1000,
-            chunk_overlap=200,
+            separator="\n\n", #Spilt by paragraphs
+            chunk_size=2000,
+            chunk_overlap=500, #More overlap for context
             length_function=len
         )  # Split text into chunks for processing
 
     # Reads a template and generates results based on the provided text and program
-    def read_template_generate_result(self, texts_with_filenames: list, program: str):
+    def read_template_generate_result(self, texts_with_filenames: list, program: str, additional_context: str):
         """
         :param texts_with_filenames: List of tuples containing text (uploaded files) and corresponding filename
         :param program: The work program (D&I template) name for which the audit is being conducted
+        :param additional_context: Additional context provided by the user.
         :return: A dictionary containing the audit results
         """
         # Get the file path for the D&I template and read the CSV data
@@ -62,8 +77,15 @@ class AuditLLM:
                 # Perform similarity search for the question
                 docs = knowledge_base.similarity_search(domain_question)
                 # Generate details using the QA chain. This is returns the finding/details column of the final output
+
+                
+                prompt_for_details = prompt_for_details_prefix(additional_context) + f"Question: {domain_question}\n"
                 with get_openai_callback() as cb:
-                    details = self.chain.run(input_documents=docs, question=domain_question)
+                    details = self.chain.run(input_documents=docs, question=prompt_for_details)
+
+                # prompt_for_details = f"{prompt_for_details_prefix}Question: {domain_question}\n"
+                # with get_openai_callback() as cb:
+                #     details = self.chain.run(input_documents=docs, question=prompt_for_details)
 
                 # Perform similarity search for the details to generate draft result. For the draft conclusion, we combine the question and answer and recheck the merged documents (chunks)  that have the details
                 details_docs = knowledge_base.similarity_search(details)
@@ -77,7 +99,7 @@ class AuditLLM:
                 draft_result_references = [{"source": doc.metadata['source'], "file_name": doc.metadata['file_name'], "text": doc.page_content} for doc in details_docs]
                 # citations = [f"{ref['source']}" for ref in details_references]
 
-                print(details_references)
+                print(prompt_for_details)
                 # print("CITATION \n")
                 # print(citations)
                 # print("\n")

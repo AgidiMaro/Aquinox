@@ -20,6 +20,7 @@ import {
 } from "chart.js";
 import { Link } from "../../../../models/Links";
 import SubHeader from "../../../common/subheader/SubHeader";
+import * as XLSX from "xlsx";
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip);
 
@@ -65,62 +66,202 @@ const TableReport = () => {
     }
   }, [dispatch, report]);
 
-  const exportAsCSV = () => {
-    const csvDoc = csvMaker();
-    download(csvDoc);
+  // const exportAsCSV = () => {
+  //   const csvDoc = csvMaker();
+  //   download(csvDoc);
+  // };
+
+  
+
+  // const download = (data: any) => {
+  //   const blob = new Blob([data], { type: "text/csv" });
+  //   const url = window.URL.createObjectURL(blob);
+  //   const a = document.createElement("a");
+  //   a.setAttribute("href", url);
+  //   a.setAttribute("download", "download.csv");
+  //   a.click();
+  // };
+
+  // const csvMaker = () => {
+  //   const csvRows: any[] = [];
+
+  //   // Define the headers for the CSV
+  //   const headers = [
+  //     "Domain",
+  //     "Library Procedure",
+  //     "Details",
+  //     "Details with Example",
+  //     "Draft Conclusion",
+  //     "Reference",
+  //   ];
+  //   csvRows.push(headers.join(","));
+
+  //   // Iterate over each domain to generate rows
+  //   report.domains.forEach((domain) => {
+  //     // Ensure the CSV rows include data for each question in the domain
+  //     updateDomainInCSV(csvRows, domain);
+  //   });
+
+  //   // Join all the rows into a single string with new line separation
+  //   return csvRows.join("\n");
+  // };
+
+
+  // const updateDomainInCSV = (csvRows: any[], domain: Domain) => {
+  //   // Add the domain name as a header row, if needed for organization
+  //   csvRows.push(`"${domain.name}"`);
+
+  //   // Iterate through each question in the domain
+  //   domain.questions.forEach((q) => {
+  //     // Ensure details_references is an array and extract 'text' or another property
+  //     const references = (q.details_references || [])
+  //       .map(
+  //         (ref) =>
+  //           `Reference Text: "${ref.text.replace(
+  //             /"/g,
+  //             '""'
+  //           )}", Reference File: "${ref.file_name.replace(/"/g, '""')}"`
+  //       )
+  //       .join("; ");
+
+  //     // Add the row with the domain and question details
+  //     csvRows.push(
+  //       `"${domain.name}","${q.criteria.replace(
+  //         /"/g,
+  //         '""'
+  //       )}","${q.details.replace(
+  //         /"/g,
+  //         '""'
+  //       )}","${q.details_from_example.replace(/"/g, '""')}","${q.answer.replace(
+  //         /"/g,
+  //         '""'
+  //       )}","${references.replace(/"/g, '""')}"`
+  //     );
+  //   });
+  // };
+
+  
+
+  const exportAsExcel = () => {
+    // Generate the Excel document using excelMaker
+    const workbook = excelMaker();
+    download(workbook);
   };
 
-  const download = (data: any) => {
-    const blob = new Blob([data], { type: "text/csv" });
-    const url = window.URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.setAttribute("href", url);
-    a.setAttribute("download", "download.csv");
-    a.click();
+  const download = (workbook: XLSX.WorkBook) => {
+    // Save the workbook as an Excel file
+    XLSX.writeFile(workbook, "AuditReport.xlsx");
   };
 
-  const csvMaker = () => {
-    const csvRows: any[] = [];
-    const columns = 5;
+  const excelMaker = (): XLSX.WorkBook => {
+    const excelRows: any[] = [];
+
+    // Define the headers for the Excel file
     const headers = [
+      "Domain",
       "Library Procedure",
       "Details",
       "Details with Example",
-      "Draft Conclution",
+      "Draft Conclusion",
       "Reference",
     ];
-    csvRows.push(headers.join(","));
-    const domainRowArr: string[] = [];
-    for (let i = 0; i < columns; ++i) {
-      domainRowArr.push("");
-    }
-    const emptyRow = domainRowArr.join(",");
+    excelRows.push(headers);
+
+    // Iterate over each domain to generate rows
     report.domains.forEach((domain) => {
-      csvRows.push(emptyRow);
-      updateDomainInCSV(csvRows, domain, domainRowArr);
+      updateDomainInExcel(excelRows, domain);
     });
-    return csvRows.join("\n");
+
+    // Create a new workbook and a worksheet
+    const workbook = XLSX.utils.book_new();
+    let worksheet = XLSX.utils.aoa_to_sheet(excelRows);
+
+    // Apply styles to the worksheet
+    worksheet = applyStyles(worksheet, headers);
+
+    // Append the styled worksheet to the workbook
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Report");
+
+    return workbook; // Return the workbook object
   };
 
-  const updateDomainInCSV = (
-    csvRows: any[],
-    domain: Domain,
-    domainRowArr: string[]
-  ) => {
-    domainRowArr[0] = `"${domain.name}"`;
-    csvRows.push(domainRowArr.join(","));
+  const applyStyles = (
+    worksheet: XLSX.WorkSheet,
+    headers: string[]
+  ): XLSX.WorkSheet => {
+    // Define the header style
+    const headerStyle = {
+      font: { bold: true, color: { rgb: "FFFFFF" } },
+      fill: { fgColor: { rgb: "8B0000" } }, // Dark red background
+      border: {
+        top: { style: "thin", color: { rgb: "000000" } },
+        bottom: { style: "thin", color: { rgb: "000000" } },
+        left: { style: "thin", color: { rgb: "000000" } },
+        right: { style: "thin", color: { rgb: "000000" } },
+      },
+    };
+
+    // Define the content cell style
+    const contentStyle = {
+      border: {
+        top: { style: "thin", color: { rgb: "000000" } },
+        bottom: { style: "thin", color: { rgb: "000000" } },
+        left: { style: "thin", color: { rgb: "000000" } },
+        right: { style: "thin", color: { rgb: "000000" } },
+      },
+    };
+
+    
+    if (worksheet["!ref"]){
+      // Apply styles to the headers
+      const headerRange = XLSX.utils.decode_range(worksheet["!ref"]);
+      for (let C = headerRange.s.c; C <= headerRange.e.c; ++C) {
+        const cellAddress = XLSX.utils.encode_cell({ c: C, r: 0 });
+        if (!worksheet[cellAddress]) continue;
+        worksheet[cellAddress].s = headerStyle;
+      }
+
+      // Apply styles to the content cells
+      for (let R = 1; R < headerRange.e.r + 1; ++R) {
+        for (let C = 0; C < headers.length; ++C) {
+          const cellAddress = XLSX.utils.encode_cell({ c: C, r: R });
+          if (!worksheet[cellAddress]) continue;
+          worksheet[cellAddress].s = contentStyle;
+        }
+      }
+    }
+
+    return worksheet;
+  };
+
+  const updateDomainInExcel = (excelRows: any[], domain: Domain) => {
     domain.questions.forEach((q) => {
-      csvRows.push(
-        `"${q.criteria}","${q.details}","${q.details_from_example}",,"${q.answer}",,"${q.details_references}"`
-      );
+      const references = (q.details_references || [])
+        .map(
+          (ref) =>
+            `Reference Text: ${ref.text}\n, Reference File: ${ref.file_name}\n`
+        )
+        .join("; ");
+
+      excelRows.push([
+        domain.name,
+        q.criteria,
+        q.details,
+        q.details_from_example,
+        q.answer,
+        references,
+      ]);
     });
   };
+
+
+
 
   const headerButtons: Link[] = [
     {
       linkRef: "",
       linkTitle: "Download Report",
-      action: exportAsCSV,
+      action: exportAsExcel,
     },
   ];
 
@@ -295,7 +436,7 @@ const TableReport = () => {
                                     <div>
                                       <ReadMore
                                         text={ref.text}
-                                        wordLimit={20}
+                                        wordLimit={100}
                                       />
                                     </div>
                                     <div className="italic">

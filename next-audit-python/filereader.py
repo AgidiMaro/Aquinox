@@ -73,6 +73,8 @@ class FileReader:
 
         current_domain = None
         current_question = None
+        current_example = None
+        
 
         # Open and read the CSV file
         with open(file_path) as csv_file:
@@ -98,7 +100,7 @@ class FileReader:
                     questions_list = []
                     file_result[domain] = questions_list  # Initialize a new list for the new domain
 
-                questions_list.append(current_question)  # Add the question to the list
+                questions_list.append({"question": current_question, "example": current_example})  # Add the question and example to the list
 
             print(f'Processed {line_count} lines.')
 

@@ -69,8 +69,8 @@ const TableReport = () => {
 
   const csvMaker = () => {
     const csvRows: any[] = [];
-    const columns = 3;
-    const headers = ["Criteria", "Answer", "Details"];
+    const columns = 5;
+    const headers = ["Criteria", "Answer", "Details", "Details with Example", "Reference"];
     csvRows.push(headers.join(","));
     const domainRowArr: string[] = [];
     for (let i = 0; i < columns; ++i) {
@@ -220,6 +220,9 @@ const TableReport = () => {
                             Details
                           </th>
                           <th className="font-medium text-sm p-2 text-gray-700">
+                            Details with Example
+                          </th>
+                          <th className="font-medium text-sm p-2 text-gray-700">
                             Reference
                           </th>
                         </tr>
@@ -240,11 +243,21 @@ const TableReport = () => {
                               {question.details}
                             </td>
                             <td className="p-2 border-b border-gray-300 text-left">
+                              {question.details_from_example}
+                            </td>
+                            <td className="p-2 border-b border-gray-300 text-left">
                               {Array.isArray(question.details_references) &&
                                 question.details_references.map((ref) => (
                                   <React.Fragment key={ref.source}>
-                                    <div><ReadMore text={ref.text} wordLimit={20} /></div>
-                                    <div className="italic">{ref.file_name}</div>
+                                    <div>
+                                      <ReadMore
+                                        text={ref.text}
+                                        wordLimit={20}
+                                      />
+                                    </div>
+                                    <div className="italic">
+                                      {ref.file_name}
+                                    </div>
                                   </React.Fragment>
                                 ))}
                             </td>

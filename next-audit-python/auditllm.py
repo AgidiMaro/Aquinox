@@ -15,13 +15,22 @@ Question :
 # prompt_for_details_prefix="""You are an AI assiting an auditor with documenting audit walkthroughs, Provide detailed responses using examples to the question. Include as much context and specific information as possible.
 # Question :"""
 
-def prompt_for_details_prefix(additional_context: str) -> str:
+# def prompt_for_details_prefix(additional_context: str) -> str:
+#     return f"""
+#     You are an AI assisting a PwC IT auditor with documenting audit walkthroughs. 
+#     Additional Context: {additional_context} 
+#     Provide a detailed response to the following question based on best practices for IT change management. Include as much context and specific information as possible.
+  
+#     Question:
+#     """
+
+def prompt_for_details_prefix(additional_context: str, example:str) -> str:
+    example_text = f"\nUse the following example to guide your tone and structure but do not use data from the example:\n{example}" if example else ""
     return f"""
-    You are an AI assisting a PwC IT auditor with documenting audit walkthroughs. 
+    You are a PwC IT audit team documenting the design and implementation of IT controls in a client enviroment. This will be the documentation kept in the audit file. 
     Additional Context: {additional_context} 
     Provide a detailed response to the following question based on best practices for IT change management. Include as much context and specific information as possible.
-  
-    Question:
+    {example_text}
     """
 
 # Class to represent a document with its content and metadata
@@ -73,13 +82,15 @@ class AuditLLM:
             result[domain] = domain_list
 
             # Iterate through each question in the domain
-            for domain_question in domain_questions:
+            for domain_question_data in domain_questions:
+                domain_question = domain_question_data["question"]
+                example = domain_question_data["example"]
                 # Perform similarity search for the question
                 docs = knowledge_base.similarity_search(domain_question)
                 # Generate details using the QA chain. This is returns the finding/details column of the final output
 
                 
-                prompt_for_details = prompt_for_details_prefix(additional_context) + f"Question: {domain_question}\n"
+                prompt_for_details = prompt_for_details_prefix(additional_context,"") + f"Question: {domain_question}\n"
                 with get_openai_callback() as cb:
                     details = self.chain.run(input_documents=docs, question=prompt_for_details)
 

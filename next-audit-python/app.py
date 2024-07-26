@@ -57,9 +57,7 @@ def upload():
 
     additional_context = request.form.get("AdditionalContext_text", "")
 
-    
-
-    
+       
 
     merged_text = ""
     texts_with_filenames = []

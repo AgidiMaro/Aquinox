@@ -40,7 +40,7 @@ const CreateReport2 = () => {
     })
     .catch(err => { 
       dispatch(updateShowSpinner(false));
-      window.confirm('Error. Ensure All required fields are populated')
+      window.confirm(err)
     })
   };
 

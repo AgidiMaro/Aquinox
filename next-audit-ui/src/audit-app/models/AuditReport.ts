@@ -27,5 +27,7 @@ export interface Query {
   answer: string;
   criteria: string;
   details: string;
+  details_from_example: string;
   details_references:Reference[];
 }
+

@@ -91,7 +91,7 @@ class FileReader:
 
                 current_domain = row[0].strip()  # Read the domain from the first column
                 current_question = row[1].strip()  # Read the question from the second column
-                current_example = row[2].strip()
+                current_example = row[2].strip() # Read the question from the second column
 
                 # If the current domain is empty, use the previous domain
                 if not current_domain:

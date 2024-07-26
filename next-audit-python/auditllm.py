@@ -15,14 +15,7 @@ Question :
 # prompt_for_details_prefix="""You are an AI assiting an auditor with documenting audit walkthroughs, Provide detailed responses using examples to the question. Include as much context and specific information as possible.
 # Question :"""
 
-# def prompt_for_details_prefix(additional_context: str) -> str:
-#     return f"""
-#     You are an AI assisting a PwC IT auditor with documenting audit walkthroughs. 
-#     Additional Context: {additional_context} 
-#     Provide a detailed response to the following question based on best practices for IT change management. Include as much context and specific information as possible.
-  
-#     Question:
-#     """
+
 
 def prompt_for_details_prefix(additional_context: str, example:str) -> str:
     example_text = f"\nUse the following example to guide your tone and structure but do not use data from the example:\n{example}" if example else ""
@@ -82,17 +75,20 @@ class AuditLLM:
             result[domain] = domain_list
 
             # Iterate through each question in the domain
-            for domain_question_data in domain_questions:
-                domain_question = domain_question_data["question"]
-                example = domain_question_data["example"]
+            for domain_question in domain_questions:
                 # Perform similarity search for the question
                 docs = knowledge_base.similarity_search(domain_question)
                 # Generate details using the QA chain. This is returns the finding/details column of the final output
 
                 
-                prompt_for_details = prompt_for_details_prefix(additional_context,"") + f"Question: {domain_question}\n"
+                prompt_for_details = prompt_for_details_prefix(additional_context) + f"Question: {domain_question}\n"
                 with get_openai_callback() as cb:
                     details = self.chain.run(input_documents=docs, question=prompt_for_details)
+                
+                prompt_for_details_with_example = prompt_for_details_prefix(additional_context,example) + f"Question: {domain_question}\n"
+                with get_openai_callback() as cb:
+                    details_from_example = self.chain.run(input_documents=docs, question=prompt_for_details_with_example)
+
 
                 # prompt_for_details = f"{prompt_for_details_prefix}Question: {domain_question}\n"
                 # with get_openai_callback() as cb:
@@ -100,6 +96,7 @@ class AuditLLM:
 
                 # Perform similarity search for the details to generate draft result. For the draft conclusion, we combine the question and answer and recheck the merged documents (chunks)  that have the details
                 details_docs = knowledge_base.similarity_search(details)
+                
                 prompt_for_draft_result = prompt_for_draft_result_prefix 
                 prompt_for_draft_result += f"Question: {domain_question}\nAnswer: {details}\n"
                 with get_openai_callback() as cb:
@@ -110,7 +107,7 @@ class AuditLLM:
                 draft_result_references = [{"source": doc.metadata['source'], "file_name": doc.metadata['file_name'], "text": doc.page_content} for doc in details_docs]
                 # citations = [f"{ref['source']}" for ref in details_references]
 
-                print(prompt_for_details)
+                print(prompt_for_details_with_example)
                 # print("CITATION \n")
                 # print(citations)
                 # print("\n")
@@ -131,6 +128,7 @@ class AuditLLM:
                     "criteria": domain_question,
                     "answer": answer,
                     "details": details,
+                    "details_from_example": details_from_example,
                     "details_references": details_references,
                     "draft_result_references": draft_result_references
                 })

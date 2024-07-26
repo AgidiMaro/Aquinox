@@ -16,13 +16,12 @@ Question :
 # Question :"""
 
 
-
 def prompt_for_details_prefix(additional_context: str, example:str) -> str:
-    example_text = f"\nUse the following example to guide your tone and structure but do not use data from the example:\n{example}" if example else ""
+    example_text = f"\nUse the following example to guide your tone and structure, but DO NOT COPY any specific information or data from it:{example}" if example else ""
     return f"""
     You are a PwC IT audit team documenting the audit of the design and implementation of IT controls. This will be the documentation kept in the audit file. 
     Additional Context: {additional_context} 
-    Provide a detailed response to the following question based on best practices for IT change management. Include as much context and specific information as possible.
+    Provide a detailed response to the following question. Include as much context and specific information as possible.
     {example_text}
     """
 

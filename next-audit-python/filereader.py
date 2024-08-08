@@ -74,6 +74,7 @@ class FileReader:
         current_domain = None
         current_question = None
         current_example = None
+        current_best_practice = None
         
 
         # Open and read the CSV file
@@ -92,6 +93,7 @@ class FileReader:
                 current_domain = row[0].strip()  # Read the domain from the first column
                 current_question = row[1].strip()  # Read the question from the second column
                 current_example = row[2].strip() # Read the question from the second column
+                current_best_practice = row[3].strip() 
 
                 # If the current domain is empty, use the previous domain
                 if not current_domain:
@@ -101,7 +103,7 @@ class FileReader:
                     questions_list = []
                     file_result[domain] = questions_list  # Initialize a new list for the new domain
 
-                questions_list.append({"question": current_question, "example": current_example})  # Add the question and example to the list
+                questions_list.append({"question": current_question, "example": current_example, "best_practise": current_best_practice})  # Add the question and example to the list
 
             print(f'Processed {line_count} lines.')
 

@@ -16,14 +16,25 @@ Question :
 # Question :"""
 
 
-def prompt_for_details_prefix(additional_context: str, example:str) -> str:
-    example_text = f"\nUse the following example to guide your tone and structure, but DO NOT COPY any specific information or data from it:{example}" if example else ""
-    return f"""
-    You are a PwC IT audit team documenting the audit of the design and implementation of IT controls. This will be the documentation kept in the audit file. 
-    Additional Context: {additional_context} 
-    Provide a detailed response to the following question. Include as much context and specific information as possible.
-    {example_text}
-    """
+# def prompt_for_details_prefix(additional_context: str, example:str) -> str:
+#     example_text = f"\nUse the following example to guide your tone and structure, but DO NOT COPY any specific information or data from it:{example}" if example else ""
+#     return f"""
+#     You are a PwC IT audit team documenting the audit of the design and implementation of IT controls. This will be the documentation kept in the audit file. 
+#     Additional Context: {additional_context} 
+#     Provide a detailed response to the following question. Include as much context and specific information as possible.
+#     {example_text}
+#     """
+
+def prompt_for_details_prefix(additional_context: str, example: str, best_practise: str) -> str:  
+    example_text = f"\nUse the following example to guide your tone and structure, but DO NOT COPY any specific information or data from it: {example}" if example else ""  
+    best_practise_text = f"\nBest Practice: {best_practise}\nUse this best practice as a standard to judge if the control is appropriate" if best_practise else ""  
+    return f"""  
+    You are a PwC IT audit team documenting the audit of the design and implementation of IT controls. This will be the documentation kept in the audit file.   
+    Additional Context: {additional_context}   
+    Provide a detailed response to the following question. Include as much context and specific information as possible.  
+    {example_text}  
+    {best_practise_text}  
+    """  
 
 # Class to represent a document with its content and metadata
 class Document:
@@ -77,17 +88,22 @@ class AuditLLM:
             for domain_question_data in domain_questions:
                 domain_question = domain_question_data["question"]
                 example = domain_question_data["example"]
+                best_practise = domain_question_data["best_practise"]
+                # print(best_practise)
 
                 # Perform similarity search for the question
                 docs = knowledge_base.similarity_search(domain_question)
                 # Generate details using the QA chain. This is returns the finding/details column of the final output
 
                 
-                prompt_for_details = prompt_for_details_prefix(additional_context,"") + f"Question: {domain_question}\n"
+                prompt_for_details = prompt_for_details_prefix(additional_context,"","") + f"Question: {domain_question}\n"
                 with get_openai_callback() as cb:
                     details = self.chain.run(input_documents=docs, question=prompt_for_details)
+
+                # print(details)
                 
-                prompt_for_details_with_example = prompt_for_details_prefix(additional_context,example) + f"Question: {domain_question}\n"
+                prompt_for_details_with_example = prompt_for_details_prefix(additional_context,example,best_practise) + f"Question: {domain_question}\n"
+                # prompt_for_details_with_example = prompt_for_details_prefix(additional_context,example) + f"Question: {domain_question}\n"
                 with get_openai_callback() as cb:
                     details_from_example = self.chain.run(input_documents=docs, question=prompt_for_details_with_example)
 

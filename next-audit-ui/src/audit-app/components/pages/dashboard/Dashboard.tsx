@@ -95,6 +95,8 @@ const Dashboard = () => {
   const navigateToAudit = (auditId: number) => {
     // navigate(`/audit/${auditId}`);
     navigate("/report");
+    // navigate("/form");
+
   };
 
   return (

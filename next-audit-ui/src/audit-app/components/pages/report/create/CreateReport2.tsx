@@ -1,53 +1,53 @@
-
 import React, { useState } from "react";
-import { getReportAsync, updateAuditReport } from "../../../../state/reportSlice";
+import {
+  getReportAsync,
+  updateAuditReport,
+} from "../../../../state/reportSlice";
 import { Form } from "react-final-form";
 import { AppDispatch } from "../../../../state/store";
 import { useDispatch } from "react-redux";
 import SubHeader from "../../../common/subheader/SubHeader";
 import { Link } from "../../../../models/Links";
-import FileSection, { FileSectionProps } from "../../../common/filesection/FileSection";
+import FileSection, {
+  FileSectionProps,
+} from "../../../common/filesection/FileSection";
 import { useNavigate } from "react-router-dom";
 import { AuditReport, Domain, Query } from "../../../../models/AuditReport";
-import title_icon from '../table/TitleIcon.svg'
+import title_icon from "../table/TitleIcon.svg";
 import { updateShowSpinner } from "../../../../state/pageSlice";
-import './CreateReport.scss'
+import "./CreateReport.scss";
 
 const CreateReport2 = () => {
-
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
   const [filesRequired, setFilesRequired] = useState(true);
 
   const onSubmit = () => {
-    
     const form: any = document.getElementById("audit-form");
     const formData = new FormData(form);
 
-    
     if (!form.checkValidity()) {
-      window.confirm('Ensure the Policies and Walkthrough notes are uploaded');
+      window.confirm("Ensure the Policies and Walkthrough notes are uploaded");
       return;
     }
-    
+
     // dispatch(getReportAsync(formData))
     dispatch(updateShowSpinner(true));
     dispatch(getReportAsync(formData))
-    .unwrap()
-    .then(message => { 
-      dispatch(updateShowSpinner(false));
-      navigateToResult(message)
-    })
-    .catch(err => { 
-      dispatch(updateShowSpinner(false));
-      window.confirm(err)
-    })
+      .unwrap()
+      .then((message) => {
+        dispatch(updateShowSpinner(false));
+        navigateToResult(message);
+      })
+      .catch((err) => {
+        dispatch(updateShowSpinner(false));
+        window.confirm(err);
+      });
   };
 
   const navigateToResult = (res: any) => {
-
-    let questions: Query [];
-    let domains: Domain [] = [];
+    let questions: Query[];
+    let domains: Domain[] = [];
     let domain: Domain;
 
     const resMessage = res.message;
@@ -58,7 +58,7 @@ const CreateReport2 = () => {
     let unknownFraction = 0;
 
     for (const key of Object.keys(resMessage)) {
-      questions = resMessage[key] as Query [];
+      questions = resMessage[key] as Query[];
 
       // TO DO - Map to accurate and not random values
       const length = questions.length;
@@ -67,10 +67,9 @@ const CreateReport2 = () => {
       let maybe = 0;
 
       for (const question of questions) {
-        if (question.answer == 'Pass'){
+        if (question.answer == "Pass") {
           ++yes;
-        }
-        else if (question.answer == 'Fail') {
+        } else if (question.answer == "Fail") {
           ++no;
         } else {
           ++maybe;
@@ -86,10 +85,10 @@ const CreateReport2 = () => {
         questions: questions,
         yesCount: yes,
         noCount: no,
-        unknown: maybe
-      }
+        unknown: maybe,
+      };
       domains.push(domain);
-    } 
+    }
 
     yesFraction *= 100;
     yesFraction /= domains.length;
@@ -106,35 +105,69 @@ const CreateReport2 = () => {
       summary: findings.summary,
       yesFrac: yesFraction,
       noFrac: noFraction,
-      unknownFrac: unknownFraction
-    }
+      unknownFrac: unknownFraction,
+    };
 
-    localStorage.setItem('report', JSON.stringify(auditReport));
+    localStorage.setItem("report", JSON.stringify(auditReport));
     dispatch(updateAuditReport(auditReport));
     navigate("/report/result");
-  }
-  
+  };
 
-  const headerButtons: Link [] = [
+  const headerButtons: Link[] = [
     {
-      linkRef: '/dashboard',
-      linkTitle: 'Generate Report',
-      action: onSubmit
-    }
+      linkRef: "/dashboard",
+      linkTitle: "Generate Report",
+      action: onSubmit,
+    },
   ];
 
-  const headerPaths: Link [] = [
+  const headerPaths: Link[] = [
     {
-      linkRef: '/dashboard',
-      linkTitle: 'Audits'
+      linkRef: "/dashboard",
+      linkTitle: "Audits",
     },
     {
-      linkRef: '',
-      linkTitle: 'Audit 1' 
-    }
-  ]
+      linkRef: "",
+      linkTitle: "Audit 1",
+    },
+  ];
 
   const inputs: FileSectionProps[] = [
+    {
+      titleText: "Client Name",
+      descriptionText: "",
+      nameOnForm: "ClientName",
+      required: false,
+      useSample: false,
+      disabled: false,
+      isTextInput: true,
+      hasExpansion: false,
+      placeholder: "Enter the client's name e.g XYZ Plc",
+    },
+    {
+      titleText: "Audit Year End",
+      descriptionText: "",
+      nameOnForm: "AuditYearEnd",
+      required: false,
+      useSample: false,
+      disabled: false,
+      isTextInput: false,
+      isDateInput: true,
+      hasExpansion: false,
+    },
+    {
+      titleText: "Name of PwC Auditor",
+      descriptionText: "",
+      nameOnForm: "PwCAuditorName",
+      required: false,
+      useSample: false,
+      disabled: false,
+      isTextInput: true,
+      hasExpansion: false,
+      placeholder:
+        "Enter the name of PwC Personnel that performed this walkthrough e.g James Pitt",
+    },
+
     {
       titleText: "Policies*",
       descriptionText:
@@ -144,6 +177,7 @@ const CreateReport2 = () => {
       useSample: !filesRequired,
       disabled: !filesRequired,
       accept: ".pdf,.txt,.docx,.xlsx,.csv",
+      hasExpansion: true,
     },
     {
       titleText: "Walkthrough Note*",
@@ -154,6 +188,7 @@ const CreateReport2 = () => {
       useSample: !filesRequired,
       disabled: !filesRequired,
       accept: ".pdf,.txt,.docx,.xlsx,.csv",
+      hasExpansion: true,
     },
     {
       titleText: "Supporting Evidence",
@@ -163,15 +198,17 @@ const CreateReport2 = () => {
       useSample: !filesRequired,
       disabled: !filesRequired,
       accept: ".pdf,.txt,.docx,.xlsx,.csv",
+      hasExpansion: true,
     },
     {
       titleText: "Additional Context",
-      descriptionText: "Enter additional context here",
+      descriptionText: "",
       nameOnForm: "AdditionalContext",
       required: false,
       useSample: false,
       disabled: false,
       isTextInput: true,
+      hasExpansion: false,
     },
   ];
 
@@ -253,6 +290,6 @@ const CreateReport2 = () => {
       </div>
     </>
   );
-}
+};
 
-export default CreateReport2
+export default CreateReport2;

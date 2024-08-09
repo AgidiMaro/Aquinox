@@ -71,8 +71,6 @@ const TableReport = () => {
   //   download(csvDoc);
   // };
 
-  
-
   // const download = (data: any) => {
   //   const blob = new Blob([data], { type: "text/csv" });
   //   const url = window.URL.createObjectURL(blob);
@@ -106,7 +104,6 @@ const TableReport = () => {
   //   return csvRows.join("\n");
   // };
 
-
   // const updateDomainInCSV = (csvRows: any[], domain: Domain) => {
   //   // Add the domain name as a header row, if needed for organization
   //   csvRows.push(`"${domain.name}"`);
@@ -139,8 +136,6 @@ const TableReport = () => {
   //     );
   //   });
   // };
-
-  
 
   const exportAsExcel = () => {
     // Generate the Excel document using excelMaker
@@ -211,8 +206,7 @@ const TableReport = () => {
       },
     };
 
-    
-    if (worksheet["!ref"]){
+    if (worksheet["!ref"]) {
       // Apply styles to the headers
       const headerRange = XLSX.utils.decode_range(worksheet["!ref"]);
       for (let C = headerRange.s.c; C <= headerRange.e.c; ++C) {
@@ -253,9 +247,6 @@ const TableReport = () => {
       ]);
     });
   };
-
-
-
 
   const headerButtons: Link[] = [
     {
@@ -397,9 +388,9 @@ const TableReport = () => {
                           <th className="font-medium text-sm p-2 text-gray-700">
                             Test procedure
                           </th>
-                          <th className="font-medium text-sm p-2 text-gray-700">
+                          {/* <th className="font-medium text-sm p-2 text-gray-700">
                             Result
-                          </th>
+                          </th> */}
                           <th className="font-medium text-sm p-2 text-gray-700">
                             Details
                           </th>
@@ -417,19 +408,19 @@ const TableReport = () => {
                             key={domain.name + index}
                             className="my-10 font-normal text-sm text-gray-700"
                           >
-                            <td className="p-2 border-b border-gray-300 text-left">
+                            <td className="p-2 border-b border-gray-300 text-left align-top">
                               {question.criteria}
                             </td>
-                            <td className="p-2 border-b border-gray-300 text-center">
+                            {/* <td className="p-2 border-b border-gray-300 text-center align-top">
                               {question.answer}
-                            </td>
-                            <td className="p-2 border-b border-gray-300 text-left">
+                            </td> */}
+                            <td className="p-2 border-b border-gray-300 text-left align-top">
                               {question.details}
                             </td>
-                            <td className="p-2 border-b border-gray-300 text-left">
+                            <td className="p-2 border-b border-gray-300 text-left align-top">
                               {question.details_from_example}
                             </td>
-                            <td className="p-2 border-b border-gray-300 text-left">
+                            <td className="p-2 border-b border-gray-300 text-left align-top">
                               {Array.isArray(question.details_references) &&
                                 question.details_references.map((ref) => (
                                   <React.Fragment key={ref.source}>

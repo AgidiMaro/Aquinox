@@ -30,7 +30,17 @@ def upload():
     uploaded_files = []
     file_names = []
 
-    
+    # Read form data
+    client_name = request.form.get("ClientName_text", "")
+    audit_year_end = request.form.get("AuditYearEnd_date", "")
+    pwc_auditor_name = request.form.get("PwCAuditorName_text", "")
+    additional_context = request.form.get("AdditionalContext_text", "")
+
+    print(f"Received Client Name: {client_name}")
+    print(f"Received Audit Year End: {audit_year_end}")
+    print(f"Received PwC Auditor Name: {pwc_auditor_name}")
+    print(f"Received additional context: {additional_context}")
+
 
     # Checks if the useSample checkbox field is selected, and if so, loads a sample JSON response.
     if request.form.get('useSample') is not None:
@@ -55,7 +65,7 @@ def upload():
             uploaded_files.append(file)
             file_names.append(file.filename)
 
-    additional_context = request.form.get("AdditionalContext_text", "")
+
 
        
 
@@ -87,11 +97,15 @@ def upload():
         texts_with_filenames.append((text, filename))
 
     # Call method from AuditLLM to read the audit template and generate responses based on the merged text
-    answer_list = audit_llm.read_template_generate_result(texts_with_filenames=texts_with_filenames, program='Change Management', additional_context=additional_context)
+    answer_list = audit_llm.read_template_generate_result(texts_with_filenames=texts_with_filenames, program='Change Management',  additional_context=additional_context,
+        client_name=client_name,
+        audit_year_end=audit_year_end,
+        pwc_auditor_name=pwc_auditor_name)
     findings = audit_llm.generate_findings(text=merged_text, answer_list=answer_list)
 
     # Return a JSON response containing the audit answers and findings
     response = {"message": answer_list, "findings": findings}
+    
     
     return response
 

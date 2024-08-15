@@ -22,16 +22,18 @@ def prompt_for_details_prefix(additional_context: str, example: str, best_practi
     """  
 
 def prompt_prefix (additional_context: str, example: str, best_practise: str, client_name : str,audit_year_end : str, pwc_auditor_name:str )-> str:
-	return f""" You are a PwC IT audit team that performed the external audit of the design and implementation of a change management control of a client called {client_name} after inquiry with relevant client personnel and inspection of the client document. This is for the audit period ending on {audit_year_end}. This is an internal documentation stored in PwC files, so write like it will only be read by PwC personnel. Including as much context and specificity as possible, provide a detailed response to this question. \n"""
+	return f""" 
+    You are a PwC IT audit team that performed the external audit of the design and implementation of a change management control of a client called {client_name} after inquiry with relevant client personnel and inspection of the client document. This is for the audit period ending on {audit_year_end}. This is an internal documentation stored in PwC files, so write like it will only be read by PwC personnel. Provide a detailed response to this question, including as much context as possible but with specificity. 
+    """
 
 def prompt_suffix(additional_context: str, example: str, best_practise: str, client_name : str,audit_year_end : str, pwc_auditor_name:str ) -> str:  
-    example_text = f"\n Use the following example to guide your tone and structure, but DO NOT COPY any specific information or data from it. Use past tenses and use WE instead of I's.  Example: \"{example}\"\n" if example else ""  
-    best_practise_text = f"Use this best practise as a standard to judge if the control as operated by the client is appropriate. Best Practise: \"{best_practise}\"\n" if best_practise else ""  
-    return f"""  
-    Additional Context: {additional_context}    
+    example_text = f"\n Use the following dummy response to guide your tone and structure, but DO NOT include any information from the dummy response in your response to the question. Use past tenses and use WE instead of I's. Example: \"{example}\"\n" if example else ""  
+    best_practise_text = f"Use this key considerations from the PwC guideline to determine if the control as operated by the client is appropriate. Key Considerations: \"{best_practise}\"\n" if best_practise else ""  
+    return f"""   
     {example_text}  
     {best_practise_text}  
     Name of the PwC Team Members that performed the walkthrough : {pwc_auditor_name}
+    Additional Context: {additional_context}  
     """ 
     
 
@@ -56,7 +58,7 @@ class AuditLLM:
         )  # Split text into chunks for processing
 
     # Reads a template and generates results based on the provided text and program
-    def read_template_generate_result(self, texts_with_filenames: list, program: str, additional_context: str, client_name: str, audit_year_end: str, pwc_auditor_name: str):
+    def read_template_generate_result(self, texts_with_filenames_design:list, texts_with_filenames_implementation:list, program: str, additional_context: str, client_name: str, audit_year_end: str, pwc_auditor_name: str):
         """
         :param texts_with_filenames: List of tuples containing text (uploaded files) and corresponding filename
         :param program: The work program (D&I template) name for which the audit is being conducted
@@ -66,16 +68,25 @@ class AuditLLM:
         # Get the file path for the D&I template and read the CSV data
         program_file_path = self.file_reader.get_file_path(program)
         template_csv_data = self.file_reader.read_csv_template_file(program_file_path)
-        # additional_context += f"\nClient Name: {client_name}\nAudit Year End: {audit_year_end}\nPwC Auditor Name: {pwc_auditor_name}"
         
-        documents = []
+        design_documents = []
+        implementation_documents = []
+
         # Split the text (uploaded files eg policies) into chunks and create Document instances with metadata
-        for text, filename in texts_with_filenames:
-            chunks = self.text_splitter.split_text(text)
-            documents.extend([Document(chunk, {"source": f"chunk_{i}", "file_name": filename}) for i, chunk in enumerate(chunks)])
+        #--Design
+        for text_design, filename_design in texts_with_filenames_design:
+            design_chunks = self.text_splitter.split_text(text_design)
+            design_documents.extend([Document(chunk, {"source": f"chunk_{i}", "file_name": filename_design}) for i, chunk in enumerate(design_chunks)])
         
+        #--Implementation
+        for text_implementation, filename_implementaton in texts_with_filenames_implementation:
+            implementation_chunks = self.text_splitter.split_text(text_implementation)
+            implementation_documents.extend([Document(chunk, {"source": f"chunk_{i}", "file_name": filename_implementaton}) for i, chunk in enumerate(implementation_chunks)])
+
+
         # Create FAISS index with documents and their embeddings
-        knowledge_base = FAISS.from_documents(documents, self.embeddings)
+        design_knowledge_base = FAISS.from_documents(design_documents, self.embeddings)
+        implementation_knowledge_base = FAISS.from_documents(implementation_documents, self.embeddings)
 
         result = {}  # Dictionary to store the results
 
@@ -86,71 +97,91 @@ class AuditLLM:
 
             # Iterate through each question in the domain
             for domain_question_data in domain_questions:
-                domain_question = domain_question_data["question"]
-                example = domain_question_data["example"]
-                best_practise = domain_question_data["best_practise"]
-                # print(best_practise)
+                # domain_question = domain_question_data["question"]
+                # example = domain_question_data["example"]
+                # best_practise = domain_question_data["best_practise"]
+
+                design_procedure = domain_question_data["design_procedure"]
+                design_consideration = domain_question_data["design_consideration"]
+                design_example = domain_question_data["design_example"]
+                implementation_procedure = domain_question_data["implementation_procedure"]
+                implementation_consideration = domain_question_data["implementation_consideration"]
+                implementation_example = domain_question_data["implementation_example"]
+                        
 
                 # Perform similarity search for the question
-                docs = knowledge_base.similarity_search(domain_question)
+                design_docs = design_knowledge_base.similarity_search(design_procedure)
+                implementation_docs = implementation_knowledge_base.similarity_search(implementation_procedure)
+
+                # print(f'DESIGN DOCs/n/n {design_docs}/n/n')
+                # print(f'IMPLEMENTATION DOCs/n/n {implementation_docs}/n/n')
+
 
                 # Generate details using the QA chain. This is returns the finding/details column of the final output
-
-                prompt_for_details = prompt_for_details_prefix(additional_context,"","","","","") + f"Question: {domain_question}\n"
-                with get_openai_callback() as cb:
-                    details = self.chain.run(input_documents=docs, question=prompt_for_details)
-
-                # print(details)
+                #--Design
+                prompt_for_design_details = prompt_for_details_prefix(additional_context,"","","","","") + f"Question: {design_procedure}\n"
+                prompt_for_design_details_example = prompt_prefix(additional_context,design_example,design_consideration,client_name,audit_year_end,pwc_auditor_name) + f"Question: {design_procedure}\n"+ prompt_suffix(additional_context,design_example,design_consideration,client_name,audit_year_end,pwc_auditor_name)
                 
-                # prompt_for_details_with_example = prompt_for_details_prefix(additional_context,example,best_practise,client_name,audit_year_end,pwc_auditor_name) + f"Question: {domain_question}\n"
-                # # prompt_for_details_with_example = prompt_for_details_prefix(additional_context,example) + f"Question: {domain_question}\n"
-                # with get_openai_callback() as cb:
-                #     details_from_example = self.chain.run(input_documents=docs, question=prompt_for_details_with_example)
-
-                prompt_for_details_with_example = prompt_prefix(additional_context,example,best_practise,client_name,audit_year_end,pwc_auditor_name) + f"Question: {domain_question}\n"+ prompt_suffix(additional_context,example,best_practise,client_name,audit_year_end,pwc_auditor_name)
                 with get_openai_callback() as cb:
-                    details_from_example = self.chain.run(input_documents=docs, question=prompt_for_details_with_example)
+                    design_details = self.chain.run(input_documents=design_docs, question=prompt_for_design_details)
+                    design_details_from_example = self.chain.run(input_documents=design_docs, question=prompt_for_design_details_example)
+                # Extract references for design
+                design_details_references = [{"source": doc.metadata['source'], "file_name": doc.metadata['file_name'], "text": doc.page_content} for doc in design_docs]
 
-
+                #--Implementation
+                prompt_for_implementation_details = prompt_for_details_prefix(additional_context,"","","","","") + f"Question: {implementation_procedure}\n"
+                prompt_for_implementation_details_example = prompt_prefix(additional_context,implementation_example,implementation_consideration,client_name,audit_year_end,pwc_auditor_name) + f"Question: {implementation_procedure}\n"+ prompt_suffix(additional_context,implementation_example,implementation_consideration,client_name,audit_year_end,pwc_auditor_name)
                 
+                with get_openai_callback() as cb:
+                    implementation_details = self.chain.run(input_documents=implementation_docs, question=prompt_for_implementation_details)
+                    implementation_details_from_example = self.chain.run(input_documents=implementation_docs, question=prompt_for_implementation_details_example)
+                # Extract references for design and implementaion details
+                implementation_details_references = [{"source": doc.metadata['source'], "file_name": doc.metadata['file_name'], "text": doc.page_content} for doc in implementation_docs]
+
+                print(f'DESIGN PROMPT/n/n {prompt_for_design_details_example}/n/n')
+                print(f'IMPLEMENTATION DETAILS PROMPT/n/n {prompt_for_implementation_details_example}/n/n')
 
                 # Perform similarity search for the details to generate draft result. For the draft conclusion, we combine the question and answer and recheck the merged documents (chunks)  that have the details
-                details_docs = knowledge_base.similarity_search(details)
-                
-                prompt_for_draft_result = ""
-                prompt_for_draft_result += f"Question: {domain_question}\nAnswer: {details}\n"
-                with get_openai_callback() as cb:
-                    draft_result_from_prompt = self.chain.run(input_documents=details_docs, question=prompt_for_draft_result)
+                # prompt_for_draft_result = ""
+                # prompt_for_draft_result += f"Question: {implementation_procedure}\nAnswer: {implementation_details_from_example}\n"
+                # with get_openai_callback() as cb:
+                #     draft_result_from_prompt = self.chain.run(input_documents=details_docs, question=prompt_for_draft_result)
 
-                # Extract references for details and draft results
-                details_references = [{"source": doc.metadata['source'], "file_name": doc.metadata['file_name'], "text": doc.page_content} for doc in docs]
-                draft_result_references = [{"source": doc.metadata['source'], "file_name": doc.metadata['file_name'], "text": doc.page_content} for doc in details_docs]
+                # draft_result_references = [{"source": doc.metadata['source'], "file_name": doc.metadata['file_name'], "text": doc.page_content} for doc in details_docs]
+                # draft_result_from_prompt = prompt_for_implementation_details
+                # draft_result_references = implementation_details_references
                 # citations = [f"{ref['source']}" for ref in details_references]
 
-                print(prompt_for_details_with_example)
-                # print("CITATION \n")
-                # print(citations)
-                # print("\n")
-                # print("DETALS with CITATIONS \n")
-                # response_with_citations = details + "\n\nCitations:\n" + "\n".join(citations)
-                # print(response_with_citations)
+                # print(prompt_for_details_with_example)
+        
 
                 # Convert draft result to Pass/Fail/Unknown. Convert to pass and fail for presentation. Also protect against the LLM having responses more words.
-                if 'Effective' in draft_result_from_prompt:
+                if 'Effective' in design_details_from_example:
                     answer = 'Pass'
-                elif 'Ineffective' in draft_result_from_prompt:
+                elif 'Ineffective' in design_details_from_example:
                     answer = 'Fail'
                 else:
                     answer = 'Unknown'
 
                 # Append the result to the domain list
                 domain_list.append({
-                    "criteria": domain_question,
-                    "answer": answer,
-                    "details": details,
-                    "details_from_example": details_from_example,
-                    "details_references": details_references,
-                    "draft_result_references": draft_result_references
+                    # "criteria": domain_question,
+                    # "answer": answer,
+                    # "details": details,
+                    # "details_from_example": details_from_example,
+                    # "details_references": details_references,
+                    # "draft_result_references": draft_result_references
+
+                    "tailored_procedure_design": design_procedure,
+                    "design_details": design_details,
+                    "design_details_from_example": design_details_from_example,
+                    "design_reference": design_details_references,
+
+                    "tailored_procedure_implementation": implementation_procedure,
+                    "implementation_details": implementation_details,
+                    "implementation_details_from_example": implementation_details_from_example,
+                    "implementation_reference": implementation_details_references,
+                    "answer":answer
                 })
 
         return result

@@ -27,7 +27,8 @@ def prompt_prefix (additional_context: str, example: str, best_practise: str, cl
     """
 
 def prompt_suffix(additional_context: str, example: str, best_practise: str, client_name : str,audit_year_end : str, pwc_auditor_name:str ) -> str:  
-    example_text = f"\n Use the following dummy response to guide your tone and structure, but DO NOT include any information from the dummy response in your response to the question. Use past tenses and use WE instead of I's. Example: \"{example}\"\n" if example else ""  
+    # example_text = f"\n Use the following dummy response to guide your tone and structure, but DO NOT include any information from the dummy response in your response to the question. Use past tenses and use WE instead of I's. Example: \"{example}\"\n" if example else ""  
+    example_text=""
     best_practise_text = f"Use this key considerations from the PwC guideline to determine if the control as operated by the client is appropriate. Key Considerations: \"{best_practise}\"\n" if best_practise else ""  
     return f"""   
     {example_text}  

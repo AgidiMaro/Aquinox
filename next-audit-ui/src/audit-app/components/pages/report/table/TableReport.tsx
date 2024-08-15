@@ -155,10 +155,13 @@ const TableReport = () => {
     const headers = [
       "Domain",
       "Library Procedure",
-      "Details",
-      "Details with Example",
-      "Draft Conclusion",
-      "Reference",
+      "Design Details",
+      "Design Details with Example",
+      "Design Reference",
+      "Implementation Procedure",
+      "Implementation Details",
+      "Implementation Details with Example",
+      "Implementation Reference",
     ];
     excelRows.push(headers);
 
@@ -230,7 +233,13 @@ const TableReport = () => {
 
   const updateDomainInExcel = (excelRows: any[], domain: Domain) => {
     domain.questions.forEach((q) => {
-      const references = (q.details_references || [])
+      const design_references = (q.design_reference || [])
+        .map(
+          (ref) =>
+            `Reference Text: ${ref.text}\n, Reference File: ${ref.file_name}\n`
+        )
+        .join("; ");
+        const implementation_references = (q.implementation_reference || [])
         .map(
           (ref) =>
             `Reference Text: ${ref.text}\n, Reference File: ${ref.file_name}\n`
@@ -239,11 +248,14 @@ const TableReport = () => {
 
       excelRows.push([
         domain.name,
-        q.criteria,
-        q.details,
-        q.details_from_example,
-        q.answer,
-        references,
+        q.tailored_procedure_design,
+        q.design_details,
+        q.design_details_from_example,
+        q.design_reference,
+        q.tailored_procedure_implementation,
+        q.implementation_details,
+        q.implementation_details_from_example,
+        q.implementation_reference
       ]);
     });
   };
@@ -386,20 +398,33 @@ const TableReport = () => {
                       <thead className="border-b-2 bg-gray-200">
                         <tr>
                           <th className="font-medium text-sm p-2 text-gray-700">
-                            Test procedure
+                            Design Library Procedure
                           </th>
                           {/* <th className="font-medium text-sm p-2 text-gray-700">
                             Result
                           </th> */}
                           <th className="font-medium text-sm p-2 text-gray-700">
-                            Details
+                            Design Details
                           </th>
                           <th className="font-medium text-sm p-2 text-gray-700">
-                            Details with Example
+                            Design Details with Example
                           </th>
                           <th className="font-medium text-sm p-2 text-gray-700">
-                            Reference
+                            Design Reference
                           </th>
+                          <th className="font-medium text-sm p-2 text-gray-700">
+                            Implementation Library Procedure
+                          </th>
+                          <th className="font-medium text-sm p-2 text-gray-700">
+                            Implementation Details
+                          </th>
+                          <th className="font-medium text-sm p-2 text-gray-700">
+                            Implementation Details with Example
+                          </th>
+                          <th className="font-medium text-sm p-2 text-gray-700">
+                            Implementation Reference
+                          </th>
+
                         </tr>
                       </thead>
                       <tbody>
@@ -409,20 +434,45 @@ const TableReport = () => {
                             className="my-10 font-normal text-sm text-gray-700"
                           >
                             <td className="p-2 border-b border-gray-300 text-left align-top">
-                              {question.criteria}
+                              {question.tailored_procedure_design}
                             </td>
                             {/* <td className="p-2 border-b border-gray-300 text-center align-top">
                               {question.answer}
                             </td> */}
                             <td className="p-2 border-b border-gray-300 text-left align-top">
-                              {question.details}
+                              {question.design_details}
                             </td>
                             <td className="p-2 border-b border-gray-300 text-left align-top">
-                              {question.details_from_example}
+                              {question.design_details_from_example}
                             </td>
                             <td className="p-2 border-b border-gray-300 text-left align-top">
-                              {Array.isArray(question.details_references) &&
-                                question.details_references.map((ref) => (
+                              {Array.isArray(question.design_reference) &&
+                                question.design_reference.map((ref) => (
+                                  <React.Fragment key={ref.source}>
+                                    <div>
+                                      <ReadMore
+                                        text={ref.text}
+                                        wordLimit={100}
+                                      />
+                                    </div>
+                                    <div className="italic">
+                                      {ref.file_name}
+                                    </div>
+                                  </React.Fragment>
+                                ))}
+                            </td>
+                            <td className="p-2 border-b border-gray-300 text-left align-top">
+                              {question.tailored_procedure_implementation}
+                            </td>
+                            <td className="p-2 border-b border-gray-300 text-left align-top">
+                              {question.implementation_details}
+                            </td>
+                            <td className="p-2 border-b border-gray-300 text-left align-top">
+                              {question.implementation_details_from_example}
+                            </td>
+                            <td className="p-2 border-b border-gray-300 text-left align-top">
+                              {Array.isArray(question.implementation_reference) &&
+                                question.implementation_reference.map((ref) => (
                                   <React.Fragment key={ref.source}>
                                     <div>
                                       <ReadMore
@@ -437,6 +487,7 @@ const TableReport = () => {
                                 ))}
                             </td>
                           </tr>
+                          
                         ))}
                       </tbody>
                     </table>

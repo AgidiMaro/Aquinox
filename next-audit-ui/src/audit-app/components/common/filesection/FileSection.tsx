@@ -116,7 +116,7 @@ const FileSection = (props: FileSectionProps) => {
           />
         )}
         {!props.isTextInput && !props.isDateInput && (
-          <label className="block flex items-center justify-center mb-2 p-2 text-sm bg-pureWhite font-medium input-label">
+          <label className="flex items-center justify-center mb-2 p-2 text-sm bg-pureWhite font-medium input-label">
             {filesDisplay}
             <input
               id={props.nameOnForm}

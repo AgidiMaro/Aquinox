@@ -21,6 +21,10 @@ import {
 import { Link } from "../../../../models/Links";
 import SubHeader from "../../../common/subheader/SubHeader";
 import * as XLSX from "xlsx";
+import ExcelJS from "exceljs";
+import { saveAs } from "file-saver";
+import { current } from "@reduxjs/toolkit";
+import { exportAsExcel } from "../../../common/excelUtils/excelUtils";
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip);
 
@@ -66,205 +70,14 @@ const TableReport = () => {
     }
   }, [dispatch, report]);
 
-  // const exportAsCSV = () => {
-  //   const csvDoc = csvMaker();
-  //   download(csvDoc);
-  // };
 
-  // const download = (data: any) => {
-  //   const blob = new Blob([data], { type: "text/csv" });
-  //   const url = window.URL.createObjectURL(blob);
-  //   const a = document.createElement("a");
-  //   a.setAttribute("href", url);
-  //   a.setAttribute("download", "download.csv");
-  //   a.click();
-  // };
-
-  // const csvMaker = () => {
-  //   const csvRows: any[] = [];
-
-  //   // Define the headers for the CSV
-  //   const headers = [
-  //     "Domain",
-  //     "Library Procedure",
-  //     "Details",
-  //     "Details with Example",
-  //     "Draft Conclusion",
-  //     "Reference",
-  //   ];
-  //   csvRows.push(headers.join(","));
-
-  //   // Iterate over each domain to generate rows
-  //   report.domains.forEach((domain) => {
-  //     // Ensure the CSV rows include data for each question in the domain
-  //     updateDomainInCSV(csvRows, domain);
-  //   });
-
-  //   // Join all the rows into a single string with new line separation
-  //   return csvRows.join("\n");
-  // };
-
-  // const updateDomainInCSV = (csvRows: any[], domain: Domain) => {
-  //   // Add the domain name as a header row, if needed for organization
-  //   csvRows.push(`"${domain.name}"`);
-
-  //   // Iterate through each question in the domain
-  //   domain.questions.forEach((q) => {
-  //     // Ensure details_references is an array and extract 'text' or another property
-  //     const references = (q.details_references || [])
-  //       .map(
-  //         (ref) =>
-  //           `Reference Text: "${ref.text.replace(
-  //             /"/g,
-  //             '""'
-  //           )}", Reference File: "${ref.file_name.replace(/"/g, '""')}"`
-  //       )
-  //       .join("; ");
-
-  //     // Add the row with the domain and question details
-  //     csvRows.push(
-  //       `"${domain.name}","${q.criteria.replace(
-  //         /"/g,
-  //         '""'
-  //       )}","${q.details.replace(
-  //         /"/g,
-  //         '""'
-  //       )}","${q.details_from_example.replace(/"/g, '""')}","${q.answer.replace(
-  //         /"/g,
-  //         '""'
-  //       )}","${references.replace(/"/g, '""')}"`
-  //     );
-  //   });
-  // };
-
-  const exportAsExcel = () => {
-    // Generate the Excel document using excelMaker
-    const workbook = excelMaker();
-    download(workbook);
-  };
-
-  const download = (workbook: XLSX.WorkBook) => {
-    // Save the workbook as an Excel file
-    XLSX.writeFile(workbook, "AuditReport.xlsx");
-  };
-
-  const excelMaker = (): XLSX.WorkBook => {
-    const excelRows: any[] = [];
-
-    // Define the headers for the Excel file
-    const headers = [
-      "Domain",
-      "Library Procedure",
-      "Design Details",
-      "Design Details with Example",
-      "Design Reference",
-      "Implementation Procedure",
-      "Implementation Details",
-      "Implementation Details with Example",
-      "Implementation Reference",
-    ];
-    excelRows.push(headers);
-
-    // Iterate over each domain to generate rows
-    report.domains.forEach((domain) => {
-      updateDomainInExcel(excelRows, domain);
-    });
-
-    // Create a new workbook and a worksheet
-    const workbook = XLSX.utils.book_new();
-    let worksheet = XLSX.utils.aoa_to_sheet(excelRows);
-
-    // Apply styles to the worksheet
-    worksheet = applyStyles(worksheet, headers);
-
-    // Append the styled worksheet to the workbook
-    XLSX.utils.book_append_sheet(workbook, worksheet, "Report");
-
-    return workbook; // Return the workbook object
-  };
-
-  const applyStyles = (
-    worksheet: XLSX.WorkSheet,
-    headers: string[]
-  ): XLSX.WorkSheet => {
-    // Define the header style
-    const headerStyle = {
-      font: { bold: true, color: { rgb: "FFFFFF" } },
-      fill: { fgColor: { rgb: "8B0000" } }, // Dark red background
-      border: {
-        top: { style: "thin", color: { rgb: "000000" } },
-        bottom: { style: "thin", color: { rgb: "000000" } },
-        left: { style: "thin", color: { rgb: "000000" } },
-        right: { style: "thin", color: { rgb: "000000" } },
-      },
-    };
-
-    // Define the content cell style
-    const contentStyle = {
-      border: {
-        top: { style: "thin", color: { rgb: "000000" } },
-        bottom: { style: "thin", color: { rgb: "000000" } },
-        left: { style: "thin", color: { rgb: "000000" } },
-        right: { style: "thin", color: { rgb: "000000" } },
-      },
-    };
-
-    if (worksheet["!ref"]) {
-      // Apply styles to the headers
-      const headerRange = XLSX.utils.decode_range(worksheet["!ref"]);
-      for (let C = headerRange.s.c; C <= headerRange.e.c; ++C) {
-        const cellAddress = XLSX.utils.encode_cell({ c: C, r: 0 });
-        if (!worksheet[cellAddress]) continue;
-        worksheet[cellAddress].s = headerStyle;
-      }
-
-      // Apply styles to the content cells
-      for (let R = 1; R < headerRange.e.r + 1; ++R) {
-        for (let C = 0; C < headers.length; ++C) {
-          const cellAddress = XLSX.utils.encode_cell({ c: C, r: R });
-          if (!worksheet[cellAddress]) continue;
-          worksheet[cellAddress].s = contentStyle;
-        }
-      }
-    }
-
-    return worksheet;
-  };
-
-  const updateDomainInExcel = (excelRows: any[], domain: Domain) => {
-    domain.questions.forEach((q) => {
-      const design_references = (q.design_reference || [])
-        .map(
-          (ref) =>
-            `Reference Text: ${ref.text}\n, Reference File: ${ref.file_name}\n`
-        )
-        .join("; ");
-        const implementation_references = (q.implementation_reference || [])
-        .map(
-          (ref) =>
-            `Reference Text: ${ref.text}\n, Reference File: ${ref.file_name}\n`
-        )
-        .join("; ");
-
-      excelRows.push([
-        domain.name,
-        q.tailored_procedure_design,
-        q.design_details,
-        q.design_details_from_example,
-        q.design_reference,
-        q.tailored_procedure_implementation,
-        q.implementation_details,
-        q.implementation_details_from_example,
-        q.implementation_reference
-      ]);
-    });
-  };
+  
 
   const headerButtons: Link[] = [
     {
       linkRef: "",
       linkTitle: "Download Report",
-      action: exportAsExcel,
+      action: ()=> exportAsExcel(report),
     },
   ];
 
@@ -397,34 +210,33 @@ const TableReport = () => {
                     <table className="table-auto border-collapse w-full my-4 rounded-lg overflow-hidden">
                       <thead className="border-b-2 bg-gray-200">
                         <tr>
-                          <th className="font-medium text-sm p-2 text-gray-700">
+                          <th className="font-medium text-sm p-2 text-gray-700 w-1/8">
                             Design Library Procedure
                           </th>
                           {/* <th className="font-medium text-sm p-2 text-gray-700">
                             Result
                           </th> */}
-                          <th className="font-medium text-sm p-2 text-gray-700">
+                          <th className="font-medium text-sm p-2 text-gray-700 w-1/8">
                             Design Details
                           </th>
-                          <th className="font-medium text-sm p-2 text-gray-700">
+                          <th className="font-medium text-sm p-2 text-gray-700 w-1/8">
                             Design Details with Example
                           </th>
-                          <th className="font-medium text-sm p-2 text-gray-700">
+                          <th className="font-medium text-sm p-2 text-gray-700 w-1/16">
                             Design Reference
                           </th>
-                          <th className="font-medium text-sm p-2 text-gray-700">
+                          <th className="font-medium text-sm p-2 text-gray-700 w-1/8">
                             Implementation Library Procedure
                           </th>
-                          <th className="font-medium text-sm p-2 text-gray-700">
+                          <th className="font-medium text-sm p-2 text-gray-700 w-1/8">
                             Implementation Details
                           </th>
-                          <th className="font-medium text-sm p-2 text-gray-700">
+                          <th className="font-medium text-sm p-2 text-gray-700 w-1/8">
                             Implementation Details with Example
                           </th>
-                          <th className="font-medium text-sm p-2 text-gray-700">
+                          <th className="font-medium text-sm p-2 text-gray-700 w-1/16">
                             Implementation Reference
                           </th>
-
                         </tr>
                       </thead>
                       <tbody>
@@ -433,26 +245,26 @@ const TableReport = () => {
                             key={domain.name + index}
                             className="my-10 font-normal text-sm text-gray-700"
                           >
-                            <td className="p-2 border-b border-gray-300 text-left align-top">
+                            <td className="p-2 border-b border-gray-300 text-left align-top w-1/8">
                               {question.tailored_procedure_design}
                             </td>
                             {/* <td className="p-2 border-b border-gray-300 text-center align-top">
                               {question.answer}
                             </td> */}
-                            <td className="p-2 border-b border-gray-300 text-left align-top">
+                            <td className="p-2 border-b border-gray-300 text-left align-top w-1/8">
                               {question.design_details}
                             </td>
-                            <td className="p-2 border-b border-gray-300 text-left align-top">
+                            <td className="p-2 border-b border-gray-300 text-left align-top w-1/8">
                               {question.design_details_from_example}
                             </td>
-                            <td className="p-2 border-b border-gray-300 text-left align-top">
+                            <td className="p-2 border-b border-gray-300 text-left align-top w-1/16">
                               {Array.isArray(question.design_reference) &&
                                 question.design_reference.map((ref) => (
                                   <React.Fragment key={ref.source}>
                                     <div>
                                       <ReadMore
                                         text={ref.text}
-                                        wordLimit={100}
+                                        wordLimit={50}
                                       />
                                     </div>
                                     <div className="italic">
@@ -461,23 +273,25 @@ const TableReport = () => {
                                   </React.Fragment>
                                 ))}
                             </td>
-                            <td className="p-2 border-b border-gray-300 text-left align-top">
+                            <td className="p-2 border-b border-gray-300 text-left align-top w-1/8">
                               {question.tailored_procedure_implementation}
                             </td>
-                            <td className="p-2 border-b border-gray-300 text-left align-top">
+                            <td className="p-2 border-b border-gray-300 text-left align-top w-1/8">
                               {question.implementation_details}
                             </td>
-                            <td className="p-2 border-b border-gray-300 text-left align-top">
+                            <td className="p-2 border-b border-gray-300 text-left align-top w-1/8">
                               {question.implementation_details_from_example}
                             </td>
-                            <td className="p-2 border-b border-gray-300 text-left align-top">
-                              {Array.isArray(question.implementation_reference) &&
+                            <td className="p-2 border-b border-gray-300 text-left align-top w-1/16">
+                              {Array.isArray(
+                                question.implementation_reference
+                              ) &&
                                 question.implementation_reference.map((ref) => (
                                   <React.Fragment key={ref.source}>
                                     <div>
                                       <ReadMore
                                         text={ref.text}
-                                        wordLimit={100}
+                                        wordLimit={50}
                                       />
                                     </div>
                                     <div className="italic">
@@ -487,7 +301,6 @@ const TableReport = () => {
                                 ))}
                             </td>
                           </tr>
-                          
                         ))}
                       </tbody>
                     </table>

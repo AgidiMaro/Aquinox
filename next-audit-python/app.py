@@ -138,7 +138,7 @@ def upload():
     answer_list = audit_llm.read_template_generate_result(
         texts_with_filenames_design=texts_with_filenames_design, 
         texts_with_filenames_implementation=texts_with_filenames_implementation,
-        program='Change Management_standard',  
+        program='Change Management_full',  
         additional_context=additional_context,
         client_name=client_name,
         audit_year_end=audit_year_end,

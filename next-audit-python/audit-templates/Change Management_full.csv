@@ -1,0 +1,168 @@
+Domain,Testing Criteria,Key Considerations for Design ,Example response Design,Tailored Procedure - Implementation / Evidence insepcted,Key Considerations for Implementation ,Example Response implementation,Best Practise
+Change Request and Approval,"Information (e.g., policies and/or procedures) that is utilized to perform testing, review and authorization of changes and/or emergency changes.","1. Policies should be be formalised and applicable for the current audit period. If not flag as an exception. 
+
+2. Policies should provide sufficient detail over the standard operating procedures and should be made readily available to employees",Inspected a copy of 'change enablement policy' and 'change management standard operating procedures' approved by the CIO on xx/xx/2024,"Inspect the respective policy that outlines standard operating procedures for the change process.
+
+Validate the policy provides sufficient detail over the change process, to the extent that requirements for testing, approval, types of change and implementation is outlined within. ","1. The change policy must be applicable to the system being assessed with sufficient detail to ensure that standard practices are outlined. 
+
+2. Policies should be approved or reviewed in within 2 years of the audit period. Consider the policy outdated if it has not been reviewed in 2 years.
+","PwC inspected the change enablement policy on the XX/XX/2024. It was noted that version 4 policy provides a comprehensive overview of the change process and is used within the operation of the control.
+
+The policy was reveiewed Mr Smith on the XX/XX/2024 to validate the use of the policy within FY24 .Mr Smith is the CIO and therefore an appropriate person to provide approval for the policy. ",
+,"How and who is responsible for making changes to application code (e.g. versions) configuration (e.g., settings or tolerances that can be made via the application without requiring amendments to code) and whether such changes are subject to the same change control processes.","1. Clearly define who is responsible for making changes to application code and configuration settings. This includes developers, system administrators, and configuration managers.
+
+2. Consider who has access to the functional code of the underlying system and whether this is restricted to a subset of individuals or whether the application is hosted by an external vendor. 
+
+3. Understand whether changes to code or configuration follow the same process, including differences between different change classficiations i.e. standard, normal or emergency. ","Both applications have been developed by third party vendors. As such version changes are made by the third party development companies and version upgrades are released every 6 months by the vendors, with patches released occasionally. Management run both applications 2 versions behing. These changes are logged by management and tested and approved prior to release following the standard change process. 
+
+Configuration changes are made by the application owner in IT based on a request from the business. These follow the same standard change process. 
+
+The CAB is required to approve changes and typically UAT is performed by the requestor for the change or their delegate","Inspect system configuration and/or user access to determine management has appropriately segregated access to development, test and production or has other controls in place to achieve the same objective","1. The environment for development, test, and production should be segregated.
+
+2. Access should be restricted to ensure only select users are able to make changes to configuration or code. ","PwC Confirmed through validating applications are third party developed and procedures performed over Privileged access to confirm accounts that can make changes to settings.
+ 
+ We inspected the application and confirmed the environment are segregated using URLs. 
+ 1. Production: app.com
+ 2. Test : app.test.com
+ 3. Development : app.dev.com",
+,"How emergency change criteria has been defined and requirements around the timing of required testing and promotion approvals (e.g., within 48 hours of a change being promoted into production).","1. There should be a clear definition of requirement for emergency 
+ 
+2. Emergency changes should be subject to test and approval","The 'Change enablement policy' and ' change management standard operating procedures' set out criteria for an emergency change. A change is considered an emergency if it is proposed to address an issue with system functionalyt which would otherwise prevent the operation of a core business process. Verbal approval must be sought from CAB or the CIO prior to deployment testing and approval of these changes is still required, with the policy dictating that all change documentation should be in place within 72 hours of the change being implemented in production. This includes testing, approval from process owners and retrospective approval from the CAB (which includes the CIO) via email. ",For one emergency change inspect the criteria in the policy and compare to an emergency change logged in the period to understand how the criteria are defined and met.,"1. There should be a clear definition of requirement for emergency 
+ 
+2. Emergency changes should be subject to test and approval","We inspected a copy of change ticket XYZ456 for an emergency change raised by the financial controller.
+ 
+ It was confirmed that the change met the criteria of an emergency change with issues on reporting functionality. This was confirmed by the application manager with verbal approval sought from the CIO.
+ 
+ Within the change ticket, the junior developer was assigned to develop the change which was implemented by the application manager on XX/XX/2022.
+ 
+ After the change was implemented, testing was retrospectively completed to confirm that there were no issues with functionality, with results documented and attached to the change ticket.
+ 
+ Approval was retrospectively provided by the process owner on XX/XX/2022. In addition, the CAB convened to review change documentation and approved this emergency change on XX/XX/2022, 48 hours after implementation. This was logged in the attached change ticket.",
+Test Management,"How the control operator determines the appropriate level of testing required (e.g., unit, integration, regression and user acceptance testing) was performed. The nature and extent of testing may vary based on the scope and complexity of the change.",1. The policy or procedure document should have a method for determining the level of testing applicable to each type/classification of change,"The level of testing required is based on the nature of the change, the specific code/configuration subject to change and expected functionality. There is also consideration of any dependencies and wider implications of the change.
+ 
+ Based on this, an itemised test plan is developed.",For one change inspect / observe the relevant evidence retained.,"1. A test plan should be developed
+ 
+2. Test should be performed before the change is implemented","For the change sampled under ticket ABC123, we inspected evidence of the test plan documented and attached within the change ticket.
+ 
+ The test plan was tailored to the change, with specific elements of functionality and data points identified for testing.
+ 
+ Testing was completed with results documented in the test plan. UAT was signed off by the tester within the AR team, with explanations of their procedures and the results documented.
+ 
+ No issues were identified in testing.",
+,"How the control operator creates test cases, scripts and plans to achieve an appropriate level of testing.","1. Testing scripts are formalised with detail of testers involved, results and dates. 
+
+2. Test scripts should be signed off or approved by someone other than the tester, who holds a position senior enough to provide approval. 
+
+3. Failed test scripts should be rejected and the change should not proceed until testing matters have been resolved. ","Test cases are created with business users asked to utilise the functionality in the test environment with specific procedures recorded based on input from the development team and process owner. 
+
+The test logs the results of each test and any issues noted in the test scripts are recorded for resolution. ","Inspect tests scripts which detail the tester, results, date/timestamps
+
+Evidence of sign off/approval of the test scripts should be provided ","1. Testing evidence should be documented with sufficient detail (Tester details, documentation, dates and timestamps, results)
+
+2. Review and approval should be documented by an individual who is authorised","PwC inspected the testing evidence associated with change ABC123. It was noted that UAT testing was performed on XX/XX/XX by Mr John (Application Support Team) and passed without any deviations. This was then reviewed and signed off by Mr Smith on the XX/XX/XX, in line with the testing requirements for a standard change. ",
+,"How the control operator confirms the appropriateness of the approvers (e.g., through comparing the approval to a listing of authorized individuals, if available or through evaluation of roles & responsibilities).","1. Approvers should be in line with defined approval pre-requisits, i.e. sufficient seniority and experience or position.
+
+2. Sufficiency of approval should depend on the change type and match the requirements of the change","The level of approval requirement needed for each type of change is set out in the change enablement policy. 
+
+- Approval to initiate the development process is provided by the change advisory board. 
+- All changes require approval from the process owner in the business, along with sign off from the change advisory board. ",Inspect differing level of approvals required for each change type to ensure that sufficient approval is provided dependent of the change classification. ,"1. Testing requirements should be outlined within change policy 
+
+2. Changes including different types of change should be inspected to ensure that approval is give in line with formalised policy or authorised approvers listing.
+
+3. Management has a predefined approval workflow based on the change type to ensure appropriate approval.  ","PwC inspected two different change tickets to validate that appropriate level of approval in line with the authorised approver listing.  
+
+Normal Change - 3482
+Normal changes require two levels of approval from the IT team and CIO. Ticket 3482 was first approved by Mrs Jennings on the xx/xx/2024 and then subequently approved Mr Smith (CIO) on the XX/XX/2024.
+
+Emergency Change - YYY2: 
+Emergency changes require CAB approval prior to implementation due to the nature and risk of the change. It was noted that approval was provided by the CAB on the xx/xx/2024 prior to implentation on the XX/XX/2024. 
+
+Changes have been validated against the authorisers approval listing and PwC noted no exceptions. ",
+,"The process in place to ensure that all required approvers (e.g., representatives from IT and the business) have approved testing cases, scripts and/or plans. The timing of approval and the population of approvers may vary based on the scope, nature and complexity of the system change. The approval process should consider whether the proposed change could impact ICFR and be subjected to appropriate approval where applicable.","1. Change should be approved before deployment
+ 2. Change should be tested before deployment","Approvals are logged within change tickets, with individuals logging their approval and activities through a workflow.
+ 
+ Change tickets and the approvals are subject to review as part of the approval from the CAB to deploy a change. This acts as a final approval which is also logged in the ticket.","For one change inspect the existence of appropriate supporting evidence of testing, review and approval (e.g., a signature or initials on the document, written explanations, checkmarks, or other indications of follow up etc.)
+  and the appropriateness of the approver of each change (e.g., through comparing the approval to a listing of authorized individuals, if available or through evaluation of roles & responsibilities),","1. Change should be approved before deployment
+ 2. Change should be tested before deployment","For the change sampled under ticket ABC123, we confirmed through inspection of the ticket that the following approvals were in place:
+ 
+ 1. Approval to develop the change provided by CAB on 30th June
+ 2. UAT completed and approved by the AR manager on 13th July
+ 3. Approval of testing and sign off to deploy the change from the process owner on 15th July
+ 4. Final approval to deploy the change provided by the CAB on 16th July
+ 5. Change implemented in production environment on 17th July",
+,How the control operator documents and approves the results of testing procedures performed.,"1. Consider the format for which test scripts are peformed i.e. documented through a standard template
+
+2. Identify the requirements for testing, is there business functionality testing required and who is responsible for doing this. 
+
+3. Testing should be adequate when considering the type, complexity and risk involved in a change. This should be in line with formalised policy and procedures. ","The level of testing required is based on the nature of the change, the specific code/configuration subject to change and the expected functionality. There is also consideration of any dependencies and wider implications of the change. Technical changes do not require business testing as in case of those changes no business functionality are affected. Changes requested by XX are tested in test environment. Changes affecting the application as a whole are not tested by XX as those changes are technical changes which are not relevant for business.","For one sample of change, inspect the testing evidence and sign offs to support the changes adherence to change policy, ensuring that the change has had the appropriate level of testing.
+
+Ensure that an appropriate individual has provided approval on the change based off the formalised testing results. ","1. Testing should be formalised with test scripts maintained and attached when requesting for a review.
+
+2. The approver should directly approve the change based on the test script and testing evidence maintained. ","For the change sampled under ticket ABC123, we confirmed through inspection of the ticket that the following approvals were in place:
+ 
+ 2. UAT completed and approved by the AR manager on 13th July
+ 3. Approval of testing and sign off to deploy the change from the process owner on 15th July",
+,How the control operator compares the version to be promoted to that approved for promotion (e.g. manual comparison or through version control software) and verifies it is promoted to production accurately.,"1. Understand how version protocols are identifed within the the change ticket
+2. Identify any retrospective procedures to ensure that the change implemented into production is in line within the developed change
+3. Identify any post implementation checks performed and procedures that occurr if the change is not line with the developed change. ","Within the 'change enablement policy' post implementaton activities require the application support team to perform post implementation approval to validate the change is promoted to production accurately. This is achieved through performing functional testing and comparing version metadata, ensuring it matches to that of the test environment. 
+
+Any variances would require a helpdesk ticket to be raised and follow up activities to identify the root cause and impact of the different change. ",For one change inspect evidence of post implementation checks including the sign off and approval of such checks. ,1. Inspect sign off evidence to support post implementation checks,"For the change sampled under ticket ABC123, PwC validated that post implentation approval was provided by Mrs Thomson on the XX/XX/XX, confirming that changes were promoted to the production environment as expected. ",
+,"The process in place to ensure that management has appropriately segregated access to development, test and production or has other controls in place to achieve the same objective.","1. The environments should be segregated
+ 2. The developer of a change should be different from the implementer of the change
+3. Identify whether the production environemnt is hosted by an external 3rd party or managed in house","PwC met with Miss Thomson (Application Lead) on XX/XX/XX and observed that all code change must be made by the 3rd party vendor, Exclesior. Management does not have access to the source code and is llimited to configuration changes. Access to make configuration changes is limited to privileged users X,Y,Z. These users are responsible for deploying the change and have no involvement in developing changes. ",Ensure that access to the production environemnt in not in perpetual use or it is restricted via access requests. ,"1. Inspect evidence of users not being able to access the production environment. 
+2. If access is restricted to the production environment via access requests, inspect a sample of to support it being provided for implementation of a change. ","PwC inspected the SOC report II to validate that coded changes are limited to the 3rd part vendor. 
+
+PwC inspected the user listing to confirm 3 users (X,Y,Z) have privileged access which allows configurations to be made. ",
+,How the control operator follows up on differences or exceptions noted during the testing or processing of changes for promotion or agrees with appropriate stakeholders that exception(s) is not critical.,1. Testing exceptions or variances should be investigated and resolved. Prior to proceeding testing should be reperformed to ensure the risk associated with previous failures is mitigated. ,"Should any variances or failures occur during testing, these must be fully investigated by the application support to team to identify the potential impact of such failure. ",Inspect the test script and testing sign off related to the change. Ensure that any variances are resolved prior to the sign off and implementation of the change. ,"1. For the sample one, validate that any exceptions noted are appropriately resolved. 
+
+2. if there are failures or varainces noted in testing, obtain documentation to support management mitigating the risk and successfully passing testing again.","For the sample of one change ABC123, PwC inspected the test script and noted that there were no variances noted in testing performed across the UAT and SIT. The testing was approved by Mr Smith (Application Support Lead) on the XX/XX/XX and approved for promotion appropriately. ",
+Segregation of duties,"The process in place to ensure that changes are promoted to production by a person other than the developer, or if applicable, access control mechanisms in place (e.g., use of firefighter/elevated accounts) to allow developers temporary access to production in the event of an emergency.","1. The environments should be segregated
+ 2. The developer of a change should be different from the implementer of the change","With a small application support team, it is not possbible to fully segregate access to development, test and production. The development engineerrs do not have access to admin accounts in the production application environment. 
+ 
+ The change enablement policy sets out protocols to be applied ensuring that the individual responsible from development is different from the people responsible for testing the change, approving and implementing in production.",Inspect / Observe specific permissions that grant this permission and the users granted this permission. Compare to a relevant organisation chart or other to validate appropriateness. If performed by a service organisation / third party understand how this is segregated and if covered by relevant reporting or monitoring with the third party.,1. The developer of a change should be different from the implementer of the change,There is natural segregation of duties for third party developed changes as these are promoted by management not the developer. For configuration changes these are made by IT who are distinct from the testing team and also the business owner who performs testing. The CAB approve all changes made.,
+,The approval for promotion in accordance with agreed upon policies and/or procedures.,"1. Approval is provided in line with policy requirements depending on the complexity and risk associated with the change. 
+
+2. Change is only promoted once approval has been provided","The level of approval requirement needed for each type of change is set out in the change enablement policy. 
+
+ - Approval to initiate the development process is provided by the change advisory board
+- All changes require approval from the process owner in the business, along with sign offf from the change advisorry board.",Inspect approval for promotion from respective approvers ensuring that this is date and timestamped prior to the implementation date of the change.,1. Approval should be provided by an appropriate individual prior the the implementation. ,"For the change sampled under ticket ABC123, we confirmed through inspection the following:
+- Final approval to deploy the change provided by the CAB on 16th July. 
+- Change implemented in production enviroment on 17th July. 
+",
+Control operation,The period for which the control has been in operation and the frequency of its operation.,"1. Identify whether its been in operation for the full year
+2. Identify the frequency of the control","The control has been in place for the full period subject to audit.
+
+Controls around change testing and approval are transactional - expected to operate for each change implemented on relevant systems",N.A.,N.A.,N.A.,
+,The appropriateness of the person(s) performing the control(s).,"1. Document the control owner and role
+2. Assess the individuals position to operate the control, accounting for their position, experience and use of the system within the business function.","Mr Browning (CFO) is an appropriate individual to operate the control on an ongoing basis as the XX system is the primary fiancial consolidation system within the IT environment. Therefore Mr Browning has sufficient knowledge, experience and visibility to operate the control on an ongoing basis. ",N.A.,N.A.,N.A.,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,Inspect the relevant policy and procedure documents and document the name and version inspected,Inspected a copy of 'change enablement policy' and 'change management standard operating procedures' approved by the CIO on xx/xx/2022. The version inspected was v3,,,,,
+,"Inspect system configuration and/or user access to determine management has appropriately segregated access to development, test and production or has other controls in place to achieve the same objective",Confirmed through validating applications are third pary development and procedures performed over privilegd access to confirm accounts that can make changes to settings,,,,,
+,For one emergency change inspect the criteria in the policy and compare to an emergency change logged in the period to understand how the criteria are defined and met,"We inspected a copy of change ticket XYZ456 for an emergenct change raised by the financial controller. 
+
+It was confirmed that the change met the criteria of an emergency changes with issues of reporting functionality. This was confirmed by the application manager with verbal approval soughr from the CIO. 
+
+Withing the change ticker, the junior developer (Jogn Doe) was assigned to develop the change which was implemented by the application manager on xx/xx/2022. 
+
+After the change was implemented, testing was retrospectively completed to confirm that there was no issues with functionality with results documented and attacked to the change ticket. 
+
+Approval was retrospectively provided by the process owner on xx/xx/2022. In addition, the CAB convened to review change documentation and approved this emergency change on xx/xx/2022, 48 hours after implementation. This is logged in the attached change ticket. ",,,,,
+,Inspect evidence that change process is homogenous by application. Validate the process for different risk categories,Observed that when creating a new change request there is only standard and emergency as a drop down in the 'Type of change' field.,,,,,
+,"For one change, inspect the evidence retained for testing. Was the testing performed before the change was implemented","For the change sampled under ticket ABC123, we confirmed through inspection the following
+
+- Approval to develop the change provided by the CAB on 30th June. 
+- UAT completed and approved by the AR manager on 13 July. 
+- Approval of testing and signoff deploy the change from the process owner on 15th July. 
+- Final approval to deploy the change provided by the CAB on 16th July. 
+- Change implemented in production enviroment on 17th July. ",,,,,
+,"For one change, inspect the existence of testing performed","For the change sampled under ticket ABC123, we confirmed through inspection the following
+
+- Approval to develop the change provided by the CAB on 30th June. 
+- UAT completed and approved by the AR manager on 13 July. 
+- Approval of testing and signoff deploy the change from the process owner on 15th July. 
+- Final approval to deploy the change provided by the CAB on 16th July. 
+- Change implemented in production enviroment on 17th July. ",,,,,
+,"For one same change chosen, inspect evidence to verify that the sample change was approved","For the change sampled under ticket ABC123, we confirmed that version control was documented in the change ticket, with detail of the latest version suject to testing",,,,,

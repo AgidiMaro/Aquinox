@@ -47,7 +47,7 @@ def upload():
 
     # Checks if the useSample checkbox field is selected, and if so, loads a sample JSON response.
     if request.form.get('useSample') is not None:
-        with open('sample-responses/LogicalAccess.json') as f:
+        with open('sample-respnoses/changeSample.json') as f:
             response = json.load(f)
         time.sleep(2)
         return response
@@ -138,7 +138,7 @@ def upload():
     answer_list = audit_llm.read_template_generate_result(
         texts_with_filenames_design=texts_with_filenames_design, 
         texts_with_filenames_implementation=texts_with_filenames_implementation,
-        program='Change Management_full',  
+        program='Change Management_standard',  
         additional_context=additional_context,
         client_name=client_name,
         audit_year_end=audit_year_end,
@@ -148,8 +148,15 @@ def upload():
 
     # Return a JSON response containing the audit answers and findings
     response = {"message": answer_list, "findings": findings}
-    
+    # Define the file path where you want to save the JSON file  
+    file_path = 'domain_list.json'  
+  
+            # Open the file in write mode and use json.dump to write the data  
+    with open(file_path, 'w') as json_file:  
+        json.dump(response, json_file, indent=4)  
 
+    print(f"domain_list has been written to {file_path}")
+    
     return response
 
 # Start the Flask application on port 8000 with debug mode enabled

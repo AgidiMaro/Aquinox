@@ -139,30 +139,9 @@ Controls around change testing and approval are transactional - expected to oper
 ,,,,,,,
 ,,,,,,,
 ,,,,,,,
-,Inspect the relevant policy and procedure documents and document the name and version inspected,Inspected a copy of 'change enablement policy' and 'change management standard operating procedures' approved by the CIO on xx/xx/2022. The version inspected was v3,,,,,
-,"Inspect system configuration and/or user access to determine management has appropriately segregated access to development, test and production or has other controls in place to achieve the same objective",Confirmed through validating applications are third pary development and procedures performed over privilegd access to confirm accounts that can make changes to settings,,,,,
-,For one emergency change inspect the criteria in the policy and compare to an emergency change logged in the period to understand how the criteria are defined and met,"We inspected a copy of change ticket XYZ456 for an emergenct change raised by the financial controller. 
-
-It was confirmed that the change met the criteria of an emergency changes with issues of reporting functionality. This was confirmed by the application manager with verbal approval soughr from the CIO. 
-
-Withing the change ticker, the junior developer (Jogn Doe) was assigned to develop the change which was implemented by the application manager on xx/xx/2022. 
-
-After the change was implemented, testing was retrospectively completed to confirm that there was no issues with functionality with results documented and attacked to the change ticket. 
-
-Approval was retrospectively provided by the process owner on xx/xx/2022. In addition, the CAB convened to review change documentation and approved this emergency change on xx/xx/2022, 48 hours after implementation. This is logged in the attached change ticket. ",,,,,
-,Inspect evidence that change process is homogenous by application. Validate the process for different risk categories,Observed that when creating a new change request there is only standard and emergency as a drop down in the 'Type of change' field.,,,,,
-,"For one change, inspect the evidence retained for testing. Was the testing performed before the change was implemented","For the change sampled under ticket ABC123, we confirmed through inspection the following
-
-- Approval to develop the change provided by the CAB on 30th June. 
-- UAT completed and approved by the AR manager on 13 July. 
-- Approval of testing and signoff deploy the change from the process owner on 15th July. 
-- Final approval to deploy the change provided by the CAB on 16th July. 
-- Change implemented in production enviroment on 17th July. ",,,,,
-,"For one change, inspect the existence of testing performed","For the change sampled under ticket ABC123, we confirmed through inspection the following
-
-- Approval to develop the change provided by the CAB on 30th June. 
-- UAT completed and approved by the AR manager on 13 July. 
-- Approval of testing and signoff deploy the change from the process owner on 15th July. 
-- Final approval to deploy the change provided by the CAB on 16th July. 
-- Change implemented in production enviroment on 17th July. ",,,,,
-,"For one same change chosen, inspect evidence to verify that the sample change was approved","For the change sampled under ticket ABC123, we confirmed that version control was documented in the change ticket, with detail of the latest version suject to testing",,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,

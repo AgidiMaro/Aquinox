@@ -22,28 +22,63 @@ const CreateReport2 = () => {
   const navigate = useNavigate();
   const [filesRequired, setFilesRequired] = useState(true);
 
-  const onSubmit = () => {
-    const form: any = document.getElementById("audit-form");
-    const formData = new FormData(form);
+  // const onSubmit = () => {
+  //   const form: any = document.getElementById("audit-form");
+  //   const formData = new FormData(form);
 
-    if (!form.checkValidity()) {
-      window.confirm("Ensure the Policies and Walkthrough notes are uploaded");
-      return;
-    }
+  //   if (!form.checkValidity()) {
+  //     window.confirm("Ensure the Policies and Walkthrough notes are uploaded");
+  //     return;
+  //   }
 
-    // dispatch(getReportAsync(formData))
-    dispatch(updateShowSpinner(true));
-    dispatch(getReportAsync(formData))
-      .unwrap()
-      .then((message) => {
-        dispatch(updateShowSpinner(false));
-        navigateToResult(message);
-      })
-      .catch((err) => {
-        dispatch(updateShowSpinner(false));
-        window.confirm(err);
-      });
-  };
+  //   dispatch(getReportAsync(formData))
+  //   dispatch(updateShowSpinner(true));
+  //   dispatch(getReportAsync(formData))
+  //     .unwrap()
+  //     .then((message) => {
+  //       dispatch(updateShowSpinner(false));
+  //       navigateToResult(message);
+  //     })
+  //     .catch((err) => {
+  //       dispatch(updateShowSpinner(false));
+  //       window.confirm(err);
+  //     });
+  // };
+  const onSubmit = async () => {  
+    const form = document.getElementById("audit-form") as HTMLFormElement;  
+    const formData = new FormData(form);  
+      
+    if (!form.checkValidity()) {  
+      alert("Please ensure all required fields are filled out and the Policies and Walkthrough notes are uploaded.");  
+      return;  
+    }  
+      
+    try {  
+      dispatch(updateShowSpinner(true));  
+      const message = await dispatch(getReportAsync(formData)).unwrap();  
+      dispatch(updateShowSpinner(false));  
+      navigateToResult(message);  
+    } catch (err) {  
+      dispatch(updateShowSpinner(false));  
+        
+      let errorMessage = "An error occurred while processing your request.";  
+        
+      if (err instanceof Error) {  
+        errorMessage += `\nError: ${err.message}`;  
+      } else if (typeof err === "string") {  
+        errorMessage += `\nError: ${err}`;  
+      } else if (isErrorWithMessage(err)) {  
+        errorMessage += `\nError: ${err.message}`;  
+      }  
+        
+      alert(errorMessage);  
+    }  
+  };  
+    
+  // Type guard to check if an object has a 'message' property  
+  function isErrorWithMessage(error: any): error is { message: string } {  
+    return typeof error === 'object' && error !== null && 'message' in error && typeof error.message === 'string';  
+  }
 
   const navigateToResult = (res: any) => {
     let questions: Query[];
